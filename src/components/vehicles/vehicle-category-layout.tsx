@@ -69,11 +69,11 @@ interface VehicleCategoryLayoutProps {
 
 export default function VehicleCategoryLayout({
 	title,
-	description,
-	icon: Icon,
+	// description,
+	// icon: Icon,
 	products,
 	filters,
-	heroGradient,
+	// heroGradient,
 	badgeColor,
 	primaryColor
 }: VehicleCategoryLayoutProps) {

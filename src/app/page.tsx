@@ -9,11 +9,8 @@ import { Badge } from '@/components/ui/badge'
 import { 
 	Car, 
 	Users, 
-	Truck, 
-	Handshake, 
 	MapPin,
 	Leaf,
-	Trophy,
 	Zap,
 	Battery,
 	Shield,
