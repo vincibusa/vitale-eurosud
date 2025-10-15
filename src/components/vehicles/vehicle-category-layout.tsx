@@ -252,13 +252,13 @@ export default function VehicleCategoryLayout({
 								</Button>
 							</SheetTrigger>
 							<SheetContent side="left" className="w-[300px] sm:w-[400px] overflow-y-auto">
-								<SheetHeader>
-									<SheetTitle className="flex items-center gap-2">
-										<Filter size={20} />
+								<SheetHeader className="px-6 pt-6 pb-4">
+									<SheetTitle className="flex items-center gap-2 text-xl">
+										<Filter size={22} />
 										Filtri
 									</SheetTitle>
 								</SheetHeader>
-								<div className="mt-6">
+								<div className="px-6 pb-6">
 									<FilterContent />
 								</div>
 							</SheetContent>

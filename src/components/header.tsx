@@ -1,56 +1,40 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Menu, X, Phone, Mail } from 'lucide-react'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { Separator } from '@/components/ui/separator'
+import { 
+	Menu, 
+	Phone, 
+	Mail, 
+	Home,
+	Truck,
+	Users,
+	Bike,
+	Bolt,
+	Car,
+	Zap,
+	MessageSquare
+} from 'lucide-react'
 
 function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	const navigationItems = [
-		{ name: 'Home', href: '/' },
-		{ name: 'Veicoli Commerciali', href: '/veicoli-commerciali' },
-		{ name: "Mobilità per Disabili", href: '/mobilita-disabili' },
-		{ name: 'Biciclette', href: '/biciclette' },
-		{ name: 'Monopattini', href: '/monopattini' },
-		{ name: 'Minicar', href: '/minicar' },
-		{ name: 'Scooter', href: '/scooter' },
-		{ name: 'Quad', href: '/quad' },
-		{ name: 'Contatti', href: '/contatti' },
+		{ name: 'Home', href: '/', icon: Home },
+		{ name: 'Veicoli Commerciali', href: '/veicoli-commerciali', icon: Truck },
+		{ name: 'Mobilità per Disabili', href: '/mobilita-disabili', icon: Users },
+		{ name: 'Biciclette', href: '/biciclette', icon: Bike },
+		{ name: 'Monopattini', href: '/monopattini', icon: Bolt },
+		{ name: 'Minicar', href: '/minicar', icon: Car },
+		{ name: 'Scooter', href: '/scooter', icon: Zap },
+		{ name: 'Quad', href: '/quad', icon: Car },
+		{ name: 'Contatti', href: '/contatti', icon: MessageSquare },
 	]
-
-	const menuVariants = {
-		closed: {
-			opacity: 0,
-			height: 0,
-			transition: {
-				duration: 0.3,
-				ease: 'easeInOut'
-			}
-		},
-		open: {
-			opacity: 1,
-			height: 'auto',
-			transition: {
-				duration: 0.3,
-				ease: 'easeInOut'
-			}
-		}
-	}
-
-	const itemVariants = {
-		closed: { opacity: 0, x: -20 },
-		open: { 
-			opacity: 1, 
-			x: 0,
-			transition: {
-				duration: 0.3
-			}
-		}
-	}
 
 	return (
 		<header className="bg-white/95 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-100 shadow-sm">
@@ -98,82 +82,80 @@ function Header() {
 
 					{/* Desktop Navigation */}
 					<nav className="hidden lg:flex items-center gap-6">
-						{navigationItems.map((item) => (
-							<Link 
-								key={item.name} 
-								href={item.href}
-								className="text-gray-700 hover:text-orange-500 transition-colors duration-200 text-sm font-medium relative group"
-							>
-								{item.name}
-								<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-200 group-hover:w-full" />
-							</Link>
-						))}
+						{navigationItems.map((item) => {
+							const Icon = item.icon
+							return (
+								<Link 
+									key={item.name} 
+									href={item.href}
+									className="text-gray-700 hover:text-orange-500 transition-colors duration-200 text-sm font-medium relative group flex items-center gap-2"
+								>
+									<Icon size={16} className="flex-shrink-0" />
+									{item.name}
+									<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-200 group-hover:w-full" />
+								</Link>
+							)
+						})}
 					</nav>
 
-					{/* Mobile menu button */}
-					<Button
-						variant="ghost"
-						size="sm"
-						className="lg:hidden"
-						onClick={() => setIsMenuOpen(!isMenuOpen)}
-						aria-label="Toggle menu"
-					>
-						<AnimatePresence mode="wait">
-							{isMenuOpen ? (
-								<motion.div
-									key="close"
-									initial={{ rotate: -90, opacity: 0 }}
-									animate={{ rotate: 0, opacity: 1 }}
-									exit={{ rotate: 90, opacity: 0 }}
-									transition={{ duration: 0.2 }}
-								>
-									<X size={20} />
-								</motion.div>
-							) : (
-								<motion.div
-									key="menu"
-									initial={{ rotate: 90, opacity: 0 }}
-									animate={{ rotate: 0, opacity: 1 }}
-									exit={{ rotate: -90, opacity: 0 }}
-									transition={{ duration: 0.2 }}
-								>
-									<Menu size={20} />
-								</motion.div>
-							)}
-						</AnimatePresence>
-					</Button>
-				</div>
-
-				{/* Mobile Navigation */}
-				<AnimatePresence>
-					{isMenuOpen && (
-						<motion.nav 
-							className="lg:hidden overflow-hidden"
-							initial="closed"
-							animate="open"
-							exit="closed"
-							variants={menuVariants}
-						>
-							<div className="mt-4 pb-4 border-t border-gray-100 pt-4 flex flex-col gap-3">
-								{navigationItems.map((item, index) => (
-									<motion.div
-										key={item.name}
-										variants={itemVariants}
-										custom={index}
-									>
-										<Link 
+					{/* Mobile Menu Sheet */}
+					<Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+						<SheetTrigger asChild>
+							<Button
+								variant="ghost"
+								size="sm"
+								className="lg:hidden"
+								aria-label="Toggle menu"
+							>
+								<Menu size={20} />
+							</Button>
+						</SheetTrigger>
+						<SheetContent side="right" className="w-[300px] sm:w-[400px]">
+							<SheetHeader>
+								<SheetTitle className="text-left">Menu</SheetTitle>
+							</SheetHeader>
+							<nav className="flex flex-col gap-1 mt-6">
+								{navigationItems.map((item) => {
+									const Icon = item.icon
+									return (
+										<Link
+											key={item.name}
 											href={item.href}
-											className="text-gray-700 hover:text-orange-500 transition-colors duration-200 py-2 text-sm font-medium block"
 											onClick={() => setIsMenuOpen(false)}
+											className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-all duration-200 group"
 										>
-											{item.name}
+											<Icon size={20} className="flex-shrink-0 group-hover:scale-110 transition-transform" />
+											<span className="font-medium">{item.name}</span>
 										</Link>
-									</motion.div>
-								))}
+									)
+								})}
+							</nav>
+
+							<Separator className="my-6" />
+
+							{/* Contact info in mobile menu */}
+							<div className="space-y-3 px-4">
+								<h3 className="text-sm font-semibold text-gray-900">Contatti</h3>
+								<a href="tel:0916145377" className="flex items-center gap-3 text-sm text-gray-600 hover:text-orange-500 transition-colors">
+									<Phone size={16} className="flex-shrink-0" />
+									<span>0916145377</span>
+								</a>
+								<a href="mailto:info@vitale-eu.it" className="flex items-center gap-3 text-sm text-gray-600 hover:text-orange-500 transition-colors">
+									<Mail size={16} className="flex-shrink-0" />
+									<span className="break-all">info@vitale-eu.it</span>
+								</a>
 							</div>
-						</motion.nav>
-					)}
-				</AnimatePresence>
+
+							{/* Opening hours in mobile menu */}
+							<div className="mt-6 px-4 py-4 bg-orange-50 rounded-lg">
+								<h3 className="text-sm font-semibold text-gray-900 mb-2">Orari</h3>
+								<p className="text-xs text-gray-600">Lun-Ven: 09:00-13:00 / 15:30-19:00</p>
+								<p className="text-xs text-gray-600">Sab: 09:00-13:00</p>
+								<p className="text-xs text-gray-600">Dom: Chiuso</p>
+							</div>
+						</SheetContent>
+					</Sheet>
+				</div>
 			</div>
 		</header>
 	)
