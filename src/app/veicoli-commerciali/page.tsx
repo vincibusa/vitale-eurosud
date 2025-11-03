@@ -1,7 +1,6 @@
 'use client'
 
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
-import { Car } from 'lucide-react'
 
 export default function VeicoliCommercialiPage() {
 	const products: VehicleProduct[] = [
@@ -73,7 +72,6 @@ export default function VeicoliCommercialiPage() {
 		<VehicleCategoryLayout
 			title="Veicoli Commerciali Elettrici"
 			description="Veicoli elettrici professionali per il trasporto di passeggeri e merci. Soluzioni ecologiche per aziende e attività commerciali."
-			icon={Car}
 			products={products}
 			filters={filters}
 			heroGradient="bg-gradient-to-r from-amber-500 to-amber-600"

@@ -1,7 +1,6 @@
 'use client'
 
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
-import { Car } from 'lucide-react'
 
 export default function MinicarPage() {
 	const products: VehicleProduct[] = [
@@ -38,7 +37,6 @@ export default function MinicarPage() {
 		<VehicleCategoryLayout
 			title="Minicar e Auto Elettriche"
 			description="Esplora la nostra gamma di minicar e auto elettriche compatte, ideali per la mobilità urbana sostenibile e confortevole."
-			icon={Car}
 			products={products}
 			filters={filters}
 			heroGradient="bg-gradient-to-r from-indigo-500 to-indigo-600"

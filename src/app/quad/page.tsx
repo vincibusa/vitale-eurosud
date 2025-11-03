@@ -1,7 +1,6 @@
 'use client'
 
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
-import { Car } from 'lucide-react'
 
 export default function QuadPage() {
 	const products: VehicleProduct[] = [
@@ -27,7 +26,6 @@ export default function QuadPage() {
 		<VehicleCategoryLayout
 			title="Quad Elettrici"
 			description="Scopri i nostri quad elettrici a 4 ruote, perfetti per avventure sostenibili e divertimento off-road con zero emissioni."
-			icon={Car}
 			products={products}
 			filters={filters}
 			heroGradient="bg-gradient-to-r from-red-500 to-red-600"

@@ -1,6 +1,5 @@
 'use client'
 
-import { Bike } from 'lucide-react'
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
 
 export default function BiciclettePage() {
@@ -47,7 +46,6 @@ export default function BiciclettePage() {
 		<VehicleCategoryLayout
 			title="Biciclette Elettriche"
 			description="Scopri la nostra collezione di biciclette elettriche per una mobilità sostenibile e divertente. Perfette per la città e i percorsi extraurbani."
-			icon={Bike}
 			products={products}
 			filters={filters}
 			heroGradient="bg-gradient-to-r from-green-500 to-green-600"

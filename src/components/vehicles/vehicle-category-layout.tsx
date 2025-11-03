@@ -59,7 +59,6 @@ export interface VehicleFilter {
 interface VehicleCategoryLayoutProps {
 	title: string
 	description: string
-	icon: React.ElementType
 	products: VehicleProduct[]
 	filters: VehicleFilter[]
 	heroGradient: string
@@ -70,7 +69,6 @@ interface VehicleCategoryLayoutProps {
 export default function VehicleCategoryLayout({
 	title,
 	// description,
-	// icon: Icon,
 	products,
 	filters,
 	// heroGradient,

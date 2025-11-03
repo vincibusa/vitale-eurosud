@@ -1,7 +1,6 @@
 'use client'
 
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
-import { Users } from 'lucide-react'
 
 export default function MobilitaDisabiliPage() {
 	const products: VehicleProduct[] = [
@@ -110,7 +109,6 @@ export default function MobilitaDisabiliPage() {
 		<VehicleCategoryLayout
 			title="Mobilità Elettrica per Disabili"
 			description="Soluzioni di mobilità elettrica pensate per garantire autonomia, comfort e sicurezza a persone con disabilità e anziani."
-			icon={Users}
 			products={products}
 			filters={filters}
 			heroGradient="bg-gradient-to-r from-teal-500 to-teal-600"

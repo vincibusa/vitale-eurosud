@@ -1,7 +1,6 @@
 'use client'
 
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
-import { Bolt } from 'lucide-react'
 
 export default function MonopattiniPage() {
 	const products: VehicleProduct[] = [
@@ -27,7 +26,6 @@ export default function MonopattiniPage() {
 		<VehicleCategoryLayout
 			title="Monopattini Elettrici"
 			description="Scopri i nostri monopattini elettrici, perfetti per la mobilità urbana sostenibile e veloce. Ideali per spostamenti agili in città."
-			icon={Bolt}
 			products={products}
 			filters={filters}
 			heroGradient="bg-gradient-to-r from-purple-500 to-purple-600"
