@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation'
 import ProductDetailLayout from '@/components/products/product-detail-layout'
-import { vehicles, getRelatedVehicles, getAllVehicleSlugs } from '@/data/vehicles'
+import { getVehicleById, getRelatedVehicles, getAllVehicleSlugs } from '@/lib/vehicles'
 import type { Metadata } from 'next'
 
 // Genera i paths statici per tutti i veicoli
 export async function generateStaticParams() {
-	const slugs = getAllVehicleSlugs()
+	const slugs = await getAllVehicleSlugs()
 	return slugs.map((slug) => ({
 		slug: slug,
 	}))
@@ -13,7 +13,7 @@ export async function generateStaticParams() {
 
 // Genera metadata dinamici per SEO
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-	const vehicle = vehicles[params.slug]
+	const vehicle = await getVehicleById(params.slug)
 	
 	if (!vehicle) {
 		return {
@@ -27,8 +27,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 	}
 }
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
-	const vehicle = vehicles[params.slug]
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+	const vehicle = await getVehicleById(params.slug)
 
 	// Se il veicolo non esiste, mostra 404
 	if (!vehicle) {
@@ -36,7 +36,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 	}
 
 	// Ottieni veicoli correlati
-	const relatedVehicles = getRelatedVehicles(params.slug, 3).map(v => ({
+	const relatedVehicles = (await getRelatedVehicles(params.slug, 3)).map(v => ({
 		id: v.id,
 		name: v.name,
 		category: v.category,
