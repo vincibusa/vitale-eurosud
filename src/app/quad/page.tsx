@@ -1,24 +1,15 @@
-'use client'
-
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
+import { getVehiclesByCategory, vehicleToProduct } from '@/lib/vehicles'
 
-export default function QuadPage() {
-	const products: VehicleProduct[] = [
-		{
-			id: 1,
-			name: "Vitale Q3000 - Quad Elettrico a 4 Ruote",
-			type: "Quad Elettrico",
-			power: "3.000W",
-			battery: "Piombo 72V - 52AH",
-			speed: "45KM/H",
-			image: "/images/quad-elettrico.jpg",
-			href: "/prodotti/quad-elettrico"
-		}
-	]
+export const revalidate = 60 // Revalidate every 60 seconds
+
+export default async function QuadPage() {
+	const vehicles = await getVehiclesByCategory('quad')
+	const products: VehicleProduct[] = vehicles.map(vehicleToProduct)
 
 	const filters: VehicleFilter[] = [
 		{ name: "Marca", key: "marca", options: ["Vitale"] },
-		{ name: "Batteria", key: "batteria", options: ["Litio"] },
+		{ name: "Batteria", key: "batteria", options: ["Litio", "Piombo"] },
 		{ name: "Potenza", key: "potenza", options: ["3000W"] }
 	]
 

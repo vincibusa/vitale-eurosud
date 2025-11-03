@@ -1,31 +1,11 @@
-'use client'
-
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
+import { getVehiclesByCategory, vehicleToProduct } from '@/lib/vehicles'
 
-export default function MinicarPage() {
-	const products: VehicleProduct[] = [
-		{
-			id: 1,
-			name: "MIA - Minicar Elettrica",
-			type: "Minicar Elettrica",
-			power: "5.000W",
-			battery: "Litio 72V - 70AH",
-			speed: "45KM/H",
-			image: "/images/mia-minicar.jpg",
-			href: "/prodotti/mia-minicar"
-		},
-		{
-			id: 2,
-			name: "ASYA - Auto Elettrica",
-			type: "Auto Elettrica",
-			power: "4.000W",
-			battery: "Litio 72V - 100AH",
-			speed: "70KM/H",
-			image: "/images/asya-minicar.jpg",
-			href: "/prodotti/asya-auto",
-			isNew: true
-		}
-	]
+export const revalidate = 60 // Revalidate every 60 seconds
+
+export default async function MinicarPage() {
+	const vehicles = await getVehiclesByCategory('minicar')
+	const products: VehicleProduct[] = vehicles.map(vehicleToProduct)
 
 	const filters: VehicleFilter[] = [
 		{ name: "Marca", key: "marca", options: ["MIA", "ASYA"] },

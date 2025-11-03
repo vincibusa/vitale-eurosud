@@ -1,40 +1,11 @@
-'use client'
-
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
+import { getVehiclesByCategory, vehicleToProduct } from '@/lib/vehicles'
 
-export default function BiciclettePage() {
-	const products: VehicleProduct[] = [
-		{
-			id: 1,
-			name: "FAT-02 DB - Fat Bike Elettrica Telaio Dritto",
-			type: "Bicicletta Elettrica",
-			power: "250W",
-			battery: "Litio 36V - 10AH",
-			speed: "25KM/H",
-			image: "/images/fat-bike-db.png",
-			href: "/prodotti/fat-02-db"
-		},
-		{
-			id: 2,
-			name: "FAT-02 CB - Fat Bike Elettrica Telaio Curvo", 
-			type: "Bicicletta Elettrica",
-			power: "250W",
-			battery: "Litio 36V - 10AH",
-			speed: "25KM/H",
-			image: "/images/fat-bike-cb.png",
-			href: "/prodotti/fat-02-cb"
-		},
-		{
-			id: 3,
-			name: "NJT007 - Bicicletta Elettrica",
-			type: "Bicicletta Elettrica", 
-			power: "250W",
-			battery: "Piombo 48V - 20AH",
-			speed: "25KM/H",
-			image: "/images/njt007-bike.png",
-			href: "/prodotti/njt007"
-		}
-	]
+export const revalidate = 60 // Revalidate every 60 seconds
+
+export default async function BiciclettePage() {
+	const vehicles = await getVehiclesByCategory('biciclette')
+	const products: VehicleProduct[] = vehicles.map(vehicleToProduct)
 
 	const filters: VehicleFilter[] = [
 		{ name: "Marca", key: "marca", options: ["Vitale", "Altri"] },

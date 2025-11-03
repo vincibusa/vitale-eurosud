@@ -3,6 +3,8 @@ import ProductDetailLayout from '@/components/products/product-detail-layout'
 import { getVehicleById, getRelatedVehicles, getAllVehicleSlugs } from '@/lib/vehicles'
 import type { Metadata } from 'next'
 
+export const revalidate = 60 // Revalidate every 60 seconds
+
 // Genera i paths statici per tutti i veicoli
 export async function generateStaticParams() {
 	const slugs = await getAllVehicleSlugs()
@@ -12,8 +14,9 @@ export async function generateStaticParams() {
 }
 
 // Genera metadata dinamici per SEO
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-	const vehicle = await getVehicleById(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+	const { slug } = await params
+	const vehicle = await getVehicleById(slug)
 	
 	if (!vehicle) {
 		return {
@@ -27,8 +30,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 	}
 }
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
-	const vehicle = await getVehicleById(params.slug)
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params
+	const vehicle = await getVehicleById(slug)
 
 	// Se il veicolo non esiste, mostra 404
 	if (!vehicle) {
@@ -36,7 +40,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
 	}
 
 	// Ottieni veicoli correlati
-	const relatedVehicles = (await getRelatedVehicles(params.slug, 3)).map(v => ({
+	const relatedVehicles = (await getRelatedVehicles(slug, 3)).map(v => ({
 		id: v.id,
 		name: v.name,
 		category: v.category,

@@ -1,20 +1,11 @@
-'use client'
-
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
+import { getVehiclesByCategory, vehicleToProduct } from '@/lib/vehicles'
 
-export default function MonopattiniPage() {
-	const products: VehicleProduct[] = [
-		{
-			id: 1,
-			name: "ME750 - Monopattino Elettrico (Targabile)",
-			type: "Monopattino Elettrico",
-			power: "500W",
-			battery: "Piombo 48V - 20AH / Optional Litio 60V - 20AH",
-			speed: "25KM/H",
-			image: "/images/me750-monopattino.jpg",
-			href: "/prodotti/me750"
-		}
-	]
+export const revalidate = 60 // Revalidate every 60 seconds
+
+export default async function MonopattiniPage() {
+	const vehicles = await getVehiclesByCategory('monopattini')
+	const products: VehicleProduct[] = vehicles.map(vehicleToProduct)
 
 	const filters: VehicleFilter[] = [
 		{ name: "Marca", key: "marca", options: ["Vitale", "Altri"] },

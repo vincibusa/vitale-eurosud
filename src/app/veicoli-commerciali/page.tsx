@@ -1,65 +1,11 @@
-'use client'
-
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
+import { getVehiclesByCategory, vehicleToProduct } from '@/lib/vehicles'
 
-export default function VeicoliCommercialiPage() {
-	const products: VehicleProduct[] = [
-		{
-			id: 1,
-			name: "Vitale Yodo - Furgone Elettrico",
-			type: "Veicolo Commerciale",
-			power: "13.000W",
-			battery: "Litio 96V - 100AH",
-			speed: "80KM/H",
-			image: "/images/yodo-commerciale.jpg",
-			href: "/prodotti/vitale-yodo",
-			isNew: true
-		},
-		{
-			id: 2,
-			name: "Italy - Tre Ruote Elettrico Per Trasporto Passeggeri",
-			type: "Veicolo Commerciale",
-			power: "4.000W",
-			battery: "60V 120AH Litio",
-			speed: "45KM/H",
-			image: "/images/italy-commerciale.jpg",
-			href: "/prodotti/vitale-italy",
-			isNew: true
-		},
-		{
-			id: 3,
-			name: "Italy Mini - Tre Ruote Elettrico Per Trasporto Passeggeri",
-			type: "Veicolo Commerciale",
-			power: "4.000W",
-			battery: "60V 120AH Litio",
-			speed: "45KM/H",
-			image: "/images/italy-mini-commerciale.jpg",
-			href: "/prodotti/vitale-italy-mini",
-			isNew: true
-		},
-		{
-			id: 4,
-			name: "E-GO - Furgone Elettrico",
-			type: "Veicolo Commerciale",
-			power: "3.000W",
-			battery: "Litio 72V - 70AH",
-			speed: "45KM/H",
-			image: "/images/ego-commerciale.jpg",
-			href: "/prodotti/vitale-ego",
-			isNew: true
-		},
-		{
-			id: 5,
-			name: "E-Truck - Furgone Elettrico",
-			type: "Veicolo Commerciale",
-			power: "2.500W",
-			battery: "Litio 72V - 50AH",
-			speed: "45KM/H",
-			image: "/images/e-truck-commerciale.jpg",
-			href: "/prodotti/e-truck",
-			isNew: true
-		}
-	]
+export const revalidate = 60 // Revalidate every 60 seconds
+
+export default async function VeicoliCommercialiPage() {
+	const vehicles = await getVehiclesByCategory('veicoli-commerciali')
+	const products: VehicleProduct[] = vehicles.map(vehicleToProduct)
 
 	const filters: VehicleFilter[] = [
 		{ name: "Marca", key: "marca", options: ["Vitale"] },

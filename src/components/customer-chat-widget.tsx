@@ -326,66 +326,77 @@ export function CustomerChatWidget() {
 	return (
 		<>
 			{/* Floating Button */}
-			<Button
-				onClick={() => setIsOpen(true)}
-				className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
-				size="icon"
-			>
-				<MessageCircle className="h-6 w-6" />
-			</Button>
+			{!isOpen && (
+				<Button
+					onClick={() => setIsOpen(true)}
+					className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 h-12 w-12 sm:h-14 sm:w-14 rounded-full shadow-lg z-50"
+					size="icon"
+				>
+					<MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
+				</Button>
+			)}
+
+			{/* Overlay for mobile */}
+			{isOpen && (
+				<div
+					className="fixed inset-0 bg-black/40 sm:bg-transparent z-40 sm:z-auto"
+					onClick={() => resetChat()}
+					aria-hidden="true"
+				/>
+			)}
 
 			{/* Chat Widget */}
 			{isOpen && (
-				<Card className="fixed bottom-24 right-6 w-96 h-[600px] shadow-xl z-50 !h-auto">
-					<CardHeader className="pb-3">
+				<Card className="fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-24 sm:right-6 w-auto sm:w-96 h-[calc(100vh-100px)] sm:h-[600px] max-h-[600px] sm:max-h-[600px] shadow-xl z-50 flex flex-col">
+					<CardHeader className="pb-3 flex-shrink-0">
 						<div className="flex items-center justify-between">
-							<CardTitle className="flex items-center gap-2 text-sm">
-								<Bot className="h-4 w-4" />
-								Assistente Vitale Eurosud
+							<CardTitle className="flex items-center gap-2 text-xs sm:text-sm">
+								<Bot className="h-3 w-3 sm:h-4 sm:w-4" />
+								<span className="truncate">Assistente Vitale Eurosud</span>
 							</CardTitle>
-							<div className="flex items-center gap-2">
-								<Badge variant="secondary" className="text-xs">
+							<div className="flex items-center gap-2 flex-shrink-0">
+								<Badge variant="secondary" className="text-xs hidden sm:inline-flex">
 									{isTyping ? 'Digitando...' : 'Online'}
 								</Badge>
 								<Button
 									onClick={resetChat}
 									variant="ghost"
 									size="icon"
-									className="h-6 w-6"
+									className="h-6 w-6 sm:h-7 sm:w-7"
 								>
-									<X className="h-3 w-3" />
+									<X className="h-3 w-3 sm:h-4 sm:w-4" />
 								</Button>
 							</div>
 						</div>
 					</CardHeader>
 					
-					<Separator />
+					<Separator className="flex-shrink-0" />
 					
-					<CardContent className="flex flex-col p-0 h-[520px]">
+					<CardContent className="flex flex-col p-0 flex-1 min-h-0 overflow-hidden">
 						{/* Registration Form or Chat */}
 						{!isRegistered ? (
-							<div className="flex-1 p-6 flex flex-col justify-center">
-								<div className="space-y-6">
+							<div className="flex-1 p-4 sm:p-6 flex flex-col justify-center overflow-y-auto">
+								<div className="space-y-4 sm:space-y-6">
 									<div className="text-center space-y-2">
-										<h3 className="text-lg font-semibold">Inizia una chat</h3>
-										<p className="text-sm text-muted-foreground">
+										<h3 className="text-base sm:text-lg font-semibold">Inizia una chat</h3>
+										<p className="text-xs sm:text-sm text-muted-foreground">
 											Inserisci i tuoi dati per iniziare a chattare con il nostro assistente
 										</p>
 									</div>
 									
-									<div className="space-y-4">
-										<div className="grid grid-cols-2 gap-3">
+									<div className="space-y-3 sm:space-y-4">
+										<div className="grid grid-cols-2 gap-2 sm:gap-3">
 											<Input
 												placeholder="Nome"
 												value={customerInfo.firstName}
 												onChange={(e) => setCustomerInfo(prev => ({ ...prev, firstName: e.target.value }))}
-												className="h-10"
+												className="h-9 sm:h-10 text-sm"
 											/>
 											<Input
 												placeholder="Cognome"
 												value={customerInfo.lastName}
 												onChange={(e) => setCustomerInfo(prev => ({ ...prev, lastName: e.target.value }))}
-												className="h-10"
+												className="h-9 sm:h-10 text-sm"
 											/>
 										</div>
 										<Input
@@ -393,25 +404,25 @@ export function CustomerChatWidget() {
 											type="email"
 											value={customerInfo.email}
 											onChange={(e) => setCustomerInfo(prev => ({ ...prev, email: e.target.value }))}
-											className="h-10"
+											className="h-9 sm:h-10 text-sm"
 										/>
 										<Input
 											placeholder="Telefono"
 											type="tel"
 											value={customerInfo.phone}
 											onChange={(e) => setCustomerInfo(prev => ({ ...prev, phone: e.target.value }))}
-											className="h-10"
+											className="h-9 sm:h-10 text-sm"
 										/>
 									</div>
 
 									<Button
 										onClick={handleRegister}
 										disabled={isRegistering}
-										className="w-full h-11 font-medium"
+										className="w-full h-10 sm:h-11 font-medium text-sm sm:text-base"
 									>
 										{isRegistering ? (
 											<>
-												<Loader2 className="h-4 w-4 mr-2 animate-spin" />
+												<Loader2 className="h-3 w-3 sm:h-4 sm:w-4 mr-2 animate-spin" />
 												Registrazione...
 											</>
 										) : (
@@ -424,76 +435,76 @@ export function CustomerChatWidget() {
 							<>
 								{/* Messages Area - Fixed height with proper scrolling */}
 								<div 
-									className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0" 
+									className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 min-h-0" 
 									ref={scrollAreaRef}
 								>
-										{messages.map((message) => (
-											<div
-												key={message.id}
-												className={cn(
-													'flex gap-3 animate-in slide-in-from-bottom-2 duration-300',
-													message.role === 'customer' ? 'justify-end' : 'justify-start'
-												)}
-											>
-												{message.role === 'ai' && (
-													<Avatar className="h-8 w-8 flex-shrink-0">
-														<AvatarFallback className="bg-primary/10">
-															<Bot className="h-4 w-4 text-primary" />
-														</AvatarFallback>
-													</Avatar>
-												)}
-												
-												<div
-													className={cn(
-														'max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm',
-														message.role === 'customer'
-															? 'bg-primary text-primary-foreground rounded-br-md'
-															: 'bg-muted rounded-bl-md'
-													)}
-												>
-													<div className="whitespace-pre-wrap leading-relaxed">{message.content}</div>
-													<div className="text-xs opacity-70 mt-2">
-														{formatTimestamp(message.createdAt)}
-													</div>
-												</div>
-												
-												{message.role === 'customer' && (
-													<Avatar className="h-8 w-8 flex-shrink-0">
-														<AvatarFallback className="bg-primary">
-															<User className="h-4 w-4 text-primary-foreground" />
-														</AvatarFallback>
-													</Avatar>
-												)}
-											</div>
-										))}
-										
-										{isTyping && (
-											<div className="flex gap-3 justify-start animate-in slide-in-from-bottom-2 duration-300">
-												<Avatar className="h-8 w-8 flex-shrink-0">
+									{messages.map((message) => (
+										<div
+											key={message.id}
+											className={cn(
+												'flex gap-2 sm:gap-3 animate-in slide-in-from-bottom-2 duration-300',
+												message.role === 'customer' ? 'justify-end' : 'justify-start'
+											)}
+										>
+											{message.role === 'ai' && (
+												<Avatar className="h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0">
 													<AvatarFallback className="bg-primary/10">
-														<Bot className="h-4 w-4 text-primary" />
+														<Bot className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
 													</AvatarFallback>
 												</Avatar>
-												<div className="bg-muted rounded-2xl rounded-bl-md px-4 py-3 text-sm shadow-sm">
-													<div className="flex items-center gap-2">
-														<Loader2 className="h-3 w-3 animate-spin" />
-														<span>Digitando...</span>
-													</div>
+											)}
+											
+											<div
+												className={cn(
+													'max-w-[85%] rounded-2xl px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm shadow-sm',
+													message.role === 'customer'
+														? 'bg-primary text-primary-foreground rounded-br-md'
+														: 'bg-muted rounded-bl-md'
+												)}
+											>
+												<div className="whitespace-pre-wrap leading-relaxed break-words">{message.content}</div>
+												<div className="text-[10px] sm:text-xs opacity-70 mt-1 sm:mt-2">
+													{formatTimestamp(message.createdAt)}
 												</div>
 											</div>
-										)}
+											
+											{message.role === 'customer' && (
+												<Avatar className="h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0">
+													<AvatarFallback className="bg-primary">
+														<User className="h-3 w-3 sm:h-4 sm:w-4 text-primary-foreground" />
+													</AvatarFallback>
+												</Avatar>
+											)}
+										</div>
+									))}
+									
+									{isTyping && (
+										<div className="flex gap-2 sm:gap-3 justify-start animate-in slide-in-from-bottom-2 duration-300">
+											<Avatar className="h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0">
+												<AvatarFallback className="bg-primary/10">
+													<Bot className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+												</AvatarFallback>
+											</Avatar>
+											<div className="bg-muted rounded-2xl rounded-bl-md px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm shadow-sm">
+												<div className="flex items-center gap-2">
+													<Loader2 className="h-2.5 w-2.5 sm:h-3 sm:w-3 animate-spin" />
+													<span>Digitando...</span>
+												</div>
+											</div>
+										</div>
+									)}
 								</div>
 								
 								{/* Input Area - Fixed at bottom */}
 								{hasRequestedOperator ? (
-									<div className="border-t bg-background/50 p-4 flex-shrink-0">
-										<div className="text-center text-sm text-muted-foreground">
+									<div className="border-t bg-background/50 p-3 sm:p-4 flex-shrink-0">
+										<div className="text-center text-xs sm:text-sm text-muted-foreground">
 											La chat si chiuderà automaticamente...
 										</div>
 									</div>
 								) : (
-									<div className="border-t bg-background/50 p-4 flex-shrink-0">
-										<div className="flex gap-3 items-end">
+									<div className="border-t bg-background/50 p-3 sm:p-4 flex-shrink-0">
+										<div className="flex gap-2 sm:gap-3 items-end">
 											<div className="flex-1 relative">
 												<Textarea
 													ref={textareaRef}
@@ -501,37 +512,37 @@ export function CustomerChatWidget() {
 													onChange={(e) => setInputValue(e.target.value)}
 													onKeyDown={handleKeyPress}
 													placeholder="Chiedi informazioni sui nostri veicoli..."
-													className="min-h-[44px] max-h-[120px] resize-none pr-12 rounded-2xl border-0 bg-muted/50 focus:bg-background transition-colors"
+													className="min-h-[40px] sm:min-h-[44px] max-h-[100px] sm:max-h-[120px] resize-none pr-10 sm:pr-12 rounded-2xl border-0 bg-muted/50 focus:bg-background transition-colors text-xs sm:text-sm"
 													disabled={isLoading}
 												/>
 												<Button
 													onClick={handleSendMessage}
 													disabled={!inputValue.trim() || isLoading}
 													size="icon"
-													className="absolute right-2 bottom-2 h-8 w-8 rounded-full"
+													className="absolute right-1.5 sm:right-2 bottom-1.5 sm:bottom-2 h-7 w-7 sm:h-8 sm:w-8 rounded-full"
 												>
 													{isLoading ? (
-														<Loader2 className="h-4 w-4 animate-spin" />
+														<Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
 													) : (
-														<Send className="h-4 w-4" />
+														<Send className="h-3 w-3 sm:h-4 sm:w-4" />
 													)}
 												</Button>
 											</div>
 										</div>
 										
-										<div className="mt-3">
+										<div className="mt-2 sm:mt-3">
 											<Button
 												onClick={handleRequestOperator}
 												variant="outline"
 												size="sm"
-												className="w-full text-xs h-8 rounded-xl"
+												className="w-full text-[10px] sm:text-xs h-7 sm:h-8 rounded-xl"
 											>
-												<Phone className="h-3 w-3 mr-2" />
+												<Phone className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-1.5 sm:mr-2" />
 												Parla con un operatore
 											</Button>
 										</div>
 										
-										<p className="text-xs text-muted-foreground mt-2 text-center">
+										<p className="text-[10px] sm:text-xs text-muted-foreground mt-1.5 sm:mt-2 text-center">
 											Premi Invio per inviare, Shift+Invio per andare a capo
 										</p>
 									</div>

@@ -1,6 +1,8 @@
 import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
 import { getVehiclesByCategory, vehicleToProduct } from '@/lib/vehicles'
 
+export const revalidate = 60 // Revalidate every 60 seconds
+
 export default async function ScooterPage() {
 	const vehicles = await getVehiclesByCategory('scooter')
 	const products: VehicleProduct[] = vehicles.map(vehicleToProduct)
