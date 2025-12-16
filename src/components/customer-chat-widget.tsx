@@ -10,7 +10,6 @@ import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
 import { Send, Bot, User, Loader2, MessageCircle, X, Phone } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { supabase } from '@/lib/supabase'
 import { getApiBaseUrl } from '@/lib/api-config'
 
 export interface ChatMessage {
@@ -101,8 +100,7 @@ export function CustomerChatWidget() {
 				const errorData = await response.json()
 				alert(`Errore durante la registrazione: ${errorData.error}`)
 			}
-		} catch (error) {
-			console.error('Errore registrazione:', error)
+		} catch {
 			alert('Errore di connessione. Riprova più tardi.')
 		} finally {
 			setIsRegistering(false)
@@ -140,9 +138,7 @@ export function CustomerChatWidget() {
 			})
 			
 			if (!saveResponse.ok) {
-				console.error('Errore salvataggio messaggio:', saveResponse.status, saveResponse.statusText)
-				const errorText = await saveResponse.text()
-				console.error('Dettagli errore:', errorText)
+				// Errore salvataggio messaggio - continua comunque
 			}
 
 			// Se un operatore è stato richiesto, non permettere più messaggi
@@ -165,9 +161,6 @@ export function CustomerChatWidget() {
 			})
 			
 			if (!aiResponse.ok) {
-				console.error('Errore risposta AI:', aiResponse.status, aiResponse.statusText)
-				const errorText = await aiResponse.text()
-				console.error('Dettagli errore AI:', errorText)
 				setIsLoading(false)
 				setIsTyping(false)
 				return
@@ -212,7 +205,7 @@ export function CustomerChatWidget() {
 											}
 										})
 									}
-								} catch (e) {
+								} catch {
 									// Ignora errori di parsing
 								}
 							}
@@ -240,8 +233,7 @@ export function CustomerChatWidget() {
 				}
 				setMessages(prev => [...prev, errorMessage])
 			}
-		} catch (error) {
-			console.error('Errore invio messaggio:', error)
+		} catch {
 			const errorMessage: ChatMessage = {
 				id: crypto.randomUUID(),
 				role: 'ai',
@@ -287,8 +279,7 @@ export function CustomerChatWidget() {
 				const errorData = await response.json()
 				alert(`Errore nella richiesta operatore: ${errorData.error}`)
 			}
-		} catch (error) {
-			console.error('Errore richiesta operatore:', error)
+		} catch {
 			alert('Errore di connessione. Riprova più tardi.')
 		}
 	}

@@ -8,7 +8,6 @@ export async function getVehicles(): Promise<Vehicle[]> {
 		.order('category_slug, name')
 
 	if (error) {
-		console.error('Error fetching vehicles:', error)
 		return []
 	}
 
@@ -42,7 +41,6 @@ export async function getVehicleById(id: string): Promise<Vehicle | null> {
 		.single()
 
 	if (error) {
-		console.error('Error fetching vehicle:', error)
 		return null
 	}
 
@@ -78,7 +76,6 @@ export async function getVehiclesByCategory(categorySlug: string): Promise<Vehic
 		.order('name')
 
 	if (error) {
-		console.error('Error fetching vehicles by category:', error)
 		return []
 	}
 
@@ -110,7 +107,6 @@ export async function getAllVehicleSlugs(): Promise<string[]> {
 		.select('id')
 
 	if (error) {
-		console.error('Error fetching vehicle slugs:', error)
 		return []
 	}
 
@@ -164,7 +160,6 @@ export async function getFeaturedVehicles(limit: number = 6): Promise<Vehicle[]>
 		.limit(limit)
 
 	if (error) {
-		console.error('Error fetching featured vehicles:', error)
 		return []
 	}
 
