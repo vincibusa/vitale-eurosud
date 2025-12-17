@@ -5,7 +5,7 @@
 export const getApiBaseUrl = (): string => {
 	// Se siamo in produzione (deployato), usa l'URL del CRM
 	if (process.env.NODE_ENV === 'production') {
-		return 'https://vitale-crm--vitale-crm.europe-west4.hosted.app'
+		return 'https://vitale-crm.vercel.app/'
 	}
 	
 	// In sviluppo, usa localhost
