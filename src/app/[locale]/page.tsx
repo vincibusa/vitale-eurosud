@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import QuickActions from '@/components/quick-actions'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import {
 	Battery,
 	Zap,
@@ -53,6 +55,8 @@ const scaleIn = {
 }
 
 export default function Home() {
+	const t = useTranslations()
+	
 	return (
 		<div className="w-full">
 			{/* Hero Section - BMW Style */}
@@ -65,7 +69,7 @@ export default function Home() {
 				>
 					<Image
 						src="/images/hero-banner.png"
-						alt="Scopri tutti i nostri veicoli elettrici"
+						alt={t('home.hero.title')}
 						fill
 						className="object-cover object-center"
 						priority
@@ -85,29 +89,32 @@ export default function Home() {
 							className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight"
 							variants={fadeInUp}
 						>
-							Il Futuro della <span className="text-white">Mobilità Elettrica</span>
+							{t('home.hero.title')}
 						</motion.h1>
 						<motion.p
 							className="text-lg md:text-xl lg:text-2xl mb-8 text-white/90 font-light leading-relaxed"
 							variants={fadeInUp}
 						>
-							Leader nella fornitura di veicoli elettrici di qualità superiore.
-							Scopri la nostra gamma completa per una mobilità sostenibile e all'avanguardia.
+							{t('home.hero.subtitle')} {t('home.hero.description')}
 						</motion.p>
 						<motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
-							<Button
-								size="lg"
-								className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 text-lg h-14 min-w-[200px] rounded-none transition-all"
-							>
-								Scopri i Veicoli
-							</Button>
-							<Button
-								size="lg"
-								variant="outline"
-								className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black font-semibold px-8 text-lg h-14 min-w-[200px] rounded-none transition-all"
-							>
-								Contattaci
-							</Button>
+							<Link href="/biciclette">
+								<Button
+									size="lg"
+									className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 text-lg h-14 min-w-[200px] rounded-none transition-all"
+								>
+									{t('home.hero.discoverVehicles')}
+								</Button>
+							</Link>
+							<Link href="/contatti">
+								<Button
+									size="lg"
+									variant="outline"
+									className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black font-semibold px-8 text-lg h-14 min-w-[200px] rounded-none transition-all"
+								>
+									{t('home.hero.contactUs')}
+								</Button>
+							</Link>
 						</motion.div>
 					</motion.div>
 				</div>

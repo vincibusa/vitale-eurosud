@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { X, Scale } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import type { VehicleProduct } from './bmw-style-product-card'
 
 interface ComparisonBarProps {
@@ -34,6 +35,7 @@ export default function ComparisonBar({
 	onClear,
 	maxItems = 4
 }: ComparisonBarProps) {
+	const t = useTranslations()
 	if (selectedVehicles.length === 0) return null
 
 	return (
@@ -51,7 +53,7 @@ export default function ComparisonBar({
 						<div className="flex items-center gap-2 sm:gap-3 flex-1 overflow-x-auto scrollbar-hide min-w-0">
 							<div className="flex items-center gap-2 text-sm font-medium text-gray-700 whitespace-nowrap">
 								<Scale className="w-4 h-4 text-brand" strokeWidth={1.5} />
-								<span className="hidden sm:inline">Confronta:</span>
+								<span className="hidden sm:inline">{t('vehicles.compareLabel')}</span>
 							</div>
 
 							{selectedVehicles.slice(0, maxItems).map((vehicle) => (
@@ -102,7 +104,7 @@ export default function ComparisonBar({
 								onClick={onClear}
 								className="text-xs sm:text-sm"
 							>
-								Cancella tutto
+								{t('vehicles.clearAll')}
 							</Button>
 
 							<Button
@@ -110,7 +112,7 @@ export default function ComparisonBar({
 								className="bg-brand hover:bg-brand-dark text-white text-xs sm:text-sm"
 								disabled={selectedVehicles.length < 2}
 							>
-								Confronta {selectedVehicles.length} {selectedVehicles.length === 1 ? 'veicolo' : 'veicoli'}
+								{t('vehicles.compare')} {selectedVehicles.length} {selectedVehicles.length === 1 ? t('vehicles.productSingular') : t('vehicles.productPlural')}
 							</Button>
 						</div>
 					</div>

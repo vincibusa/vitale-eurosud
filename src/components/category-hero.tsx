@@ -1,10 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import { ChevronRight, Home, Bike, Bolt, Zap, Car, Truck, Users, ShoppingBag } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 const fadeIn = {
 	hidden: { opacity: 0 },
@@ -46,6 +47,7 @@ export default function CategoryHero({
 	totalProducts,
 	backgroundImage = '/images/hero-banner.png'
 }: CategoryHeroProps) {
+	const t = useTranslations()
 	const Icon = iconMap[iconName]
 	return (
 		<section className="relative h-[400px] md:h-[500px] overflow-hidden">
@@ -77,7 +79,7 @@ export default function CategoryHero({
 				>
 					<Link href="/" className="hover:text-white transition-colors flex items-center gap-1">
 						<Home size={16} />
-						<span>Home</span>
+						<span>{t('product.home')}</span>
 					</Link>
 					<ChevronRight size={16} />
 					<span className="text-white font-medium">{title}</span>
@@ -95,7 +97,7 @@ export default function CategoryHero({
 							<Icon size={36} className="text-white" />
 						</div>
 						<Badge className="bg-white/20 backdrop-blur-sm text-white border-0 px-4 py-1">
-							{totalProducts} {totalProducts === 1 ? 'Prodotto' : 'Prodotti'}
+							{totalProducts} {totalProducts === 1 ? t('vehicles.product') : t('vehicles.products')}
 						</Badge>
 					</div>
 					<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">

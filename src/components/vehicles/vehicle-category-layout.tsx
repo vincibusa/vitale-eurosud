@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/i18n/routing'
 import { Search, X } from 'lucide-react'
 import CategoryTabs from './category-tabs'
 import BMWStyleProductCard, { type VehicleProduct } from './bmw-style-product-card'

@@ -2,11 +2,13 @@ import VehicleCategoryLayout, { VehicleProduct } from '@/components/vehicles/veh
 import CategoryHero from '@/components/category-hero'
 import { getVehiclesByCategory, vehicleToProduct, getVehicleSubcategory } from '@/lib/vehicles'
 import { CATEGORY_SUBCATEGORIES } from '@/config/subcategories'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
-export default async function BiciclettePage() {
-	const vehicles = await getVehiclesByCategory('biciclette')
+export default async function MonopattiniPage() {
+	const t = await getTranslations()
+	const vehicles = await getVehiclesByCategory('monopattini')
 
 	// Enrich vehicles with subcategory
 	const enrichedVehicles = vehicles.map((v) => ({
@@ -15,23 +17,23 @@ export default async function BiciclettePage() {
 	}))
 
 	const products: VehicleProduct[] = enrichedVehicles.map(vehicleToProduct)
-	const subcategories = CATEGORY_SUBCATEGORIES['biciclette']
+	const subcategories = CATEGORY_SUBCATEGORIES['monopattini']
 
 	return (
 		<>
 			<CategoryHero
-				title="Biciclette Elettriche"
-				description="Scopri la nostra collezione di biciclette elettriche per una mobilità sostenibile e divertente. Perfette per la città e i percorsi extraurbani."
-				iconName="Bike"
+				title={t('vehicles.categories.monopattini')}
+				description={t('vehicles.categoryDescriptions.monopattini')}
+				iconName="Bolt"
 				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
 			/>
 			<VehicleCategoryLayout
-				title="Biciclette Elettriche"
-				description="Scopri la nostra collezione di biciclette elettriche per una mobilità sostenibile e divertente. Perfette per la città e i percorsi extraurbani."
+				title={t('vehicles.categories.monopattini')}
+				description={t('vehicles.categoryDescriptions.monopattini')}
 				products={products}
 				subcategories={subcategories}
-				categorySlug="biciclette"
+				categorySlug="monopattini"
 				badgeColor="bg-brand/10 text-brand hover:bg-brand/20"
 				primaryColor="brand"
 			/>

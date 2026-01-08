@@ -2,11 +2,13 @@ import VehicleCategoryLayout, { VehicleProduct } from '@/components/vehicles/veh
 import CategoryHero from '@/components/category-hero'
 import { getVehiclesByCategory, vehicleToProduct, getVehicleSubcategory } from '@/lib/vehicles'
 import { CATEGORY_SUBCATEGORIES } from '@/config/subcategories'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
-export default async function QuadPage() {
-	const vehicles = await getVehiclesByCategory('quad')
+export default async function ScooterPage() {
+	const t = await getTranslations()
+	const vehicles = await getVehiclesByCategory('scooter')
 
 	// Enrich vehicles with subcategory
 	const enrichedVehicles = vehicles.map((v) => ({
@@ -15,27 +17,26 @@ export default async function QuadPage() {
 	}))
 
 	const products: VehicleProduct[] = enrichedVehicles.map(vehicleToProduct)
-	const subcategories = CATEGORY_SUBCATEGORIES['quad']
+	const subcategories = CATEGORY_SUBCATEGORIES['scooter']
 
 	return (
 		<>
 			<CategoryHero
-				title="Quad Elettrici"
-				description="Scopri i nostri quad elettrici a 4 ruote, perfetti per avventure sostenibili e divertimento off-road con zero emissioni."
-				iconName="ShoppingBag"
+				title={t('vehicles.categories.scooter')}
+				description={t('vehicles.categoryDescriptions.scooter')}
+				iconName="Zap"
 				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
 			/>
 			<VehicleCategoryLayout
-				title="Quad Elettrici"
-				description="Scopri i nostri quad elettrici a 4 ruote, perfetti per avventure sostenibili e divertimento off-road con zero emissioni."
+				title={t('vehicles.categories.scooter')}
+				description={t('vehicles.categoryDescriptions.scooter')}
 				products={products}
 				subcategories={subcategories}
-				categorySlug="quad"
+				categorySlug="scooter"
 				badgeColor="bg-brand/10 text-brand hover:bg-brand/20"
 				primaryColor="brand"
 			/>
 		</>
 	)
 }
-

@@ -2,12 +2,13 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Separator } from '@/components/ui/separator'
 import MegaMenu, { MegaMenuItem } from '@/components/mega-menu'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link, usePathname, useRouter } from '@/i18n/routing'
 import {
 	Menu,
 	Phone,
@@ -21,77 +22,93 @@ import {
 	Wrench,
 	Shield,
 	MessageSquare,
-	ChevronRight
+	ChevronRight,
+	Globe
 } from 'lucide-react'
 
 function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const t = useTranslations()
+	const locale = useLocale()
+	const pathname = usePathname()
+	const router = useRouter()
+	const currentLocale = locale as 'it' | 'en'
+	
+	const handleLanguageToggle = (e: React.MouseEvent) => {
+		e.preventDefault()
+		const newLocale = currentLocale === 'it' ? 'en' : 'it'
+		// Remove current locale from pathname if present
+		const pathWithoutLocale = pathname.startsWith(`/${currentLocale}`) 
+			? pathname.slice(`/${currentLocale}`.length) || '/'
+			: pathname
+		router.push(pathWithoutLocale, { locale: newLocale })
+	}
 
 	// Configurazione mega-menu
 	const menuItems: MegaMenuItem[] = [
 		{
-			label: 'Veicoli Elettrici',
+			label: t('header.vehicles'),
 			submenu: [
 				{
-					category: 'Mobilità Urbana',
+					category: t('header.urbanMobility'),
 					items: [
-						{ name: 'Biciclette', href: '/biciclette', description: 'E-bike per città e tempo libero' },
-						{ name: 'Monopattini', href: '/monopattini', description: 'Scooter elettrici pratici' },
-						{ name: 'Scooter', href: '/scooter', description: 'Mobilità elettrica veloce' }
+						{ name: t('header.bicycles'), href: '/biciclette', description: t('header.bicyclesDesc') },
+						{ name: t('header.electricScooters'), href: '/monopattini', description: t('header.electricScootersDesc') },
+						{ name: t('header.scooters'), href: '/scooter', description: t('header.scootersDesc') }
 					]
 				},
 				{
-					category: 'Auto & Minicar',
+					category: t('header.autoMinicar'),
 					items: [
-						{ name: 'Minicar', href: '/minicar', description: 'Minicar elettriche compatte' },
-						{ name: 'Quad', href: '/quad', description: 'Quad elettrici potenti' }
+						{ name: t('header.minicar'), href: '/minicar', description: t('header.minicarDesc') },
+						{ name: t('header.quad'), href: '/quad', description: t('header.quadDesc') }
 					]
 				}
 			]
 		},
 		{
-			label: 'Trasporto',
+			label: t('header.transport'),
 			submenu: [
 				{
-					category: 'Soluzioni Professionali',
+					category: t('header.professionalSolutions'),
 					items: [
-						{ name: 'Veicoli Commerciali', href: '/veicoli-commerciali', description: 'Per trasporto merci' },
-						{ name: 'Trasporto Passeggeri', href: '/veicoli-commerciali', description: 'Shuttle elettrici' }
+						{ name: t('header.commercialVehicles'), href: '/veicoli-commerciali', description: t('header.commercialVehiclesDesc') },
+						{ name: t('header.passengerTransport'), href: '/veicoli-commerciali', description: t('header.passengerTransportDesc') }
 					]
 				},
 				{
-					category: 'Accessibilità',
+					category: t('header.accessibility'),
 					items: [
-						{ name: 'Mobilità Disabili', href: '/mobilita-disabili', description: 'Veicoli accessibili' }
+						{ name: t('header.disabledMobility'), href: '/mobilita-disabili', description: t('header.disabledMobilityDesc') }
 					]
 				}
 			]
 		},
 		{
-			label: 'Servizi',
+			label: t('header.services'),
 			submenu: [
 				{
-					category: 'Assistenza',
+					category: t('header.assistance'),
 					items: [
-						{ name: 'Manutenzione', href: '/contatti', description: 'Servizi di assistenza' },
-						{ name: 'Ricambi Originali', href: '/contatti', description: 'Parti di ricambio certificate' }
+						{ name: t('header.maintenance'), href: '/contatti', description: t('header.maintenanceDesc') },
+						{ name: t('header.originalParts'), href: '/contatti', description: t('header.originalPartsDesc') }
 					]
 				},
 				{
-					category: 'Supporto',
+					category: t('header.support'),
 					items: [
-						{ name: 'Garanzie', href: '/contatti', description: 'Copertura estesa' },
-						{ name: 'Ecobonus', href: '/contatti', description: 'Incentivi statali' }
+						{ name: t('header.warranties'), href: '/contatti', description: t('header.warrantiesDesc') },
+						{ name: t('header.ecobonus'), href: '/contatti', description: t('header.ecobonusDesc') }
 					]
 				}
 			]
 		},
 		{
-			label: 'Chi Siamo',
+			label: t('header.about'),
 			href: '/contatti'
 		},
 		{
-			label: 'Contatti',
+			label: t('header.contacts'),
 			href: '/contatti'
 		}
 	]
@@ -99,32 +116,32 @@ function Header() {
 	// Menu mobile
 	const mobileMenuSections = [
 		{
-			title: 'Veicoli Elettrici',
+			title: t('header.vehicles'),
 			icon: Bike,
 			items: [
-				{ name: 'Biciclette', href: '/biciclette', icon: Bike },
-				{ name: 'Monopattini', href: '/monopattini', icon: Bolt },
-				{ name: 'Scooter', href: '/scooter', icon: Zap },
-				{ name: 'Minicar', href: '/minicar', icon: Car },
-				{ name: 'Quad', href: '/quad', icon: Car }
+				{ name: t('header.bicycles'), href: '/biciclette', icon: Bike },
+				{ name: t('header.electricScooters'), href: '/monopattini', icon: Bolt },
+				{ name: t('header.scooters'), href: '/scooter', icon: Zap },
+				{ name: t('header.minicar'), href: '/minicar', icon: Car },
+				{ name: t('header.quad'), href: '/quad', icon: Car }
 			]
 		},
 		{
-			title: 'Trasporto',
+			title: t('header.transport'),
 			icon: Truck,
 			items: [
-				{ name: 'Veicoli Commerciali', href: '/veicoli-commerciali', icon: Truck },
-				{ name: 'Mobilità Disabili', href: '/mobilita-disabili', icon: Users }
+				{ name: t('header.commercialVehicles'), href: '/veicoli-commerciali', icon: Truck },
+				{ name: t('header.disabledMobility'), href: '/mobilita-disabili', icon: Users }
 			]
 		},
 		{
-			title: 'Altro',
+			title: t('common.menu'),
 			icon: MessageSquare,
 			items: [
-				{ name: 'Servizi', href: '/contatti', icon: Wrench },
-				{ name: 'Garanzie', href: '/contatti', icon: Shield },
-				{ name: 'Chi Siamo', href: '/contatti', icon: Users },
-				{ name: 'Contatti', href: '/contatti', icon: MessageSquare }
+				{ name: t('header.services'), href: '/contatti', icon: Wrench },
+				{ name: t('header.warranties'), href: '/contatti', icon: Shield },
+				{ name: t('header.about'), href: '/contatti', icon: Users },
+				{ name: t('header.contacts'), href: '/contatti', icon: MessageSquare }
 			]
 		}
 	]
@@ -136,17 +153,17 @@ function Header() {
 				<div className="container mx-auto px-4 py-2">
 					<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs sm:text-sm">
 						<div className="flex flex-wrap items-center gap-3 md:gap-4">
-						<a href="tel:0916145377" className="flex items-center gap-2 hover:text-brand transition-colors">
+						<a href={`tel:${t('common.phone')}`} className="flex items-center gap-2 hover:text-brand transition-colors">
 							<Phone size={14} strokeWidth={1.5} className="flex-shrink-0" />
-							<span>0916145377</span>
+							<span>{t('common.phone')}</span>
 						</a>
-						<a href="mailto:info@vitale-eu.it" className="flex items-center gap-2 hover:text-brand transition-colors">
+						<a href={`mailto:${t('common.email')}`} className="flex items-center gap-2 hover:text-brand transition-colors">
 							<Mail size={14} strokeWidth={1.5} className="flex-shrink-0" />
-							<span className="truncate">info@vitale-eu.it</span>
+							<span className="truncate">{t('common.email')}</span>
 						</a>
 						</div>
 						<div className="hidden lg:block text-gray-400">
-							<span>Lun-Ven 09:00-13:00 / 15:30-19:00 • Sab 09:00-13:00</span>
+							<span>{t('common.hours')}</span>
 						</div>
 					</div>
 				</div>
@@ -178,6 +195,32 @@ function Header() {
 
 					{/* Right icons */}
 					<div className="flex items-center gap-3">
+						{/* Language Switcher - Toggle Switch (Visible on all screen sizes) */}
+						<div className="flex items-center gap-2">
+							<span className={`text-sm font-medium transition-colors ${currentLocale === 'it' ? 'text-blue-600' : 'text-gray-400'}`}>
+								🇮🇹
+							</span>
+							<button
+								onClick={handleLanguageToggle}
+								className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 cursor-pointer ${
+									currentLocale === 'en' 
+										? 'bg-blue-600 hover:bg-blue-700' 
+										: 'bg-gray-200 hover:bg-gray-300'
+								}`}
+								role="switch"
+								aria-checked={currentLocale === 'en'}
+								aria-label="Toggle language"
+							>
+								<span
+									className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm ${
+										currentLocale === 'en' ? 'translate-x-6' : 'translate-x-1'
+									}`}
+								/>
+							</button>
+							<span className={`text-sm font-medium transition-colors ${currentLocale === 'en' ? 'text-blue-600' : 'text-gray-400'}`}>
+								🇬🇧
+							</span>
+						</div>
 						{/* Mobile Menu Sheet */}
 						<Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
 							<SheetTrigger asChild>
@@ -192,7 +235,7 @@ function Header() {
 							</SheetTrigger>
 							<SheetContent side="right" className="w-[320px] sm:w-[400px] overflow-y-auto">
 								<SheetHeader className="text-left mb-6">
-									<SheetTitle className="text-xl font-bold">Menu</SheetTitle>
+									<SheetTitle className="text-xl font-bold">{t('common.menu')}</SheetTitle>
 								</SheetHeader>
 
 								{/* Mobile menu sections */}
@@ -232,27 +275,25 @@ function Header() {
 									})}
 								</div>
 
-								<Separator className="my-6" />
-
 								{/* Contact info in mobile menu */}
 								<div className="space-y-3 px-4">
-									<h3 className="text-sm font-semibold text-gray-900">Contatti</h3>
-									<a href="tel:0916145377" className="flex items-center gap-3 text-sm text-gray-600 hover:text-brand transition-colors">
+									<h3 className="text-sm font-semibold text-gray-900">{t('footer.contacts')}</h3>
+									<a href={`tel:${t('common.phone')}`} className="flex items-center gap-3 text-sm text-gray-600 hover:text-brand transition-colors">
 										<Phone size={16} strokeWidth={1.5} className="flex-shrink-0" />
-										<span>0916145377</span>
+										<span>{t('common.phone')}</span>
 									</a>
-									<a href="mailto:info@vitale-eu.it" className="flex items-center gap-3 text-sm text-gray-600 hover:text-brand transition-colors">
+									<a href={`mailto:${t('common.email')}`} className="flex items-center gap-3 text-sm text-gray-600 hover:text-brand transition-colors">
 										<Mail size={16} strokeWidth={1.5} className="flex-shrink-0" />
-										<span className="break-all">info@vitale-eu.it</span>
+										<span className="break-all">{t('common.email')}</span>
 									</a>
 								</div>
 
 								{/* Opening hours in mobile menu */}
 								<div className="mt-6 px-4 py-4 bg-gray-50 rounded-none">
-									<h3 className="text-sm font-semibold text-gray-900 mb-2">Orari</h3>
-									<p className="text-xs text-gray-600">Lun-Ven: 09:00-13:00 / 15:30-19:00</p>
-									<p className="text-xs text-gray-600">Sab: 09:00-13:00</p>
-									<p className="text-xs text-gray-600">Dom: Chiuso</p>
+									<h3 className="text-sm font-semibold text-gray-900 mb-2">{t('contacts.contactInfo.openingHours')}</h3>
+									<p className="text-xs text-gray-600">{t('common.hoursShort')}</p>
+									<p className="text-xs text-gray-600">{t('common.hoursSaturday')}</p>
+									<p className="text-xs text-gray-600">{t('common.hoursSunday')}</p>
 								</div>
 							</SheetContent>
 						</Sheet>

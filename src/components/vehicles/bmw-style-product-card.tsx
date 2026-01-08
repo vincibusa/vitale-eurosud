@@ -2,10 +2,11 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Check } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export interface VehicleProduct {
 	id: string
@@ -48,18 +49,19 @@ export default function BMWStyleProductCard({
 	onCompareClick,
 	isInCompare
 }: BMWStyleProductCardProps) {
+	const t = useTranslations()
 	const specs = [
 		{
-			label: 'Autonomia',
-			value: product.autonomy || 'N/D'
+			label: t('vehicles.specs.autonomia'),
+			value: product.autonomy || t('vehicles.specs.notAvailable')
 		},
 		{
-			label: 'Tempo ricarica',
-			value: product.chargingTime || 'N/D'
+			label: t('vehicles.specs.tempoRicarica'),
+			value: product.chargingTime || t('vehicles.specs.notAvailable')
 		},
 		{
-			label: 'Potenza',
-			value: product.power || 'N/D'
+			label: t('vehicles.specs.potenza'),
+			value: product.power || t('vehicles.specs.notAvailable')
 		}
 	]
 
@@ -85,7 +87,7 @@ export default function BMWStyleProductCard({
 					<div className="absolute top-4 left-4 flex flex-col gap-2">
 						{product.isNew && (
 							<Badge className={`${badgeColor} border-0`}>
-								Novità
+								{t('vehicles.new')}
 							</Badge>
 						)}
 						<Badge variant="secondary" className="bg-white/90 backdrop-blur-sm">
@@ -128,7 +130,7 @@ export default function BMWStyleProductCard({
 						className="flex-1 bg-brand hover:bg-brand-dark text-white"
 					>
 						<Link href={product.href}>
-							Scopri
+							{t('common.discover')}
 						</Link>
 					</Button>
 
@@ -149,10 +151,10 @@ export default function BMWStyleProductCard({
 						{isInCompare ? (
 							<>
 								<Check className="w-4 h-4 mr-2" />
-								Confronta
+								{t('vehicles.compare')}
 							</>
 						) : (
-							'Confronta'
+							t('vehicles.compare')
 						)}
 					</Button>
 				</div>

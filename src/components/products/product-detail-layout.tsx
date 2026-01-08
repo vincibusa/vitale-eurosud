@@ -4,8 +4,9 @@ import { useState, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import { Button } from '@/components/ui/button'
+import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -31,11 +32,14 @@ import {
 // Carica Model3DViewer solo lato client (evita errori SSR con @google/model-viewer)
 const Model3DViewer = dynamic(() => import('./model-3d-viewer'), {
 	ssr: false,
-	loading: () => (
-		<div className="flex items-center justify-center h-full bg-gray-100">
-			<div className="text-gray-500">Caricamento modello 3D...</div>
-		</div>
-	)
+	loading: () => {
+		// Note: useTranslations cannot be used here in loading component
+		return (
+			<div className="flex items-center justify-center h-full bg-gray-100">
+				<div className="text-gray-500">Loading...</div>
+			</div>
+		)
+	}
 })
 
 // Animation variants
@@ -179,6 +183,7 @@ export default function ProductDetailLayout({
 	badgeColor,
 	model3d
 }: ProductDetailProps) {
+	const t = useTranslations()
 	const [currentImageIndex, setCurrentImageIndex] = useState(0)
 	const [showContactForm, setShowContactForm] = useState(false)
 	const has3DModel = Boolean(model3d)
@@ -212,11 +217,11 @@ export default function ProductDetailLayout({
 					<div className="container mx-auto px-4 py-3">
 						<nav className="flex items-center gap-2 text-sm text-gray-500">
 							<Link href="/" className="hover:text-gray-900 transition-colors">
-								Home
+								{t('product.home')}
 							</Link>
 							<span>/</span>
 							<Link href="/cerca" className="hover:text-gray-900 transition-colors">
-								Inventario
+								{t('product.inventory')}
 							</Link>
 							<span>/</span>
 							<Link href={categoryHref} className="hover:text-gray-900 transition-colors">
@@ -251,7 +256,7 @@ export default function ProductDetailLayout({
 											}`}
 										>
 											<Box size={16} strokeWidth={1.5} />
-											Modello 3D
+											{t('product.view3d')}
 										</button>
 										<button
 											onClick={() => setViewMode('2d')}
@@ -262,7 +267,7 @@ export default function ProductDetailLayout({
 											}`}
 										>
 											<ImageIcon size={16} strokeWidth={1.5} />
-											Foto
+											{t('product.viewImages')}
 										</button>
 									</div>
 								</motion.div>
@@ -411,27 +416,27 @@ export default function ProductDetailLayout({
 									{/* Quick Specs - BMW Style */}
 									<div className="p-6 border-b border-gray-100">
 										<h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
-											Specifiche Principali
+											{t('product.mainSpecs')}
 										</h3>
 										<div className="grid grid-cols-2 gap-4">
 											<div className="text-center p-3 bg-gray-50 rounded-none">
 												<Zap size={20} strokeWidth={1.5} className={`mx-auto mb-2 ${colors.text}`} />
-												<p className="text-xs text-gray-500 mb-1">Potenza</p>
+												<p className="text-xs text-gray-500 mb-1">{t('vehicles.specs.potenza')}</p>
 												<p className="font-bold text-gray-900 text-sm">{specs.potenza}</p>
 											</div>
 											<div className="text-center p-3 bg-gray-50 rounded-none">
 												<Compass size={20} strokeWidth={1.5} className={`mx-auto mb-2 ${colors.text}`} />
-												<p className="text-xs text-gray-500 mb-1">Autonomia</p>
+												<p className="text-xs text-gray-500 mb-1">{t('vehicles.specs.autonomia')}</p>
 												<p className="font-bold text-gray-900 text-sm">{specs.autonomia}</p>
 											</div>
 											<div className="text-center p-3 bg-gray-50 rounded-none">
 												<Gauge size={20} strokeWidth={1.5} className={`mx-auto mb-2 ${colors.text}`} />
-												<p className="text-xs text-gray-500 mb-1">Velocità Max</p>
+												<p className="text-xs text-gray-500 mb-1">{t('vehicles.specs.velocitaMax')}</p>
 												<p className="font-bold text-gray-900 text-sm">{specs.velocitaMassima}</p>
 											</div>
 											<div className="text-center p-3 bg-gray-50 rounded-none">
 												<Battery size={20} strokeWidth={1.5} className={`mx-auto mb-2 ${colors.text}`} />
-												<p className="text-xs text-gray-500 mb-1">Batteria</p>
+												<p className="text-xs text-gray-500 mb-1">{t('vehicles.specs.batteria')}</p>
 												<p className="font-bold text-gray-900 text-sm truncate">{specs.batteria.split(' ')[0]}</p>
 											</div>
 										</div>
@@ -445,7 +450,7 @@ export default function ProductDetailLayout({
 										onClick={() => setShowContactForm(true)}
 									>
 										<FileText size={18} strokeWidth={1.5} className="mr-2" />
-										Richiedi Preventivo
+										{t('product.requestQuote')}
 									</Button>
 									<Button
 										size="sm"
@@ -455,7 +460,7 @@ export default function ProductDetailLayout({
 									>
 										<a href="tel:0916145377">
 											<Phone size={16} strokeWidth={1.5} className="mr-2" />
-											Chiama
+											{t('product.call')}
 										</a>
 									</Button>
 									</div>
@@ -463,7 +468,7 @@ export default function ProductDetailLayout({
 									{/* Product Code */}
 									<div className="px-6 pb-6">
 										<p className="text-xs text-gray-400 text-center">
-											Codice Articolo: <span className="font-mono">{productCode}</span>
+											{t('product.productCode')}: <span className="font-mono">{productCode}</span>
 										</p>
 									</div>
 								</div>
@@ -478,69 +483,69 @@ export default function ProductDetailLayout({
 				<div className="container mx-auto px-4">
 					<div className="max-w-4xl mx-auto">
 						{/* Technical Specs Section */}
-						<ExpandableSection title="Scheda Tecnica Completa" defaultOpen={true} icon={Settings}>
+						<ExpandableSection title={t('product.fullSpecs')} defaultOpen={true} icon={Settings}>
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
-									<span className="text-gray-600">Marca</span>
+									<span className="text-gray-600">{t('vehicles.specs.marca')}</span>
 									<span className="font-semibold text-gray-900">{brand}</span>
 								</div>
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
-									<span className="text-gray-600">Modello</span>
+									<span className="text-gray-600">{t('vehicles.specs.modello')}</span>
 									<span className="font-semibold text-gray-900">{model}</span>
 								</div>
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
 									<span className="text-gray-600 flex items-center gap-2">
 										<Zap size={16} strokeWidth={1.5} className={colors.text} />
-										Potenza
+										{t('vehicles.specs.potenza')}
 									</span>
 									<span className="font-semibold text-gray-900">{specs.potenza}</span>
 								</div>
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
 									<span className="text-gray-600 flex items-center gap-2">
 										<Battery size={16} strokeWidth={1.5} className={colors.text} />
-										Batteria
+										{t('vehicles.specs.batteria')}
 									</span>
 									<span className="font-semibold text-gray-900">{specs.batteria}</span>
 								</div>
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
 									<span className="text-gray-600 flex items-center gap-2">
 										<Gauge size={16} strokeWidth={1.5} className={colors.text} />
-										Velocità Max
+										{t('vehicles.specs.velocitaMax')}
 									</span>
 									<span className="font-semibold text-gray-900">{specs.velocitaMassima}</span>
 								</div>
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
 									<span className="text-gray-600 flex items-center gap-2">
 										<Compass size={16} strokeWidth={1.5} className={colors.text} />
-										Autonomia
+										{t('vehicles.specs.autonomia')}
 									</span>
 									<span className="font-semibold text-gray-900">{specs.autonomia}</span>
 								</div>
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
-									<span className="text-gray-600">Tempo Ricarica</span>
+									<span className="text-gray-600">{t('vehicles.specs.tempoRicarica')}</span>
 									<span className="font-semibold text-gray-900">{specs.tempoRicarica}</span>
 								</div>
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
-									<span className="text-gray-600">Ruote</span>
+									<span className="text-gray-600">{t('vehicles.specs.ruote')}</span>
 									<span className="font-semibold text-gray-900">{specs.ruote}</span>
 								</div>
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
-									<span className="text-gray-600">Trazione</span>
+									<span className="text-gray-600">{t('vehicles.specs.trazione')}</span>
 									<span className="font-semibold text-gray-900">{specs.trazione}</span>
 								</div>
 								<div className="flex items-center justify-between py-3 border-b border-gray-100">
-									<span className="text-gray-600">Telaio</span>
+									<span className="text-gray-600">{t('vehicles.specs.telaio')}</span>
 									<span className="font-semibold text-gray-900">{specs.telaio}</span>
 								</div>
 								{specs.freni && (
 									<div className="flex items-center justify-between py-3 border-b border-gray-100">
-										<span className="text-gray-600">Freni</span>
+										<span className="text-gray-600">{t('vehicles.specs.freni')}</span>
 										<span className="font-semibold text-gray-900">{specs.freni}</span>
 									</div>
 								)}
 								{specs.pendenza && (
 									<div className="flex items-center justify-between py-3 border-b border-gray-100">
-										<span className="text-gray-600">Pendenza Max</span>
+										<span className="text-gray-600">{t('vehicles.specs.pendenzaMax')}</span>
 										<span className="font-semibold text-gray-900">{specs.pendenza}</span>
 									</div>
 								)}
@@ -713,9 +718,9 @@ export default function ProductDetailLayout({
 						>
 							<motion.div variants={fadeInUp} className="text-center mb-10">
 								<h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-									Altri Veicoli
+									{t('product.otherVehicles')}
 								</h2>
-								<p className="text-gray-600">Scopri altri modelli della nostra gamma</p>
+								<p className="text-gray-600">{t('product.discoverOther')}</p>
 							</motion.div>
 							<motion.div
 								className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -763,7 +768,7 @@ export default function ProductDetailLayout({
 									className="px-8"
 									asChild
 								>
-									<Link href="/cerca">Guarda tutti i veicoli</Link>
+									<Link href="/cerca">{t('product.viewAll')}</Link>
 								</Button>
 							</div>
 						</motion.div>

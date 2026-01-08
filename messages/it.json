@@ -1,0 +1,276 @@
+{
+	"common": {
+		"phone": "0916145377",
+		"email": "info@vitale-eu.it",
+		"address": "Via Messina Montagne, 6",
+		"city": "90121 Palermo (PA)",
+		"hours": "Lun-Ven 09:00-13:00 / 15:30-19:00 • Sab 09:00-13:00",
+		"hoursShort": "Lun-Ven: 09:00-13:00 / 15:30-19:00",
+		"hoursSaturday": "Sab: 09:00-13:00",
+		"hoursSunday": "Dom: Chiuso",
+		"discover": "Scopri",
+		"contact": "Contattaci",
+		"moreInfo": "Maggiori Informazioni",
+		"requestQuote": "Richiedi Preventivo",
+		"send": "Invia",
+		"close": "Chiudi",
+		"menu": "Menu"
+	},
+	"header": {
+		"vehicles": "Veicoli Elettrici",
+		"transport": "Trasporto",
+		"services": "Servizi",
+		"about": "Chi Siamo",
+		"contacts": "Contatti",
+		"urbanMobility": "Mobilità Urbana",
+		"bicycles": "Biciclette",
+		"bicyclesDesc": "E-bike per città e tempo libero",
+		"scooters": "Scooter",
+		"scootersDesc": "Mobilità elettrica veloce",
+		"electricScooters": "Monopattini",
+		"electricScootersDesc": "Scooter elettrici pratici",
+		"autoMinicar": "Auto & Minicar",
+		"minicar": "Minicar",
+		"minicarDesc": "Minicar elettriche compatte",
+		"quad": "Quad",
+		"quadDesc": "Quad elettrici potenti",
+		"professionalSolutions": "Soluzioni Professionali",
+		"commercialVehicles": "Veicoli Commerciali",
+		"commercialVehiclesDesc": "Per trasporto merci",
+		"passengerTransport": "Trasporto Passeggeri",
+		"passengerTransportDesc": "Shuttle elettrici",
+		"accessibility": "Accessibilità",
+		"disabledMobility": "Mobilità Disabili",
+		"disabledMobilityDesc": "Veicoli accessibili",
+		"assistance": "Assistenza",
+		"maintenance": "Manutenzione",
+		"maintenanceDesc": "Servizi di assistenza",
+		"originalParts": "Ricambi Originali",
+		"originalPartsDesc": "Parti di ricambio certificate",
+		"support": "Supporto",
+		"warranties": "Garanzie",
+		"warrantiesDesc": "Copertura estesa",
+		"ecobonus": "Ecobonus",
+		"ecobonusDesc": "Incentivi statali"
+	},
+	"footer": {
+		"description": "Leader nella fornitura di veicoli elettrici di qualità superiore per una mobilità sostenibile.",
+
+		"fax": "Fax: 0916145372",
+		"vehicles": "Veicoli",
+		"electricBicycles": "Biciclette Elettriche",
+		"electricScooters": "Monopattini",
+		"electricScootersFull": "Scooter Elettrici",
+		"minicar": "Minicar",
+		"electricQuad": "Quad Elettrici",
+		"commercialVehicles": "Veicoli Commerciali",
+		"services": "Servizi",
+		"assistanceMaintenance": "Assistenza e Manutenzione",
+		"originalParts": "Ricambi Originali",
+		"warranties": "Garanzie",
+		"ecobonusIncentives": "Ecobonus e Incentivi",
+		"disabledMobility": "Mobilità Disabili",
+		"company": "Azienda",
+		"aboutUs": "Chi Siamo",
+		"becomePartner": "Diventa Partner",
+		"workWithUs": "Lavora con Noi",
+		"contacts": "Contatti",
+		"companyName": "EUROSUD S.R.L.",
+		"vat": "PIVA 04165720824",
+		"followUs": "Seguici",
+		"newsletter": "Newsletter",
+		"newsletterDesc": "Iscriviti per ricevere offerte e novità",
+		"emailPlaceholder": "La tua email",
+		"copyright": "© {year} Vitale - Tutti i diritti riservati",
+		"trademark": "VITALE è un marchio registrato al Ministero dello Sviluppo Economico",
+		"privacyPolicy": "Privacy Policy",
+		"cookiePolicy": "Cookie Policy",
+		"termsConditions": "Termini e Condizioni"
+	},
+	"home": {
+		"hero": {
+			"title": "Il Futuro della Mobilità Elettrica",
+			"subtitle": "Leader nella fornitura di veicoli elettrici di qualità superiore.",
+			"description": "Scopri la nostra gamma completa per una mobilità sostenibile e all'avanguardia.",
+			"discoverVehicles": "Scopri i Veicoli",
+			"contactUs": "Contattaci"
+		},
+		"quickActions": {
+			"vehicleCatalog": "Catalogo Veicoli",
+			"vehicleCatalogDesc": "Esplora tutti i modelli disponibili",
+			"cargoTransport": "Trasporto Merci",
+			"cargoTransportDesc": "Soluzioni professionali per il lavoro",
+			"disabledMobility": "Mobilità Disabili",
+			"disabledMobilityDesc": "Veicoli accessibili e sicuri",
+			"contactUs": "Contattaci",
+			"contactUsDesc": "Richiedi informazioni personalizzate"
+		},
+		"asya": {
+			"badge": "Novità 2024",
+			"title": "ASYA",
+			"subtitle": "AUTO ELETTRICA",
+			"description1": "La nuova Asya: l'auto elettrica da due posti pensata per un'esperienza di guida ecologica e all'avanguardia. Con un'autonomia di 150 km, una potenza di 7 kW e una velocità massima di 85 km/h.",
+			"description2": "Il compagno ideale per la guida urbana e extraurbana, con batteria ad alta efficienza e sistema di gestione energetica avanzato.",
+			"range": "Autonomia 150km",
+			"power": "Potenza 7 kW",
+			"homologation": "Omologazione L7e-CP"
+		},
+		"passengerTransport": {
+			"badge": "Trasporto Passeggeri",
+			"title": "Veicoli elettrici per trasporto passeggeri",
+			"description1": "Vitale Italy, la nostra eccellenza nel trasporto passeggeri. Progettato per offrire prestazioni eccezionali e guidato dall'energia sostenibile.",
+			"description2": "Il veicolo elettrico che ridefinisce il tuo concetto di trasporto passeggeri grazie ai 4 posti + 1 per il conducente."
+		},
+		"cargoTransport": {
+			"badge": "Trasporto Merci",
+			"title": "Veicoli Elettrici per trasporto merci",
+			"description1": "L'epicentro dell'innovazione in mobilità sostenibile, dove la nostra azienda brilla come leader nella fornitura di veicoli elettrici di qualità superiore.",
+			"description2": "Collaboriamo con una rete di concessionari fidati per guidare la rivoluzione verde su strada.",
+			"discoverEgo": "Scopri Vitale-EGO"
+		},
+		"partnership": {
+			"badge": "Partnership",
+			"title": "Soluzioni su misura per le tue esigenze",
+			"description1": "Diventare un nostro concessionario è un'opportunità imperdibile che ti mette direttamente al volante del successo.",
+			"description2": "Avrai accesso prioritario a una gamma completa di prodotti di alta qualità, supportati da un affidabile approvvigionamento di ricambi."
+		},
+		"values": {
+			"title": "I Nostri Valori",
+			"subtitle": "Impegnati per un futuro sostenibile e una mobilità accessibile a tutti",
+			"freedom": {
+				"title": "Libertà di Movimento",
+				"description": "Di' addio alle restrizioni della città e goditi la libertà di guidare un veicolo elettrico al 100%. Mobilità ecologica e sostenibile."
+			},
+			"sustainability": {
+				"title": "Mobilità Sostenibile",
+				"description": "La strada verso un futuro più verde inizia con ogni passo che facciamo verso la mobilità sostenibile. Le nostre città cambiano."
+			},
+			"ecobonus": {
+				"title": "Ecobonus",
+				"description": "L'ecobonus è un aiuto attuato in Italia per promuovere l'acquisizione di veicoli a basse emissioni."
+			}
+		}
+	},
+	"contacts": {
+		"title": "Diventa rivenditore",
+		"badge": "Partnership",
+		"description1": "Diventare rivenditore di Vitale offre diverse ragioni convincenti. Innanzitutto, l'azienda offre una vasta gamma di veicoli elettrici di alta qualità, che coprono diverse categorie.",
+		"description2": "Inoltre, Vitale fornisce un supporto professionale completo ai propri rivenditori. Questo include assistenza nella gestione delle vendite, formazione sul prodotto, supporto marketing e servizi post-vendita.",
+		"requestInfo": "Richiedi Informazioni",
+		"whyVitale": "Perché scegliere Vitale",
+		"whyVitaleDesc": "Vantaggi esclusivi per i nostri partner commerciali",
+		"qualityProducts": {
+			"title": "Prodotti di Qualità",
+			"description": "Accesso prioritario a una gamma completa di prodotti di alta qualità"
+		},
+		"fullSupport": {
+			"title": "Supporto Completo",
+			"description": "Assistenza tempestiva e approvvigionamento ricambi garantito"
+		},
+		"solidPartnership": {
+			"title": "Partnership Solida",
+			"description": "Una partnership che si basa su risultati concreti e duraturi"
+		},
+		"contactForm": {
+			"title": "Contattaci",
+			"description": "Compila il form per richiedere informazioni sui nostri veicoli elettrici",
+			"firstName": "Nome",
+			"lastName": "Cognome",
+			"email": "Email",
+			"phone": "Telefono",
+			"message": "Messaggio",
+			"messagePlaceholder": "Scrivi qui il tuo messaggio...",
+			"privacy": "Accetto l'informativa sulla",
+			"privacyLink": "privacy policy",
+			"submit": "Invia Messaggio",
+			"required": "*"
+		},
+		"contactInfo": {
+			"title": "Recapiti",
+			"openingHours": "Orari di apertura",
+			"mondayFriday": "Lun – Ven:",
+			"saturday": "Sabato:",
+			"sunday": "Domenica:",
+			"closed": "CHIUSO",
+			"companyInfo": "Informazioni Aziendali",
+			"companyName": "Ragione Sociale:",
+			"vat": "P.IVA:",
+			"fax": "Fax:"
+		},
+		"cta": {
+			"title": "Pronto a unirti alla rivoluzione elettrica?",
+			"description": "Contattaci oggi stesso per scoprire le opportunità di partnership con Vitale",
+			"callNow": "Chiama Ora",
+			"sendEmail": "Invia Email"
+		}
+	},
+	"vehicles": {
+		"categories": {
+			"biciclette": "Biciclette Elettriche",
+			"monopattini": "Monopattini Elettrici",
+			"scooter": "Scooter Elettrici",
+			"minicar": "Minicar Elettriche",
+			"quad": "Quad Elettrici",
+			"veicoli-commerciali": "Veicoli Commerciali",
+			"mobilita-disabili": "Mobilità Disabili"
+		},
+		"categoryDescriptions": {
+			"biciclette": "Scopri la nostra collezione di biciclette elettriche per una mobilità sostenibile e divertente. Perfette per la città e i percorsi extraurbani.",
+			"monopattini": "Monopattini elettrici pratici e maneggevoli per spostamenti urbani veloci e sostenibili.",
+			"scooter": "Scooter elettrici potenti e affidabili per una mobilità urbana ed extraurbana.",
+			"minicar": "Minicar elettriche compatte e moderne per la mobilità urbana sostenibile.",
+			"quad": "Quad elettrici potenti per avventure off-road e terreni difficili.",
+			"veicoli-commerciali": "Veicoli commerciali elettrici per trasporto merci e passeggeri.",
+			"mobilita-disabili": "Veicoli elettrici accessibili e sicuri per la mobilità delle persone con disabilità."
+		},
+		"specs": {
+			"batteria": "Batteria",
+			"autonomia": "Autonomia",
+			"tempoRicarica": "Tempo Ricarica",
+			"ruote": "Ruote",
+			"potenza": "Potenza",
+			"velocitaMassima": "Velocità Massima",
+			"trazione": "Trazione",
+			"telaio": "Telaio",
+			"freni": "Freni",
+			"pendenza": "Pendenza",
+			"peso": "Peso",
+			"velocitaMax": "Velocità Max",
+			"pendenzaMax": "Pendenza Max",
+			"marca": "Marca",
+			"modello": "Modello",
+			"notAvailable": "N/D"
+		},
+		"compare": "Confronta",
+		"viewDetails": "Visualizza Dettagli",
+		"relatedProducts": "Prodotti Correlati",
+		"new": "Novità",
+		"product": "Prodotto",
+		"products": "Prodotti",
+		"productSingular": "veicolo",
+		"productPlural": "veicoli",
+		"clearAll": "Cancella tutto",
+		"compareLabel": "Confronta:"
+	},
+	"product": {
+		"home": "Home",
+		"inventory": "Inventario",
+		"mainSpecs": "Specifiche Principali",
+		"fullSpecs": "Scheda Tecnica Completa",
+		"requestQuote": "Richiedi Preventivo",
+		"call": "Chiama",
+		"productCode": "Codice Articolo",
+		"discoverOther": "Scopri altri modelli della nostra gamma",
+		"viewAll": "Guarda tutti i veicoli",
+		"notFound": "Prodotto Non Trovato",
+		"loading3d": "Caricamento modello 3D...",
+		"view3d": "Vista 3D",
+		"viewImages": "Foto",
+		"otherVehicles": "Altri Veicoli"
+	},
+	"metadata": {
+		"title": "Vitale - Fornitura Veicoli Elettrici",
+		"description": "Leader nella fornitura di veicoli elettrici di qualità superiore. Dalle biciclette ai dynamici scooter, dalle avanzate auto ai veicoli specializzati per persone con disabilità. Mobilità sostenibile e all'avanguardia."
+	}
+}
+

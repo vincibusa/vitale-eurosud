@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { Car, Truck, Users, MessageSquare, ArrowRight } from 'lucide-react'
 import { LucideIcon } from 'lucide-react'
 
@@ -26,34 +27,36 @@ interface QuickAction {
 	href: string
 }
 
-const quickActions: QuickAction[] = [
-	{
-		icon: Car,
-		title: 'Catalogo Veicoli',
-		description: 'Esplora tutti i modelli disponibili',
-		href: '/biciclette'
-	},
-	{
-		icon: Truck,
-		title: 'Trasporto Merci',
-		description: 'Soluzioni professionali per il lavoro',
-		href: '/veicoli-commerciali'
-	},
-	{
-		icon: Users,
-		title: 'Mobilità Disabili',
-		description: 'Veicoli accessibili e sicuri',
-		href: '/mobilita-disabili'
-	},
-	{
-		icon: MessageSquare,
-		title: 'Contattaci',
-		description: 'Richiedi informazioni personalizzate',
-		href: '/contatti'
-	}
-]
-
 export default function QuickActions() {
+	const t = useTranslations()
+	
+	const quickActions: QuickAction[] = [
+		{
+			icon: Car,
+			title: t('home.quickActions.vehicleCatalog'),
+			description: t('home.quickActions.vehicleCatalogDesc'),
+			href: '/biciclette'
+		},
+		{
+			icon: Truck,
+			title: t('home.quickActions.cargoTransport'),
+			description: t('home.quickActions.cargoTransportDesc'),
+			href: '/veicoli-commerciali'
+		},
+		{
+			icon: Users,
+			title: t('home.quickActions.disabledMobility'),
+			description: t('home.quickActions.disabledMobilityDesc'),
+			href: '/mobilita-disabili'
+		},
+		{
+			icon: MessageSquare,
+			title: t('home.quickActions.contactUs'),
+			description: t('home.quickActions.contactUsDesc'),
+			href: '/contatti'
+		}
+	]
+	
 	return (
 		<section className="py-12 md:py-16 bg-white">
 			<div className="container mx-auto px-4">
@@ -85,7 +88,7 @@ export default function QuickActions() {
 												{action.description}
 											</p>
 											<div className="flex items-center gap-2 text-brand group-hover:gap-3 transition-all duration-300">
-												<span className="text-sm font-medium">Scopri</span>
+												<span className="text-sm font-medium">{t('common.discover')}</span>
 												<ArrowRight size={16} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
 											</div>
 										</CardContent>

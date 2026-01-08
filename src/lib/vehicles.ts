@@ -1,5 +1,7 @@
 import { supabase } from './supabase'
 import type { Vehicle } from '@/types/vehicle'
+import { localizeVehicle } from './vehicles-i18n'
+import { getLocale } from 'next-intl/server'
 
 /**
  * NOTA: Per aggiungere modelli 3D ai veicoli:
@@ -14,6 +16,8 @@ import type { Vehicle } from '@/types/vehicle'
  */
 
 export async function getVehicles(): Promise<Vehicle[]> {
+	const locale = (await getLocale()) as 'it' | 'en'
+	
 	const { data, error } = await supabase
 		.from('vehicles')
 		.select('*')
@@ -23,29 +27,12 @@ export async function getVehicles(): Promise<Vehicle[]> {
 		return []
 	}
 
-	return data.map(vehicle => ({
-		id: vehicle.id,
-		name: vehicle.name,
-		model: vehicle.model,
-		brand: vehicle.brand,
-		year: vehicle.year,
-		productCode: vehicle.product_code,
-		category: vehicle.category,
-		categorySlug: vehicle.category_slug,
-		categoryHref: `/${vehicle.category_slug}`,
-		images: vehicle.images || [],
-		specs: vehicle.specs || {},
-		description: vehicle.description || '',
-		specialBadges: vehicle.special_badges || [],
-		descriptionImages: vehicle.description_images || [],
-		optionalFeatures: vehicle.optional_features || [],
-		primaryColor: vehicle.primary_color || 'gray',
-		badgeColor: vehicle.badge_color || 'bg-gray-100 text-gray-700 hover:bg-gray-200',
-		isNew: vehicle.is_new || false
-	}))
+	return data.map(vehicle => localizeVehicle(vehicle, locale))
 }
 
 export async function getVehicleById(id: string): Promise<Vehicle | null> {
+	const locale = (await getLocale()) as 'it' | 'en'
+	
 	const { data, error } = await supabase
 		.from('vehicles')
 		.select('*')
@@ -58,30 +45,12 @@ export async function getVehicleById(id: string): Promise<Vehicle | null> {
 
 	if (!data) return null
 
-	return {
-		id: data.id,
-		name: data.name,
-		model: data.model,
-		brand: data.brand,
-		year: data.year,
-		productCode: data.product_code,
-		category: data.category,
-		categorySlug: data.category_slug,
-		categoryHref: `/${data.category_slug}`,
-		images: data.images || [],
-		specs: data.specs || {},
-		description: data.description || '',
-		specialBadges: data.special_badges || [],
-		descriptionImages: data.description_images || [],
-		optionalFeatures: data.optional_features || [],
-		primaryColor: data.primary_color || 'gray',
-		badgeColor: data.badge_color || 'bg-gray-100 text-gray-700 hover:bg-gray-200',
-		isNew: data.is_new || false,
-		model3d: data.model_3d || undefined
-	}
+	return localizeVehicle(data, locale)
 }
 
 export async function getVehiclesByCategory(categorySlug: string): Promise<Vehicle[]> {
+	const locale = (await getLocale()) as 'it' | 'en'
+	
 	const { data, error } = await supabase
 		.from('vehicles')
 		.select('*')
@@ -92,27 +61,7 @@ export async function getVehiclesByCategory(categorySlug: string): Promise<Vehic
 		return []
 	}
 
-	return data.map(vehicle => ({
-		id: vehicle.id,
-		name: vehicle.name,
-		model: vehicle.model,
-		brand: vehicle.brand,
-		year: vehicle.year,
-		productCode: vehicle.product_code,
-		category: vehicle.category,
-		categorySlug: vehicle.category_slug,
-		categoryHref: `/${vehicle.category_slug}`,
-		images: vehicle.images || [],
-		specs: vehicle.specs || {},
-		description: vehicle.description || '',
-		specialBadges: vehicle.special_badges || [],
-		descriptionImages: vehicle.description_images || [],
-		optionalFeatures: vehicle.optional_features || [],
-		primaryColor: vehicle.primary_color || 'gray',
-		badgeColor: vehicle.badge_color || 'bg-gray-100 text-gray-700 hover:bg-gray-200',
-		isNew: vehicle.is_new || false,
-		model3d: vehicle.model_3d || undefined
-	}))
+	return data.map(vehicle => localizeVehicle(vehicle, locale))
 }
 
 export async function getAllVehicleSlugs(): Promise<string[]> {
@@ -171,6 +120,8 @@ export function vehicleToProduct(vehicle: Vehicle) {
 
 // Get featured vehicles (new vehicles)
 export async function getFeaturedVehicles(limit: number = 6): Promise<Vehicle[]> {
+	const locale = (await getLocale()) as 'it' | 'en'
+	
 	const { data, error } = await supabase
 		.from('vehicles')
 		.select('*')
@@ -182,27 +133,7 @@ export async function getFeaturedVehicles(limit: number = 6): Promise<Vehicle[]>
 		return []
 	}
 
-	return data.map(vehicle => ({
-		id: vehicle.id,
-		name: vehicle.name,
-		model: vehicle.model,
-		brand: vehicle.brand,
-		year: vehicle.year,
-		productCode: vehicle.product_code,
-		category: vehicle.category,
-		categorySlug: vehicle.category_slug,
-		categoryHref: `/${vehicle.category_slug}`,
-		images: vehicle.images || [],
-		specs: vehicle.specs || {},
-		description: vehicle.description || '',
-		specialBadges: vehicle.special_badges || [],
-		descriptionImages: vehicle.description_images || [],
-		optionalFeatures: vehicle.optional_features || [],
-		primaryColor: vehicle.primary_color || 'gray',
-		badgeColor: vehicle.badge_color || 'bg-gray-100 text-gray-700 hover:bg-gray-200',
-		isNew: vehicle.is_new || false,
-		model3d: vehicle.model_3d || undefined
-	}))
+	return data.map(vehicle => localizeVehicle(vehicle, locale))
 }
 
 // Derive subcategory from vehicle properties for BMW-style tab filtering
