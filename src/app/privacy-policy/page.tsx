@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
 						animate="visible"
 						variants={fadeInUp}
 					>
-						<div className="mx-auto mb-6 w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
+						<div className="mx-auto mb-6 w-20 h-20 bg-white/20 rounded-none flex items-center justify-center">
 							<Shield className="text-white" size={40} />
 						</div>
 						<h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
@@ -61,7 +61,7 @@ export default function PrivacyPolicyPage() {
 										Il Titolare del trattamento dei dati è <strong>EUROSUD S.R.L.</strong>, con sede legale in Via Messina Montagne, 6, 90121 Palermo (PA), P.IVA 04165720824.
 									</p>
 									<p>
-										Per qualsiasi informazione relativa al trattamento dei dati personali, è possibile contattare il Titolare all'indirizzo email: <a href="mailto:info@vitale-eu.it" className="text-orange-600 hover:underline">info@vitale-eu.it</a>
+										Per qualsiasi informazione relativa al trattamento dei dati personali, è possibile contattare il Titolare all'indirizzo email: <a href="mailto:info@vitale-eu.it" className="text-brand hover:underline">info@vitale-eu.it</a>
 									</p>
 								</motion.section>
 
@@ -146,7 +146,7 @@ export default function PrivacyPolicyPage() {
 										<li>Proporre reclamo all'Autorità Garante per la Protezione dei Dati Personali.</li>
 									</ul>
 									<p className="mt-4">
-										Per esercitare i tuoi diritti, scrivi a: <a href="mailto:info@vitale-eu.it" className="text-orange-600 hover:underline">info@vitale-eu.it</a>
+										Per esercitare i tuoi diritti, scrivi a: <a href="mailto:info@vitale-eu.it" className="text-brand hover:underline">info@vitale-eu.it</a>
 									</p>
 								</motion.section>
 
@@ -167,9 +167,9 @@ export default function PrivacyPolicyPage() {
 									</p>
 								</motion.section>
 
-								<motion.section variants={fadeInUp} className="mt-8 p-4 bg-gray-100 rounded-lg">
+								<motion.section variants={fadeInUp} className="mt-8 p-4 bg-gray-100 rounded-none">
 									<p className="text-sm text-gray-600">
-										Per qualsiasi domanda o chiarimento sulla presente Informativa Privacy, non esitare a contattarci all'indirizzo <a href="mailto:info@vitale-eu.it" className="text-orange-600 hover:underline">info@vitale-eu.it</a> o tramite la <Link href="/contatti" className="text-orange-600 hover:underline">pagina Contatti</Link>.
+										Per qualsiasi domanda o chiarimento sulla presente Informativa Privacy, non esitare a contattarci all'indirizzo <a href="mailto:info@vitale-eu.it" className="text-brand hover:underline">info@vitale-eu.it</a> o tramite la <Link href="/contatti" className="text-brand hover:underline">pagina Contatti</Link>.
 									</p>
 								</motion.section>
 							</CardContent>

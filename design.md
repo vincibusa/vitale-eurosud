@@ -124,7 +124,7 @@ const filters: VehicleFilter[] = [
 ```tsx
 <Button 
   size="lg" 
-  className="bg-orange-500 hover:bg-orange-600 text-white w-full md:w-auto"
+  className="bg-brand hover:bg-brand-dark text-white rounded-none w-full md:w-auto"
 >
   Testo Bottone
 </Button>
@@ -134,17 +134,17 @@ const filters: VehicleFilter[] = [
 ```tsx
 <Button 
   size="lg" 
-  className="border-2 border-blue-500 text-blue-600 bg-white hover:bg-blue-50 hover:text-blue-700 w-full md:w-auto"
+  className="border-2 border-brand text-brand bg-white hover:bg-blue-50 rounded-none w-full md:w-auto"
 >
   Testo Bottone
 </Button>
 ```
 
-#### CTA Button (White on colored background)
+#### CTA Button (White on Dark background)
 ```tsx
 <Button 
   size="lg" 
-  className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700 font-semibold px-6 md:px-8"
+  className="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-6 md:px-8 rounded-none"
 >
   Testo Bottone
 </Button>
@@ -152,17 +152,17 @@ const filters: VehicleFilter[] = [
 
 ### Card Pattern
 ```tsx
-<Card className="text-center p-6 md:p-8 hover:shadow-lg transition-shadow h-full">
+<Card className="text-center p-6 md:p-8 hover:shadow-2xl transition-all duration-300 h-full border-0 group">
   <CardHeader>
-    <div className="mx-auto mb-4 w-14 h-14 md:w-16 md:h-16 bg-orange-100 rounded-full flex items-center justify-center">
-      <IconComponent className="text-orange-500" size={28} />
+    <div className="mx-auto mb-4 w-14 h-14 md:w-16 md:h-16 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-brand transition-colors">
+      <IconComponent className="text-brand group-hover:text-white transition-colors" size={28} />
     </div>
-    <CardTitle className="text-lg md:text-xl font-bold text-gray-900">
+    <CardTitle className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-brand transition-colors">
       Titolo Card
     </CardTitle>
   </CardHeader>
   <CardContent>
-    <CardDescription className="text-sm md:text-base text-gray-600">
+    <CardDescription className="text-sm md:text-base text-gray-600 font-light">
       Descrizione del contenuto
     </CardDescription>
   </CardContent>
@@ -171,29 +171,26 @@ const filters: VehicleFilter[] = [
 
 ### Badge System
 ```tsx
-{/* Badge colorati per categorie */}
-<Badge className="mb-3 md:mb-4 bg-orange-500 hover:bg-orange-600 text-white">Novità</Badge>
-<Badge className="mb-3 md:mb-4 bg-blue-500 hover:bg-blue-600 text-white">Trasporto Passeggeri</Badge>
-<Badge className="mb-3 md:mb-4 bg-green-500 hover:bg-green-600 text-white">Trasporto Merci</Badge>
-<Badge className="mb-3 md:mb-4 bg-purple-500 hover:bg-purple-600 text-white">Partnership</Badge>
+{/* Badge Premium Style */}
+<Badge className="mb-3 md:mb-4 bg-brand hover:bg-brand-dark text-white">Novità</Badge>
+<Badge className="mb-3 md:mb-4 bg-blue-50 text-brand hover:bg-blue-100">Categoria</Badge>
 ```
 
 ---
 
 ## 🎨 Sistema Colori
 
-### Palette Principale
-- **Primary Orange**: `#F97316` (orange-500)
-- **Primary Orange Hover**: `#EA580C` (orange-600)
-- **Secondary Blue**: `#3B82F6` (blue-500)
-- **Secondary Green**: `#10B981` (green-500)
-- **Secondary Purple**: `#8B5CF6` (purple-500)
+### Palette Principale (BMW Premium Style)
+- **Primary Blue**: `#1C69D4` (brand-primary)
+- **Primary Blue Light**: `#4A90E2` (brand-light)
+- **Primary Blue Dark**: `#0653B6` (brand-dark)
+- **Secondary Orange**: `#F97316` (orange-500) - Usato come accento
 
 ### Colori di Testo
 - **Heading**: `text-gray-900`
 - **Body Text**: `text-gray-600`
 - **Muted Text**: `text-gray-400`
-- **Link**: `text-orange-500 hover:text-orange-600`
+- **Link**: `text-primary hover:text-brand-dark`
 
 ### Background
 - **Primary**: `bg-white`
@@ -203,6 +200,11 @@ const filters: VehicleFilter[] = [
 ---
 
 ## 📝 Tipografia
+
+### Font System
+Utilizziamo **Inter** configurato per emulare il look premium di *BMW Type Next*.
+- **Pesi usati**: 300 (Light), 400 (Regular), 500 (Medium), 700 (Bold)
+- **Settings**: `letter-spacing: -0.015em`, `text-rendering: optimizeLegibility`
 
 ### Heading System (Mobile-First)
 ```tsx
@@ -412,7 +414,7 @@ import Image from 'next/image'
 {/* Assicurarsi di contrasti sufficienti */}
 className="text-gray-900"  // Testo scuro su sfondo chiaro
 className="text-white"     // Testo bianco su sfondo scuro
-className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700"
+className="bg-brand text-white hover:bg-brand-dark"
 ```
 
 ### Focus States
@@ -420,10 +422,10 @@ className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700"
 {/* Links con stati focus visibili */}
 <Link 
   href="/prodotti"
-  className="text-gray-700 hover:text-orange-500 transition-colors duration-200 relative group"
+  className="text-gray-700 hover:text-brand transition-colors duration-200 relative group"
 >
   Prodotti
-  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-200 group-hover:w-full" />
+  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
 </Link>
 ```
 
@@ -445,16 +447,16 @@ className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700"
   <motion.div initial="hidden" animate="visible" variants={fadeIn}>
     <Image src="/images/hero-banner.png" alt="Hero" fill className="object-cover object-center" priority />
   </motion.div>
-  <div className="absolute inset-0 bg-black/30" />
+  <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent" />
   <div className="relative container mx-auto px-4 h-full flex items-center">
     <motion.div className="text-white max-w-2xl" initial="hidden" animate="visible" variants={fadeInUp}>
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 tracking-tight">
         Titolo Hero
       </h1>
-      <p className="text-base md:text-lg lg:text-xl mb-6 md:mb-8 text-white/95">
+      <p className="text-base md:text-lg lg:text-xl mb-6 md:mb-8 text-white/90 font-light">
         Sottotitolo descrittivo
       </p>
-      <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700">
+      <Button size="lg" className="bg-brand hover:bg-brand-dark text-white rounded-none">
         Call to Action
       </Button>
     </motion.div>
@@ -472,7 +474,7 @@ className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700"
         className="order-2 lg:order-1"
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={slideInLeft}
       >
-        <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg">
+        <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-2xl">
           <Image src="/images/product.jpg" alt="Product" fill className="object-cover object-center" />
         </div>
       </motion.div>
@@ -482,14 +484,14 @@ className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700"
         className="order-1 lg:order-2"
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={slideInRight}
       >
-        <Badge className="mb-3 md:mb-4 bg-orange-500 hover:bg-orange-600 text-white">Categoria</Badge>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
+        <Badge className="mb-3 md:mb-4 bg-blue-50 text-brand hover:bg-blue-100">Categoria</Badge>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6 tracking-tight">
           Titolo Prodotto
         </h2>
-        <div className="space-y-3 md:space-y-4 text-sm md:text-base text-gray-600 mb-6 md:mb-8">
+        <div className="space-y-3 md:space-y-4 text-sm md:text-base text-gray-600 mb-6 md:mb-8 font-light">
           <p>Descrizione prodotto...</p>
         </div>
-        <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white w-full md:w-auto">
+        <Button size="lg" className="bg-brand hover:bg-brand-dark text-white rounded-none w-full md:w-auto">
           Scopri di più
         </Button>
       </motion.div>
@@ -541,8 +543,8 @@ className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700"
 - [ ] Struttura base con sezioni appropriate
 
 ### ✅ Design System
-- [ ] Utilizzo color scheme Vitale (arancione primario)
-- [ ] Tipografia responsive (mobile-first)
+- [ ] Utilizzo color scheme Vitale (BMW Premium Blue)
+- [ ] Tipografia premium (Inter con tracking e feature settings)
 - [ ] Spaziatura consistente (py-12 md:py-16)
 - [ ] Container pattern (container mx-auto px-4)
 

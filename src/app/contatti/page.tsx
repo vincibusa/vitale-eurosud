@@ -68,7 +68,7 @@ export default function ContattiPage() {
 	return (
 		<div className="w-full">
 			{/* Hero Section - Diventa rivenditore */}
-			<section className="relative py-16 md:py-20 bg-gradient-to-r from-orange-500 to-orange-600 text-white overflow-hidden">
+			<section className="relative py-16 md:py-20 bg-gradient-to-r from-brand to-brand-dark text-white overflow-hidden">
 				<div className="absolute inset-0 bg-black/10" />
 				<div className="relative container mx-auto px-4">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -95,7 +95,7 @@ export default function ContattiPage() {
 							</div>
 							<Button 
 								size="lg" 
-								className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700 font-semibold"
+								className="bg-white text-brand hover:bg-gray-100 hover:text-brand-dark font-semibold"
 							>
 								Richiedi Informazioni
 							</Button>
@@ -106,7 +106,7 @@ export default function ContattiPage() {
 							animate="visible"
 							variants={slideInRight}
 						>
-							<div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg">
+							<div className="relative h-[300px] md:h-[400px] rounded-none overflow-hidden shadow-lg">
 								<Image
 									src="/images/partnership.jpg"
 									alt="Diventa rivenditore Vitale"
@@ -150,8 +150,8 @@ export default function ContattiPage() {
 								<motion.div key={index} variants={scaleIn}>
 									<Card className="text-center p-6 md:p-8 hover:shadow-lg transition-shadow h-full">
 										<CardHeader>
-											<div className="mx-auto mb-4 w-14 h-14 md:w-16 md:h-16 bg-orange-100 rounded-full flex items-center justify-center">
-												<IconComponent className="text-orange-500" size={28} />
+											<div className="mx-auto mb-4 w-14 h-14 md:w-16 md:h-16 bg-brand/10 rounded-none flex items-center justify-center">
+												<IconComponent className="text-brand" size={28} strokeWidth={1.5} />
 											</div>
 											<CardTitle className="text-lg md:text-xl font-bold text-gray-900">
 												{benefit.title}
@@ -200,7 +200,7 @@ export default function ContattiPage() {
 												<input
 													type="text"
 													id="nome"
-													className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+													className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-brand focus:border-brand"
 													required
 												/>
 											</div>
@@ -211,7 +211,7 @@ export default function ContattiPage() {
 												<input
 													type="text"
 													id="cognome"
-													className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+													className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-brand focus:border-brand"
 													required
 												/>
 											</div>
@@ -223,7 +223,7 @@ export default function ContattiPage() {
 											<input
 												type="email"
 												id="email"
-												className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+												className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-brand focus:border-brand"
 												required
 											/>
 										</div>
@@ -234,7 +234,7 @@ export default function ContattiPage() {
 											<input
 												type="tel"
 												id="telefono"
-												className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+												className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-brand focus:border-brand"
 											/>
 										</div>
 										<div>
@@ -244,7 +244,7 @@ export default function ContattiPage() {
 											<textarea
 												id="messaggio"
 												rows={5}
-												className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+												className="w-full px-3 py-2 border border-gray-300 rounded-none focus:ring-2 focus:ring-brand focus:border-brand"
 												placeholder="Scrivi qui il tuo messaggio..."
 												required
 											/>
@@ -258,7 +258,7 @@ export default function ContattiPage() {
 											/>
 											<label htmlFor="privacy" className="text-xs text-gray-600">
 												Accetto l'informativa sulla{' '}
-												<Link href="/privacy-policy" className="text-orange-500 hover:text-orange-600 underline">
+												<Link href="/privacy-policy" className="text-brand hover:text-brand-dark underline">
 													privacy policy
 												</Link>
 											</label>
@@ -266,7 +266,7 @@ export default function ContattiPage() {
 										<Button 
 											type="submit"
 											size="lg" 
-											className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+											className="w-full bg-brand hover:bg-brand-dark text-white"
 										>
 											Invia Messaggio
 										</Button>
@@ -287,33 +287,33 @@ export default function ContattiPage() {
 								<Card className="p-6 md:p-8">
 									<CardHeader className="px-0 pt-0">
 										<CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
-											<Phone className="text-orange-500" size={24} />
+											<Phone className="text-brand" size={24} strokeWidth={1.5} />
 											Recapiti
 										</CardTitle>
 									</CardHeader>
 									<CardContent className="px-0 pb-0">
 										<div className="space-y-4">
 											<div className="flex items-center gap-3">
-												<MapPin className="text-orange-500 flex-shrink-0" size={20} />
+												<MapPin className="text-brand flex-shrink-0" size={20} strokeWidth={1.5} />
 												<div>
 													<p className="font-medium">Via Messina Montagne, 6</p>
 													<p className="text-sm text-gray-600">90121 Palermo (PA)</p>
 												</div>
 											</div>
 											<div className="flex items-center gap-3">
-												<Phone className="text-orange-500 flex-shrink-0" size={20} />
+												<Phone className="text-brand flex-shrink-0" size={20} strokeWidth={1.5} />
 												<a 
 													href="tel:0916145377"
-													className="text-gray-900 hover:text-orange-500 transition-colors font-medium"
+													className="text-gray-900 hover:text-brand transition-colors font-medium"
 												>
 													0916145377
 												</a>
 											</div>
 											<div className="flex items-center gap-3">
-												<Mail className="text-orange-500 flex-shrink-0" size={20} />
+												<Mail className="text-brand flex-shrink-0" size={20} strokeWidth={1.5} />
 												<a 
 													href="mailto:info@vitale-eu.it"
-													className="text-gray-900 hover:text-orange-500 transition-colors"
+													className="text-gray-900 hover:text-brand transition-colors"
 												>
 													info@vitale-eu.it
 												</a>
@@ -326,7 +326,7 @@ export default function ContattiPage() {
 								<Card className="p-6 md:p-8">
 									<CardHeader className="px-0 pt-0">
 										<CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
-											<Clock className="text-orange-500" size={24} />
+											<Clock className="text-brand" size={24} strokeWidth={1.5} />
 											Orari di apertura
 										</CardTitle>
 									</CardHeader>
@@ -352,7 +352,7 @@ export default function ContattiPage() {
 								<Card className="p-6 md:p-8">
 									<CardHeader className="px-0 pt-0">
 										<CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
-											<Building className="text-orange-500" size={24} />
+											<Building className="text-brand" size={24} strokeWidth={1.5} />
 											Informazioni Aziendali
 										</CardTitle>
 									</CardHeader>
@@ -372,7 +372,7 @@ export default function ContattiPage() {
 
 			{/* Call to Action */}
 			<motion.section 
-				className="py-12 md:py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white"
+				className="py-12 md:py-16 bg-gradient-to-r from-brand to-brand-dark text-white"
 				initial="hidden"
 				whileInView="visible"
 				viewport={{ once: true, margin: "-100px" }}
@@ -388,7 +388,7 @@ export default function ContattiPage() {
 					<div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
 						<Button 
 							size="lg" 
-							className="bg-white text-orange-600 hover:bg-gray-100 hover:text-orange-700 font-semibold w-full sm:w-auto"
+							className="bg-white text-brand hover:bg-gray-100 hover:text-brand-dark font-semibold w-full sm:w-auto"
 						>
 							Chiama Ora
 						</Button>

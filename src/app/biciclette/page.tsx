@@ -1,27 +1,40 @@
-import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
-import { getVehiclesByCategory, vehicleToProduct } from '@/lib/vehicles'
+import VehicleCategoryLayout, { VehicleProduct } from '@/components/vehicles/vehicle-category-layout'
+import CategoryHero from '@/components/category-hero'
+import { getVehiclesByCategory, vehicleToProduct, getVehicleSubcategory } from '@/lib/vehicles'
+import { CATEGORY_SUBCATEGORIES } from '@/config/subcategories'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
 export default async function BiciclettePage() {
 	const vehicles = await getVehiclesByCategory('biciclette')
-	const products: VehicleProduct[] = vehicles.map(vehicleToProduct)
 
-	const filters: VehicleFilter[] = [
-		{ name: "Marca", key: "marca", options: ["Vitale", "Altri"] },
-		{ name: "Batteria", key: "batteria", options: ["Litio", "Piombo"] },
-		{ name: "Potenza", key: "potenza", options: ["250W", "500W"] }
-	]
+	// Enrich vehicles with subcategory
+	const enrichedVehicles = vehicles.map((v) => ({
+		...v,
+		subcategory: getVehicleSubcategory(v)
+	}))
+
+	const products: VehicleProduct[] = enrichedVehicles.map(vehicleToProduct)
+	const subcategories = CATEGORY_SUBCATEGORIES['biciclette']
 
 	return (
-		<VehicleCategoryLayout
-			title="Biciclette Elettriche"
-			description="Scopri la nostra collezione di biciclette elettriche per una mobilità sostenibile e divertente. Perfette per la città e i percorsi extraurbani."
-			products={products}
-			filters={filters}
-			heroGradient="bg-gradient-to-r from-green-500 to-green-600"
-			badgeColor="bg-green-100 text-green-700 hover:bg-green-200"
-			primaryColor="green"
-		/>
+		<>
+			<CategoryHero
+				title="Biciclette Elettriche"
+				description="Scopri la nostra collezione di biciclette elettriche per una mobilità sostenibile e divertente. Perfette per la città e i percorsi extraurbani."
+				iconName="Bike"
+				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
+				totalProducts={products.length}
+			/>
+			<VehicleCategoryLayout
+				title="Biciclette Elettriche"
+				description="Scopri la nostra collezione di biciclette elettriche per una mobilità sostenibile e divertente. Perfette per la città e i percorsi extraurbani."
+				products={products}
+				subcategories={subcategories}
+				categorySlug="biciclette"
+				badgeColor="bg-brand/10 text-brand hover:bg-brand/20"
+				primaryColor="brand"
+			/>
+		</>
 	)
 }

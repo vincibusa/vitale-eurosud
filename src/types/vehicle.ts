@@ -32,4 +32,6 @@ export interface Vehicle {
 	primaryColor: string
 	badgeColor: string
 	isNew?: boolean
+	subcategory?: string
+	model3d?: string
 }

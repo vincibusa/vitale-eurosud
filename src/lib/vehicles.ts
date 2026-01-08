@@ -1,6 +1,18 @@
 import { supabase } from './supabase'
 import type { Vehicle } from '@/types/vehicle'
 
+/**
+ * NOTA: Per aggiungere modelli 3D ai veicoli:
+ * 
+ * 1. Carica il file .glb/.gltf su Supabase Storage (bucket 'vehicle-images' o simile)
+ * 2. Aggiungi l'URL pubblico del modello nella colonna `model_3d` della tabella `vehicles`
+ * 
+ * Esempio URL: https://[project].supabase.co/storage/v1/object/public/vehicle-images/model.glb
+ * 
+ * I modelli 3D verranno visualizzati automaticamente nella pagina di dettaglio prodotto
+ * solo per i veicoli che hanno il campo `model_3d` valorizzato.
+ */
+
 export async function getVehicles(): Promise<Vehicle[]> {
 	const { data, error } = await supabase
 		.from('vehicles')
@@ -64,7 +76,8 @@ export async function getVehicleById(id: string): Promise<Vehicle | null> {
 		optionalFeatures: data.optional_features || [],
 		primaryColor: data.primary_color || 'gray',
 		badgeColor: data.badge_color || 'bg-gray-100 text-gray-700 hover:bg-gray-200',
-		isNew: data.is_new || false
+		isNew: data.is_new || false,
+		model3d: data.model_3d || undefined
 	}
 }
 
@@ -97,7 +110,8 @@ export async function getVehiclesByCategory(categorySlug: string): Promise<Vehic
 		optionalFeatures: vehicle.optional_features || [],
 		primaryColor: vehicle.primary_color || 'gray',
 		badgeColor: vehicle.badge_color || 'bg-gray-100 text-gray-700 hover:bg-gray-200',
-		isNew: vehicle.is_new || false
+		isNew: vehicle.is_new || false,
+		model3d: vehicle.model_3d || undefined
 	}))
 }
 
@@ -144,9 +158,14 @@ export function vehicleToProduct(vehicle: Vehicle) {
 		power: vehicle.specs.potenza,
 		battery: vehicle.specs.batteria,
 		speed: vehicle.specs.velocitaMassima,
-		image: vehicle.images[0],
+		autonomy: vehicle.specs.autonomia,
+		chargingTime: vehicle.specs.tempoRicarica,
+		image: vehicle.images[0] || '/images/placeholder.jpg',
 		href: `/prodotti/${vehicle.id}`,
-		isNew: vehicle.isNew || false
+		isNew: vehicle.isNew || false,
+		subcategory: vehicle.subcategory,
+		optionalFeatures: vehicle.optionalFeatures || [],
+		specs: vehicle.specs
 	}
 }
 
@@ -181,6 +200,48 @@ export async function getFeaturedVehicles(limit: number = 6): Promise<Vehicle[]>
 		optionalFeatures: vehicle.optional_features || [],
 		primaryColor: vehicle.primary_color || 'gray',
 		badgeColor: vehicle.badge_color || 'bg-gray-100 text-gray-700 hover:bg-gray-200',
-		isNew: vehicle.is_new || false
+		isNew: vehicle.is_new || false,
+		model3d: vehicle.model_3d || undefined
 	}))
+}
+
+// Derive subcategory from vehicle properties for BMW-style tab filtering
+export function getVehicleSubcategory(vehicle: Vehicle): string {
+	const category = vehicle.categorySlug
+	const nameLower = vehicle.name.toLowerCase()
+	const modelLower = vehicle.model?.toLowerCase() || ''
+
+	switch (category) {
+		case 'biciclette':
+			if (nameLower.includes('fat') || modelLower.includes('mountain')) return 'mountain'
+			if (nameLower.includes('cargo') || modelLower.includes('cargo')) return 'cargo'
+			return 'city'
+
+		case 'monopattini':
+			// Performance if power >= 500W
+			const power = vehicle.specs.potenza ? parseInt(vehicle.specs.potenza) : 0
+			return power >= 500 ? 'performance' : 'urbano'
+
+		case 'scooter':
+			return nameLower.includes('tre ruote') || modelLower.includes('tre ruote')
+				? 'tre-ruote'
+				: 'due-ruote'
+
+		case 'veicoli-commerciali':
+			return nameLower.includes('passeggeri') ||
+			       nameLower.includes('italy') ||
+			       modelLower.includes('passeggeri')
+				? 'passeggeri'
+				: 'merci'
+
+		case 'mobilita-disabili':
+			return nameLower.includes('cabinato') ||
+			       nameLower.includes('mob') ||
+			       modelLower.includes('cabinato')
+				? 'cabinato'
+				: 'scooter'
+
+		default:
+			return 'all'
+	}
 }

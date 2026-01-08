@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
@@ -316,15 +317,27 @@ export function CustomerChatWidget() {
 
 	return (
 		<>
-			{/* Floating Button */}
+			{/* Floating Button - BMW Style */}
 			{!isOpen && (
-				<Button
-					onClick={() => setIsOpen(true)}
-					className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 h-12 w-12 sm:h-14 sm:w-14 rounded-full shadow-lg z-50"
-					size="icon"
+				<motion.div
+					initial={{ scale: 0 }}
+					animate={{ scale: 1 }}
+					transition={{ type: "spring", stiffness: 260, damping: 20 }}
+					className="fixed bottom-6 right-6 z-50"
 				>
-					<MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
-				</Button>
+					<Button
+						onClick={() => setIsOpen(true)}
+						className="h-16 w-16 rounded-full shadow-2xl bg-gradient-to-r from-brand to-brand-dark hover:from-brand-dark hover:to-brand-dark border-4 border-white transition-all duration-300 hover:scale-110"
+						size="icon"
+					>
+						<MessageCircle className="h-7 w-7 text-white" strokeWidth={1.5} />
+					</Button>
+					<motion.div
+						className="absolute -top-1 -right-1 h-4 w-4 bg-green-500 rounded-full border-2 border-white"
+						animate={{ scale: [1, 1.2, 1] }}
+						transition={{ repeat: Infinity, duration: 2 }}
+					/>
+				</motion.div>
 			)}
 
 			{/* Overlay for mobile */}
@@ -336,30 +349,40 @@ export function CustomerChatWidget() {
 				/>
 			)}
 
-			{/* Chat Widget */}
+			{/* Chat Widget - BMW Style */}
 			{isOpen && (
-				<Card className="fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-24 sm:right-6 w-auto sm:w-96 h-[calc(100vh-100px)] sm:h-[600px] max-h-[600px] sm:max-h-[600px] shadow-xl z-50 flex flex-col">
-					<CardHeader className="pb-3 flex-shrink-0">
-						<div className="flex items-center justify-between">
-							<CardTitle className="flex items-center gap-2 text-xs sm:text-sm">
-								<Bot className="h-3 w-3 sm:h-4 sm:w-4" />
-								<span className="truncate">Assistente Vitale Eurosud</span>
-							</CardTitle>
-							<div className="flex items-center gap-2 flex-shrink-0">
-								<Badge variant="secondary" className="text-xs hidden sm:inline-flex">
-									{isTyping ? 'Digitando...' : 'Online'}
-								</Badge>
+				<motion.div
+					initial={{ opacity: 0, y: 20, scale: 0.95 }}
+					animate={{ opacity: 1, y: 0, scale: 1 }}
+					exit={{ opacity: 0, y: 20, scale: 0.95 }}
+					transition={{ duration: 0.2 }}
+					className="fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-24 sm:right-6 w-auto sm:w-96 z-50"
+				>
+					<Card className="h-[calc(100vh-100px)] sm:h-[600px] max-h-[600px] shadow-2xl flex flex-col overflow-hidden border-0 p-0">
+						{/* Header con gradiente blu BMW */}
+						<CardHeader className="py-4 sm:py-5 pb-3 flex-shrink-0 bg-gradient-to-r from-brand to-brand-dark text-white">
+							<div className="flex items-center justify-between">
+								<CardTitle className="flex items-center gap-3 text-sm sm:text-base font-semibold text-white">
+									<div className="w-8 h-8 sm:w-10 sm:h-10 rounded-none bg-white/20 flex items-center justify-center">
+										<Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" strokeWidth={1.5} />
+									</div>
+									<div className="text-white">
+										<div className="truncate text-white">Assistente Vitale</div>
+										<div className="text-xs font-normal text-white">
+											{isTyping ? 'Sta scrivendo...' : 'Online ora'}
+										</div>
+									</div>
+								</CardTitle>
 								<Button
 									onClick={resetChat}
 									variant="ghost"
 									size="icon"
-									className="h-6 w-6 sm:h-7 sm:w-7"
+									className="h-8 w-8 sm:h-9 sm:w-9 hover:bg-white/20 text-white"
 								>
-									<X className="h-3 w-3 sm:h-4 sm:w-4" />
+									<X className="h-4 w-4 sm:h-5 sm:w-5 text-white" strokeWidth={1.5} />
 								</Button>
 							</div>
-						</div>
-					</CardHeader>
+						</CardHeader>
 					
 					<Separator className="flex-shrink-0" />
 					
@@ -447,7 +470,7 @@ export function CustomerChatWidget() {
 											
 											<div
 												className={cn(
-													'max-w-[85%] rounded-2xl px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm shadow-sm',
+													'max-w-[85%] rounded-none px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm shadow-sm',
 													message.role === 'customer'
 														? 'bg-primary text-primary-foreground rounded-br-md'
 														: 'bg-muted rounded-bl-md'
@@ -476,7 +499,7 @@ export function CustomerChatWidget() {
 													<Bot className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
 												</AvatarFallback>
 											</Avatar>
-											<div className="bg-muted rounded-2xl rounded-bl-md px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm shadow-sm">
+											<div className="bg-muted rounded-none rounded-bl-md px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm shadow-sm">
 												<div className="flex items-center gap-2">
 													<Loader2 className="h-2.5 w-2.5 sm:h-3 sm:w-3 animate-spin" />
 													<span>Digitando...</span>
@@ -503,14 +526,14 @@ export function CustomerChatWidget() {
 													onChange={(e) => setInputValue(e.target.value)}
 													onKeyDown={handleKeyPress}
 													placeholder="Chiedi informazioni sui nostri veicoli..."
-													className="min-h-[40px] sm:min-h-[44px] max-h-[100px] sm:max-h-[120px] resize-none pr-10 sm:pr-12 rounded-2xl border-0 bg-muted/50 focus:bg-background transition-colors text-xs sm:text-sm"
+													className="min-h-[40px] sm:min-h-[44px] max-h-[100px] sm:max-h-[120px] resize-none pr-10 sm:pr-12 rounded-none border-0 bg-muted/50 focus:bg-background transition-colors text-xs sm:text-sm"
 													disabled={isLoading}
 												/>
 												<Button
 													onClick={handleSendMessage}
 													disabled={!inputValue.trim() || isLoading}
 													size="icon"
-													className="absolute right-1.5 sm:right-2 bottom-1.5 sm:bottom-2 h-7 w-7 sm:h-8 sm:w-8 rounded-full"
+													className="absolute right-1.5 sm:right-2 bottom-1.5 sm:bottom-2 h-7 w-7 sm:h-8 sm:w-8 rounded-none"
 												>
 													{isLoading ? (
 														<Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
@@ -526,7 +549,7 @@ export function CustomerChatWidget() {
 												onClick={handleRequestOperator}
 												variant="outline"
 												size="sm"
-												className="w-full text-[10px] sm:text-xs h-7 sm:h-8 rounded-xl"
+												className="w-full text-[10px] sm:text-xs h-7 sm:h-8 rounded-none"
 											>
 												<Phone className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-1.5 sm:mr-2" />
 												Parla con un operatore
@@ -542,6 +565,7 @@ export function CustomerChatWidget() {
 						)}
 					</CardContent>
 				</Card>
+				</motion.div>
 			)}
 		</>
 	)

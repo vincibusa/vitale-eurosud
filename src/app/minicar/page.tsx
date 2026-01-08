@@ -1,28 +1,41 @@
-import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
-import { getVehiclesByCategory, vehicleToProduct } from '@/lib/vehicles'
+import VehicleCategoryLayout, { VehicleProduct } from '@/components/vehicles/vehicle-category-layout'
+import CategoryHero from '@/components/category-hero'
+import { getVehiclesByCategory, vehicleToProduct, getVehicleSubcategory } from '@/lib/vehicles'
+import { CATEGORY_SUBCATEGORIES } from '@/config/subcategories'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
 export default async function MinicarPage() {
 	const vehicles = await getVehiclesByCategory('minicar')
-	const products: VehicleProduct[] = vehicles.map(vehicleToProduct)
 
-	const filters: VehicleFilter[] = [
-		{ name: "Marca", key: "marca", options: ["MIA", "ASYA"] },
-		{ name: "Batteria", key: "batteria", options: ["Litio"] },
-		{ name: "Potenza", key: "potenza", options: ["4000W", "5000W"] }
-	]
+	// Enrich vehicles with subcategory
+	const enrichedVehicles = vehicles.map((v) => ({
+		...v,
+		subcategory: getVehicleSubcategory(v)
+	}))
+
+	const products: VehicleProduct[] = enrichedVehicles.map(vehicleToProduct)
+	const subcategories = CATEGORY_SUBCATEGORIES['minicar']
 
 	return (
-		<VehicleCategoryLayout
-			title="Minicar e Auto Elettriche"
-			description="Esplora la nostra gamma di minicar e auto elettriche compatte, ideali per la mobilità urbana sostenibile e confortevole."
-			products={products}
-			filters={filters}
-			heroGradient="bg-gradient-to-r from-indigo-500 to-indigo-600"
-			badgeColor="bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
-			primaryColor="indigo"
-		/>
+		<>
+			<CategoryHero
+				title="Minicar e Auto Elettriche"
+				description="Esplora la nostra gamma di minicar e auto elettriche compatte, ideali per la mobilità urbana sostenibile e confortevole."
+				iconName="Car"
+				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
+				totalProducts={products.length}
+			/>
+			<VehicleCategoryLayout
+				title="Minicar e Auto Elettriche"
+				description="Esplora la nostra gamma di minicar e auto elettriche compatte, ideali per la mobilità urbana sostenibile e confortevole."
+				products={products}
+				subcategories={subcategories}
+				categorySlug="minicar"
+				badgeColor="bg-brand/10 text-brand hover:bg-brand/20"
+				primaryColor="brand"
+			/>
+		</>
 	)
 }
 

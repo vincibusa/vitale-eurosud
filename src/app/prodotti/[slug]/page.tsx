@@ -70,6 +70,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 			relatedProducts={relatedVehicles}
 			primaryColor={vehicle.primaryColor}
 			badgeColor={vehicle.badgeColor}
+			model3d={vehicle.model3d}
 		/>
 	)
 }

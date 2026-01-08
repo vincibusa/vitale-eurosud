@@ -1,28 +1,41 @@
-import VehicleCategoryLayout, { VehicleProduct, VehicleFilter } from '@/components/vehicles/vehicle-category-layout'
-import { getVehiclesByCategory, vehicleToProduct } from '@/lib/vehicles'
+import VehicleCategoryLayout, { VehicleProduct } from '@/components/vehicles/vehicle-category-layout'
+import CategoryHero from '@/components/category-hero'
+import { getVehiclesByCategory, vehicleToProduct, getVehicleSubcategory } from '@/lib/vehicles'
+import { CATEGORY_SUBCATEGORIES } from '@/config/subcategories'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
 export default async function QuadPage() {
 	const vehicles = await getVehiclesByCategory('quad')
-	const products: VehicleProduct[] = vehicles.map(vehicleToProduct)
 
-	const filters: VehicleFilter[] = [
-		{ name: "Marca", key: "marca", options: ["Vitale"] },
-		{ name: "Batteria", key: "batteria", options: ["Litio", "Piombo"] },
-		{ name: "Potenza", key: "potenza", options: ["3000W"] }
-	]
+	// Enrich vehicles with subcategory
+	const enrichedVehicles = vehicles.map((v) => ({
+		...v,
+		subcategory: getVehicleSubcategory(v)
+	}))
+
+	const products: VehicleProduct[] = enrichedVehicles.map(vehicleToProduct)
+	const subcategories = CATEGORY_SUBCATEGORIES['quad']
 
 	return (
-		<VehicleCategoryLayout
-			title="Quad Elettrici"
-			description="Scopri i nostri quad elettrici a 4 ruote, perfetti per avventure sostenibili e divertimento off-road con zero emissioni."
-			products={products}
-			filters={filters}
-			heroGradient="bg-gradient-to-r from-red-500 to-red-600"
-			badgeColor="bg-red-100 text-red-700 hover:bg-red-200"
-			primaryColor="red"
-		/>
+		<>
+			<CategoryHero
+				title="Quad Elettrici"
+				description="Scopri i nostri quad elettrici a 4 ruote, perfetti per avventure sostenibili e divertimento off-road con zero emissioni."
+				iconName="ShoppingBag"
+				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
+				totalProducts={products.length}
+			/>
+			<VehicleCategoryLayout
+				title="Quad Elettrici"
+				description="Scopri i nostri quad elettrici a 4 ruote, perfetti per avventure sostenibili e divertimento off-road con zero emissioni."
+				products={products}
+				subcategories={subcategories}
+				categorySlug="quad"
+				badgeColor="bg-brand/10 text-brand hover:bg-brand/20"
+				primaryColor="brand"
+			/>
+		</>
 	)
 }
 

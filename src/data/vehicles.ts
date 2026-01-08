@@ -95,8 +95,8 @@ Portapacchi posteriore incluso`,
 			'Portapacchi Posteriore',
 			'Sella Ergonomica'
 		],
-		primaryColor: 'green',
-		badgeColor: 'bg-green-100 text-green-700 hover:bg-green-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'fat-02-cb': {
@@ -160,8 +160,8 @@ Parafanghi anteriori e posteriori`,
 			'Sella Ergonomica',
 			'Telaio Low-Step'
 		],
-		primaryColor: 'green',
-		badgeColor: 'bg-green-100 text-green-700 hover:bg-green-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'njt007': {
@@ -224,8 +224,8 @@ Luci anteriori e posteriori`,
 			'Portapacchi Posteriore',
 			'Sella Comfort'
 		],
-		primaryColor: 'green',
-		badgeColor: 'bg-green-100 text-green-700 hover:bg-green-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	// ========== SCOOTER ELETTRICI ==========
@@ -297,8 +297,8 @@ Doppio set di chiavi incluso`,
 			'Sistema MLS',
 			'Stop Posteriore LED'
 		],
-		primaryColor: 'blue',
-		badgeColor: 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'ecozone-max': {
@@ -367,8 +367,8 @@ Sistema antifurto con allarme volumetrico`,
 			'Sistema Antifurto',
 			'Sospensioni Regolabili'
 		],
-		primaryColor: 'blue',
-		badgeColor: 'bg-blue-100 text-blue-700 hover:bg-blue-200',
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20',
 		isNew: true
 	},
 
@@ -432,8 +432,8 @@ Disponibile upgrade batteria al litio`,
 			'Upgrade Batteria Litio (Optional)',
 			'Vano Portaoggetti'
 		],
-		primaryColor: 'blue',
-		badgeColor: 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'sct001': {
@@ -491,8 +491,8 @@ Ottimo rapporto qualità/prezzo`,
 			'Luci Anteriori/Posteriori',
 			'Vano Portaoggetti'
 		],
-		primaryColor: 'blue',
-		badgeColor: 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	// ========== MONOPATTINI ELETTRICI ==========
@@ -557,8 +557,8 @@ Vano portaoggetti`,
 			'Upgrade Batteria Litio (Optional)',
 			'Vano Portaoggetti'
 		],
-		primaryColor: 'purple',
-		badgeColor: 'bg-purple-100 text-purple-700 hover:bg-purple-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	// ========== MINICAR ELETTRICHE ==========
@@ -630,8 +630,8 @@ Portabagagli posteriore`,
 			'Tergicristalli',
 			'Vetri Elettrici'
 		],
-		primaryColor: 'red',
-		badgeColor: 'bg-red-100 text-red-700 hover:bg-red-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'asya-auto': {
@@ -704,8 +704,8 @@ ABS e controllo trazione`,
 			'Sistema Antifurto',
 			'Vetri Elettrici'
 		],
-		primaryColor: 'red',
-		badgeColor: 'bg-red-100 text-red-700 hover:bg-red-200',
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20',
 		isNew: true
 	},
 
@@ -773,8 +773,8 @@ Portapacchi anteriore e posteriore`,
 			'Telaio Tubolare Rinforzato',
 			'Trazione 4x4'
 		],
-		primaryColor: 'yellow',
-		badgeColor: 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	// ========== VEICOLI COMMERCIALI ==========
@@ -846,8 +846,8 @@ Freni ABS`,
 			'Sensori Parcheggio',
 			'Vano Carico 3.5 m³'
 		],
-		primaryColor: 'amber',
-		badgeColor: 'bg-amber-100 text-amber-700 hover:bg-amber-200',
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20',
 		isNew: true
 	},
 
@@ -916,8 +916,8 @@ Sistema audio`,
 			'Sistema Audio',
 			'Vetri Panoramici'
 		],
-		primaryColor: 'amber',
-		badgeColor: 'bg-amber-100 text-amber-700 hover:bg-amber-200',
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20',
 		isNew: true
 	},
 
@@ -986,8 +986,8 @@ Vetri laterali`,
 			'Sedili Imbottiti',
 			'Vetri Laterali'
 		],
-		primaryColor: 'amber',
-		badgeColor: 'bg-amber-100 text-amber-700 hover:bg-amber-200',
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20',
 		isNew: true
 	},
 
@@ -1056,8 +1056,8 @@ Freni a disco`,
 			'Sedili Ergonomici',
 			'Vano Carico 2 m³'
 		],
-		primaryColor: 'amber',
-		badgeColor: 'bg-amber-100 text-amber-700 hover:bg-amber-200',
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20',
 		isNew: true
 	},
 
@@ -1124,8 +1124,8 @@ Freni a disco`,
 			'Sedile Comfort',
 			'Vano Carico 1.5 m³'
 		],
-		primaryColor: 'amber',
-		badgeColor: 'bg-amber-100 text-amber-700 hover:bg-amber-200',
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20',
 		isNew: true
 	},
 
@@ -1195,8 +1195,8 @@ Clacson`,
 			'Sedile Girevole',
 			'Specchietti Retrovisori'
 		],
-		primaryColor: 'teal',
-		badgeColor: 'bg-teal-100 text-teal-700 hover:bg-teal-200',
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20',
 		isNew: true
 	},
 
@@ -1266,8 +1266,8 @@ Display digitale`,
 			'Tergicristallo',
 			'Vetri Panoramici'
 		],
-		primaryColor: 'teal',
-		badgeColor: 'bg-teal-100 text-teal-700 hover:bg-teal-200',
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20',
 		isNew: true
 	},
 
@@ -1335,8 +1335,8 @@ Luci LED`,
 			'Tergicristallo',
 			'Vetri Panoramici'
 		],
-		primaryColor: 'teal',
-		badgeColor: 'bg-teal-100 text-teal-700 hover:bg-teal-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'mob20': {
@@ -1403,8 +1403,8 @@ Freni a disco`,
 			'Tergicristallo',
 			'Vetri Panoramici'
 		],
-		primaryColor: 'teal',
-		badgeColor: 'bg-teal-100 text-teal-700 hover:bg-teal-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'mob30a': {
@@ -1469,8 +1469,8 @@ Luci LED`,
 			'Sedile Ergonomico',
 			'Vetri Panoramici'
 		],
-		primaryColor: 'teal',
-		badgeColor: 'bg-teal-100 text-teal-700 hover:bg-teal-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'dk02': {
@@ -1533,8 +1533,8 @@ Specchietti`,
 			'Sedile Girevole',
 			'Specchietti'
 		],
-		primaryColor: 'teal',
-		badgeColor: 'bg-teal-100 text-teal-700 hover:bg-teal-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'dk01': {
@@ -1596,8 +1596,8 @@ Facile da guidare`,
 			'Sedile Imbottito',
 			'Tre Ruote'
 		],
-		primaryColor: 'teal',
-		badgeColor: 'bg-teal-100 text-teal-700 hover:bg-teal-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'mob01': {
@@ -1660,8 +1660,8 @@ Tre ruote stabili`,
 			'Specchietti',
 			'Tre Ruote'
 		],
-		primaryColor: 'teal',
-		badgeColor: 'bg-teal-100 text-teal-700 hover:bg-teal-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	},
 
 	'mob02': {
@@ -1726,8 +1726,8 @@ Specchietti`,
 			'Sedile Ergonomico',
 			'Specchietti'
 		],
-		primaryColor: 'teal',
-		badgeColor: 'bg-teal-100 text-teal-700 hover:bg-teal-200'
+		primaryColor: 'brand',
+		badgeColor: 'bg-brand/10 text-brand hover:bg-brand/20'
 	}
 }
 
