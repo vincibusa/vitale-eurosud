@@ -40,7 +40,7 @@ export default function MegaMenu({ items, isScrolled = false }: MegaMenuProps) {
 						<>
 							<button
 								className={cn(
-									'flex items-center gap-1 text-sm font-medium transition-colors duration-200 py-2',
+									'flex items-center gap-1 text-sm font-bold transition-colors duration-200 py-2',
 									activeMenu === item.label
 										? 'text-brand'
 										: isScrolled
@@ -108,7 +108,7 @@ export default function MegaMenu({ items, isScrolled = false }: MegaMenuProps) {
 						<Link
 							href={item.href || '#'}
 							className={cn(
-								'text-sm font-medium transition-colors duration-200 py-2',
+								'text-sm font-bold transition-colors duration-200 py-2',
 								isScrolled
 									? 'text-gray-700 hover:text-brand'
 									: 'text-white hover:text-brand-light'

@@ -13,16 +13,12 @@ import {
 	Menu,
 	Phone,
 	Mail,
-	Bike,
-	Bolt,
 	Car,
-	Zap,
 	Truck,
 	Users,
-	Shield,
+	Store,
 	MessageSquare,
 	ChevronRight,
-	Globe
 } from 'lucide-react'
 
 function Header() {
@@ -46,7 +42,9 @@ function Header() {
 	const currentLocale = locale as 'it' | 'en'
 	const isProductDetailPage = pathname.includes('/prodotti/')
 	const isCatalogPage = pathname.includes('/catalogo-veicoli')
-	const isSolidHeader = isScrolled || isProductDetailPage || isCatalogPage
+	const isComparePage = pathname.includes('/confronta')
+	const isDealerPage = pathname.includes('/rivenditori')
+	const isSolidHeader = isScrolled || isProductDetailPage || isCatalogPage || isComparePage || isDealerPage
 	
 	const handleLanguageToggle = (e: React.MouseEvent) => {
 		e.preventDefault()
@@ -61,49 +59,42 @@ function Header() {
 	// Configurazione mega-menu
 	const menuItems: MegaMenuItem[] = [
 		{
-			label: t('header.vehicles'),
+			label: 'Veicoli commerciali',
 			submenu: [
 				{
-					category: t('header.urbanMobility'),
+					category: 'Soluzioni professionali',
 					items: [
-						{ name: t('header.bicycles'), href: '/biciclette', description: t('header.bicyclesDesc') },
-						{ name: t('header.electricScooters'), href: '/monopattini', description: t('header.electricScootersDesc') },
-						{ name: t('header.scooters'), href: '/scooter', description: t('header.scootersDesc') }
-					]
-				},
-				{
-					category: t('header.autoMinicar'),
-					items: [
-						{ name: t('header.minicar'), href: '/minicar', description: t('header.minicarDesc') },
-						{ name: t('header.quad'), href: '/quad', description: t('header.quadDesc') }
+						{ name: 'Trasporto merci', href: '/veicoli-commerciali', description: 'Modelli professionali per carico e lavoro' },
+						{ name: 'Trasporto passeggeri', href: '/veicoli-commerciali', description: 'Soluzioni dedicate al trasporto persone' }
 					]
 				}
 			]
 		},
 		{
-			label: t('header.transport'),
+			label: 'Veicoli privati',
 			submenu: [
 				{
-					category: t('header.professionalSolutions'),
+					category: 'Tutti i veicoli',
 					items: [
-						{ name: t('header.commercialVehicles'), href: '/veicoli-commerciali', description: t('header.commercialVehiclesDesc') },
-						{ name: t('header.passengerTransport'), href: '/veicoli-commerciali', description: t('header.passengerTransportDesc') }
-					]
-				},
-				{
-					category: t('header.accessibility'),
-					items: [
-						{ name: t('header.disabledMobility'), href: '/mobilita-disabili', description: t('header.disabledMobilityDesc') }
+						{ name: 'Biciclette', href: '/biciclette', description: 'Mobilità urbana e tempo libero' },
+						{ name: 'Monopattini', href: '/monopattini', description: 'Compatti e pratici per la città' },
+						{ name: 'Scooter', href: '/scooter', description: 'Comfort e autonomia per ogni giorno' },
+						{ name: 'Minicar', href: '/minicar', description: 'City car elettriche per uso quotidiano' },
+						{ name: 'Quad', href: '/quad', description: 'Prestazioni e versatilità su più terreni' }
 					]
 				}
 			]
 		},
 		{
-			label: t('header.about'),
-			href: '/contatti'
+			label: 'Mobilità per disabili',
+			href: '/mobilita-disabili'
 		},
 		{
-			label: t('header.contacts'),
+			label: 'Rivenditore',
+			href: '/rivenditori'
+		},
+		{
+			label: 'Contatti',
 			href: '/contatti'
 		}
 	]
@@ -111,31 +102,31 @@ function Header() {
 	// Menu mobile
 	const mobileMenuSections = [
 		{
-			title: t('header.vehicles'),
-			icon: Bike,
-			items: [
-				{ name: t('header.bicycles'), href: '/biciclette', icon: Bike },
-				{ name: t('header.electricScooters'), href: '/monopattini', icon: Bolt },
-				{ name: t('header.scooters'), href: '/scooter', icon: Zap },
-				{ name: t('header.minicar'), href: '/minicar', icon: Car },
-				{ name: t('header.quad'), href: '/quad', icon: Car }
-			]
-		},
-		{
-			title: t('header.transport'),
+			title: 'Veicoli commerciali',
 			icon: Truck,
 			items: [
-				{ name: t('header.commercialVehicles'), href: '/veicoli-commerciali', icon: Truck },
-				{ name: t('header.disabledMobility'), href: '/mobilita-disabili', icon: Users }
+				{ name: 'Trasporto merci', href: '/veicoli-commerciali', icon: Truck },
+				{ name: 'Trasporto passeggeri', href: '/veicoli-commerciali', icon: Users }
 			]
 		},
 		{
-			title: t('common.menu'),
+			title: 'Veicoli privati',
+			icon: Car,
+			items: [
+				{ name: 'Biciclette', href: '/biciclette', icon: Car },
+				{ name: 'Monopattini', href: '/monopattini', icon: Car },
+				{ name: 'Scooter', href: '/scooter', icon: Car },
+				{ name: 'Minicar', href: '/minicar', icon: Car },
+				{ name: 'Quad', href: '/quad', icon: Car }
+			]
+		},
+		{
+			title: 'Altre sezioni',
 			icon: MessageSquare,
 			items: [
-				{ name: t('header.warranties'), href: '/contatti', icon: Shield },
-				{ name: t('header.about'), href: '/contatti', icon: Users },
-				{ name: t('header.contacts'), href: '/contatti', icon: MessageSquare }
+				{ name: 'Mobilità per disabili', href: '/mobilita-disabili', icon: Users },
+				{ name: 'Rivenditore', href: '/rivenditori', icon: Store },
+				{ name: 'Contatti', href: '/contatti', icon: MessageSquare }
 			]
 		}
 	]
@@ -148,30 +139,32 @@ function Header() {
 			}`}>
 			{/* Main navigation */}
 			<div className="container mx-auto px-4 py-4">
-				<div className="flex items-center justify-between">
+				<div className="flex items-center">
 					{/* Logo */}
 					<Link href="/" className="flex items-center group">
 						<motion.div
 							whileHover={{ scale: 1.05 }}
 							transition={{ duration: 0.2 }}
-							className="flex items-center"
+							className="relative flex items-center h-9 md:h-11 w-[150px] md:w-[180px]"
 						>
 							<Image
-								src="/images/vitale-logo.png"
+								src={isSolidHeader ? '/images/vitale-logo.png' : '/immagini/Vitale_logo_bianco.png'}
 								alt="Vitale - Fornitura Veicoli Elettrici"
-								width={140}
-								height={45}
-								className="h-10 md:h-12 w-auto"
+								fill
+								sizes="(max-width: 768px) 150px, 180px"
+								className={isSolidHeader ? 'object-contain' : 'object-cover'}
 								priority
 							/>
 						</motion.div>
 					</Link>
 
 					{/* Desktop Mega Menu */}
-					<MegaMenu items={menuItems} isScrolled={isSolidHeader} />
+					<div className="ml-6">
+						<MegaMenu items={menuItems} isScrolled={isSolidHeader} />
+					</div>
 
 					{/* Right icons */}
-					<div className="flex items-center gap-3">
+					<div className="ml-auto flex items-center gap-3">
 						{/* Language Switcher - Toggle Switch (Visible on all screen sizes) */}
 						<div className="flex items-center gap-2">
 							<span

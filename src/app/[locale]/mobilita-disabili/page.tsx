@@ -22,10 +22,16 @@ export default async function MobilitaDisabiliPage() {
 	return (
 		<>
 			<CategoryHero
-				title={t('vehicles.categories.mobilita-disabili')}
-				description={t('vehicles.categoryDescriptions.mobilita-disabili')}
+				title="Mobilità"
+				titleAccent="disabili"
+				titleBreakBeforeAccent
+				titleAccentClassName="text-brand-light"
+				description="Veicoli elettrici per una prestazione eccellente"
+				titleClassName="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white"
+				descriptionClassName="text-xl md:text-2xl text-white/90 mb-6 font-light max-w-2xl"
 				iconName="Users"
-				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
+				gradient="bg-gradient-to-r from-black/65 via-black/40 to-transparent md:from-black/80 md:via-black/50"
+				bottomGradientClassName="bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60"
 				totalProducts={products.length}
 				backgroundImage="/immagini/veicoli_elettrici.jpg"
 			/>

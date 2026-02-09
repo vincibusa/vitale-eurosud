@@ -25,7 +25,6 @@ export default async function MonopattiniPage() {
 				title={t('vehicles.categories.monopattini')}
 				description={t('vehicles.categoryDescriptions.monopattini')}
 				iconName="Bolt"
-				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
 				backgroundImage="/images/me750-monopattino.jpg"
 			/>

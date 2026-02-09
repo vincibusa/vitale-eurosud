@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
-import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 
 const fadeInUp = {
@@ -23,7 +22,8 @@ const staggerContainer = {
 interface QuickAction {
 	iconSrc: string
 	title: string
-	description: string
+	description?: string
+	ctaLabel: string
 	href: string
 }
 
@@ -33,33 +33,40 @@ export default function QuickActions() {
 	const quickActions: QuickAction[] = [
 		{
 			iconSrc: '/immagini/Icone/VITALE_SITO WEB-01.png',
-			title: t('home.quickActions.vehicleCatalog'),
-			description: t('home.quickActions.vehicleCatalogDesc'),
+			title: 'Trova il tuo veicolo',
+			ctaLabel: 'Catalogo',
 			href: '/catalogo-veicoli'
 		},
 		{
 			iconSrc: '/immagini/Icone/VITALE_SITO WEB-03.png',
 			title: t('home.quickActions.cargoTransport'),
-			description: t('home.quickActions.cargoTransportDesc'),
+			ctaLabel: 'Modelli disponibili',
 			href: '/veicoli-commerciali'
 		},
 		{
 			iconSrc: '/immagini/Icone/VITALE_SITO WEB-04.png',
 			title: t('home.quickActions.disabledMobility'),
-			description: t('home.quickActions.disabledMobilityDesc'),
+			ctaLabel: 'Muoviti in libertà',
 			href: '/mobilita-disabili'
 		},
 		{
 			iconSrc: '/immagini/Icone/VITALE_SITO WEB-05.png',
 			title: t('home.quickActions.contactUs'),
-			description: t('home.quickActions.contactUsDesc'),
+			ctaLabel: 'Siamo qui per te',
 			href: '/contatti'
 		}
 	]
 	
 	return (
-		<section className="py-12 md:py-16 bg-white">
+		<section className=" bg-white">
 			<div className="container mx-auto px-4">
+				<div className="text-center mb-2 md:mb-4 mt-5">
+					<h2 className="text-base md:text-lg font-light text-gray-900 mb-1">
+						Leader nella fornitura di veicoli elettrici di qualità superiore.
+						<br />
+						Scopri la nostra gamma completa per una mobilità sostenibile e all&apos;avanguardia.
+					</h2>
+				</div>
 				<motion.div
 					className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
 					initial="hidden"
@@ -70,26 +77,23 @@ export default function QuickActions() {
 					{quickActions.map((action, index) => (
 						<motion.div key={index} variants={fadeInUp}>
 							<Link href={action.href}>
-								<Card className="group h-full overflow-hidden border-2 border-gray-200 hover:border-brand transition-all duration-300 hover:shadow-xl cursor-pointer">
-									<CardContent className="p-6 md:p-8 flex flex-col items-center text-center h-full">
-										<div className="w-16 h-16 md:w-20 md:h-20 rounded-none bg-brand/5 group-hover:bg-brand flex items-center justify-center mb-4 md:mb-6 transition-all duration-300 overflow-hidden">
+								<Card className="group h-full overflow-hidden border-0 shadow-none cursor-pointer">
+									<CardContent className="p-3 md:p-4 flex flex-col items-center text-center h-full min-h-[240px]">
+										<div className="w-24 h-24 md:w-28 md:h-28 rounded-none flex items-center justify-center  overflow-hidden">
 											<Image
 												src={action.iconSrc}
 												alt={action.title}
-												width={64}
-												height={64}
-												className="w-12 h-12 md:w-14 md:h-14 object-contain group-hover:scale-110 transition-transform duration-300"
+												width={112}
+												height={112}
+												className="w-20 h-20 md:w-24 md:h-24 object-contain"
 											/>
 										</div>
-										<h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-brand transition-colors mb-2">
+										<h3 className="text-base md:text-lg font-light text-gray-900 mb-1">
 											{action.title}
 										</h3>
-										<p className="text-sm md:text-base text-gray-600 mb-4 flex-1">
-											{action.description}
-										</p>
-										<div className="flex items-center gap-2 text-brand group-hover:gap-3 transition-all duration-300">
-											<span className="text-sm font-medium">{t('common.discover')}</span>
-											<ArrowRight size={16} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
+
+										<div className="mt-5 flex items-center gap-2 border border-black bg-white text-black px-6 py-4">
+											<span className="text-sm font-bold">{action.ctaLabel}</span>
 										</div>
 									</CardContent>
 								</Card>

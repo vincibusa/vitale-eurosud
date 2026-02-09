@@ -66,7 +66,7 @@ export default async function ComparisonPage({ searchParams }: ComparisonPagePro
 	const gridColumnsDesktop = `200px repeat(${products.length}, minmax(250px, 1fr))`
 
 	return (
-		<div className="container mx-auto px-2 md:px-4 py-6 md:py-12">
+		<div className="container mx-auto px-2 md:px-4 pt-24 md:pt-28 pb-6 md:pb-12">
 			{/* Header */}
 			<div className="mb-6 md:mb-8">
 				<h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
@@ -208,4 +208,3 @@ export default async function ComparisonPage({ searchParams }: ComparisonPagePro
 		</div>
 	)
 }
-

@@ -118,6 +118,18 @@ export default function VehicleCategoryLayout({
 			{/* Main Content */}
 			<section className="py-8 md:py-12 lg:py-16">
 				<div className="container mx-auto px-4">
+					<motion.p
+						className="mb-5 md:mb-6 max-w-4xl text-sm md:text-base text-gray-600 leading-relaxed"
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, margin: '-100px' }}
+						variants={fadeInUp}
+					>
+						Veicolo elettrico sostenibile, progettato per ridurre le emissioni e l&apos;impatto ambientale.
+						Silenzioso, efficiente e alimentato da energia pulita, offre una mobilità moderna che unisce prestazioni,
+						comfort e rispetto per il pianeta.
+					</motion.p>
+
 					{/* Category Tabs */}
 					<motion.div
 						className="mb-6"

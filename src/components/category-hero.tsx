@@ -22,13 +22,36 @@ interface CategoryHeroProps {
 	gradient: string
 	totalProducts: number
 	backgroundImage?: string
+	titleClassName?: string
+	descriptionClassName?: string
+	bottomGradientClassName?: string
+	titleAccent?: string
+	titleAccentClassName?: string
+	titleBreakBeforeAccent?: boolean
+	autoBreakTitle?: boolean
+	imageAlt?: string
 }
 
 export default function CategoryHero({
 	title,
 	description,
-	backgroundImage = '/images/hero-banner.png'
+	backgroundImage = '/images/hero-banner.png',
+	titleClassName,
+	descriptionClassName,
+	gradient = 'bg-gradient-to-r from-black/65 via-black/40 to-transparent md:from-black/80 md:via-black/50',
+	bottomGradientClassName = 'bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60',
+	titleAccent,
+	titleAccentClassName = 'text-brand-light',
+	titleBreakBeforeAccent = false,
+	autoBreakTitle = true,
+	imageAlt
 }: CategoryHeroProps) {
+	const titleParts = title.trim().split(/\s+/)
+	const canAutoBreak = autoBreakTitle && !titleAccent && titleParts.length > 1
+	const resolvedTitle = canAutoBreak ? titleParts.slice(0, -1).join(' ') : title
+	const resolvedAccent = canAutoBreak ? titleParts[titleParts.length - 1] : titleAccent
+	const resolvedBreakBeforeAccent = canAutoBreak ? true : titleBreakBeforeAccent
+
 	return (
 		<section className="relative h-[400px] md:h-[500px] overflow-hidden">
 			{/* Background Image */}
@@ -40,27 +63,43 @@ export default function CategoryHero({
 			>
 				<Image
 					src={backgroundImage}
-					alt={title}
+					alt={imageAlt ?? `${resolvedTitle}${resolvedAccent ? ` ${resolvedAccent}` : ''}`}
 					fill
 					className="object-cover object-right"
 					priority
 				/>
 			</motion.div>
 
-			<div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent" />
+			<div className={`absolute inset-0 ${gradient}`} />
+			{bottomGradientClassName ? (
+				<div className={`absolute inset-0 ${bottomGradientClassName}`} />
+			) : null}
 
 			<div className="relative container mx-auto px-4 h-full flex items-end py-12">
 				{/* Title Section */}
-				<motion.div
+					<motion.div
 					className="text-white"
 					initial="hidden"
 					animate="visible"
 					variants={fadeInUp}
 				>
-					<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-						{title}
+					<h1 className={titleClassName ?? 'text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white'}>
+						{resolvedTitle}
+						{resolvedAccent ? (
+							resolvedBreakBeforeAccent ? (
+								<>
+									<br />
+									<span className={titleAccentClassName}>{resolvedAccent}</span>
+								</>
+							) : (
+								<>
+									{' '}
+									<span className={titleAccentClassName}>{resolvedAccent}</span>
+								</>
+							)
+						) : null}
 					</h1>
-					<p className="text-lg md:text-xl text-white/90 max-w-2xl">
+					<p className={descriptionClassName ?? 'text-xl md:text-2xl text-white/90 mb-6 font-light max-w-2xl'}>
 						{description}
 					</p>
 				</motion.div>

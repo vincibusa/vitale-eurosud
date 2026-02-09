@@ -7,7 +7,6 @@ import { Link } from '@/i18n/routing'
 import {
 	Facebook,
 	Instagram,
-	Youtube,
 	Phone,
 	Mail,
 	MapPin,
@@ -69,8 +68,12 @@ function Footer() {
 								<div className="flex items-start gap-2 text-xs text-gray-500">
 									<Clock size={14} strokeWidth={1.5} className="mt-0.5 flex-shrink-0" />
 									<div>
-										<p>{t('common.hoursShort')}</p>
-										<p>{t('common.hoursSaturday')}</p>
+										<p className="font-semibold">Lun/Ven:</p>
+										<p>09:00 - 13:00 / 15:30 - 19:00</p>
+										<p className="mt-1 font-semibold">Sabato:</p>
+										<p>09:00 - 13:00</p>
+										<p className="mt-1 font-semibold">Domenica:</p>
+										<p>Chiuso</p>
 									</div>
 								</div>
 							</div>
@@ -198,13 +201,6 @@ function Footer() {
 								aria-label="Instagram"
 							>
 								<Instagram size={18} strokeWidth={1.5} />
-							</Link>
-							<Link
-								href="#"
-								className="w-10 h-10 rounded-full bg-gray-800 hover:bg-brand flex items-center justify-center transition-colors duration-300 opacity-50 cursor-not-allowed"
-								aria-label="YouTube"
-							>
-								<Youtube size={18} strokeWidth={1.5} />
 							</Link>
 						</div>
 					</div>

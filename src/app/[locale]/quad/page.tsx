@@ -25,7 +25,6 @@ export default async function QuadPage() {
 				title={t('vehicles.categories.quad')}
 				description={t('vehicles.categoryDescriptions.quad')}
 				iconName="ShoppingBag"
-				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
 				backgroundImage="/images/quad-elettrico.jpg"
 			/>

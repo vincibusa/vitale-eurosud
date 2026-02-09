@@ -25,7 +25,6 @@ export default async function MinicarPage() {
 				title={t('vehicles.categories.minicar')}
 				description="City car elettriche compatte: pratiche, sicure e pensate per la mobilita di ogni giorno."
 				iconName="Car"
-				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
 				backgroundImage="/immagini/asya_autoelettrica.jpg"
 			/>

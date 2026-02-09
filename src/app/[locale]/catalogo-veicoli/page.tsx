@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { Link } from '@/i18n/routing'
 import { getVehicles } from '@/lib/vehicles'
 import { getTranslations } from 'next-intl/server'
-import { Badge } from '@/components/ui/badge'
 
 export const revalidate = 60
 
@@ -31,12 +30,13 @@ export default async function CatalogoVeicoliPage() {
 		<div className="w-full bg-gray-50 pt-20 md:pt-24">
 			<section className="py-14 md:py-20 bg-white border-b border-gray-200">
 				<div className="container mx-auto px-4">
-					<Badge className="mb-4 bg-brand/10 text-brand hover:bg-brand/20">Catalogo Veicoli</Badge>
 					<h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
-						Tutti i veicoli disponibili
+						Scopri tutti i modelli Vitale
 					</h1>
 					<p className="text-base md:text-lg text-gray-600 max-w-4xl">
-						Esplora l&apos;intera gamma Vitale: modelli divisi per categoria con accesso diretto alla scheda dettaglio.
+						Dai modelli classici alle ultime novità, con funzioni innovative pensate per le tue esigenze.
+						<br />
+						Leader nella fornitura di veicoli elettrici di alta qualità. Scopri la nostra gamma completa e vivi una mobilità sostenibile e all&apos;avanguardia.
 					</p>
 				</div>
 			</section>

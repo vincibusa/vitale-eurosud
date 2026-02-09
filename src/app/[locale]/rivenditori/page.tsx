@@ -1,11 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { Link } from '@/i18n/routing'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Building2, Mail, MapPin, Phone } from 'lucide-react'
 
 const fadeInUp = {
@@ -15,45 +13,21 @@ const fadeInUp = {
 
 export default function RivenditoriPage() {
 	return (
-		<div className="w-full">
-			<section className="relative h-[70vh] min-h-[560px] overflow-hidden">
-				<motion.div className="absolute inset-0" initial="hidden" animate="visible" variants={fadeInUp}>
-					<Image
-						src="/immagini/rivenditore-privato-10.png"
-						alt="Sei un rivenditore?"
-						fill
-						className="object-cover object-center"
-						priority
-					/>
-				</motion.div>
-				<div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
-				<div className="relative container mx-auto px-4 h-full flex items-center">
-					<motion.div className="max-w-3xl text-white" initial="hidden" animate="visible" variants={fadeInUp}>
-						<Badge className="mb-4 bg-white/15 text-white hover:bg-white/20">Diventa Partner</Badge>
+		<div className="w-full pt-20 md:pt-24">
+			<section className="bg-white py-16 md:py-24 border-b border-gray-200">
+				<div className="container mx-auto px-4">
+					<motion.div className="max-w-3xl text-gray-900" initial="hidden" animate="visible" variants={fadeInUp}>
 						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
 							Sei un rivenditore?
 						</h1>
-						<p className="text-xl md:text-2xl text-white/90 font-light max-w-2xl">
-							Espandi la tua visibilità e porta i tuoi veicoli a più clienti
+						<p className="text-base md:text-lg text-gray-700 leading-relaxed max-w-4xl">
+							Vitale ti offre un&apos;opportunità unica di collaborazione: entra a far parte della nostra rete,
+							promuovi i tuoi veicoli su una piattaforma di fiducia e raggiungi nuovi clienti interessati a
+							soluzioni di mobilità innovativa.
+							<span className="block mt-3 font-bold">
+								Unisciti a noi per far crescere il tuo business con supporto, visibilità e prefossionalità!
+							</span>
 						</p>
-					</motion.div>
-				</div>
-			</section>
-
-			<section className="py-12 md:py-16 bg-white">
-				<div className="container mx-auto px-4">
-					<motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-						<div className="max-w-4xl">
-							<h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Collaborazione Rivenditori</h2>
-							<p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4">
-								Vitale ti offre un&apos;opportunità unica di collaborazione: entra a far parte della nostra rete,
-								promuovi i tuoi veicoli su una piattaforma di fiducia e raggiungi nuovi clienti interessati a
-								soluzioni di mobilità innovativa.
-							</p>
-							<p className="text-base md:text-lg text-gray-700 leading-relaxed">
-								Unisciti a noi per far crescere il tuo business con supporto, visibilità e professionalità!
-							</p>
-						</div>
 					</motion.div>
 				</div>
 			</section>

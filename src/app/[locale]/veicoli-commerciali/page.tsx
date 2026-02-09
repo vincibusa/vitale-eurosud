@@ -25,7 +25,6 @@ export default async function VeicoliCommercialiPage() {
 				title={t('vehicles.categories.veicoli-commerciali')}
 				description={t('vehicles.categoryDescriptions.veicoli-commerciali')}
 				iconName="Truck"
-				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
 				backgroundImage="/immagini/veicoli_elettrici_trasporto.jpg"
 			/>
