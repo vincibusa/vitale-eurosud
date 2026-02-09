@@ -58,7 +58,7 @@ export default function Home() {
 	return (
 		<div className="w-full">
 			{/* Hero Section - BMW Style */}
-			<section className="relative h-[600px] lg:h-[80vh] min-h-[600px] overflow-hidden">
+			<section className="relative h-screen min-h-screen md:h-[70vh] md:min-h-[520px] lg:h-[80vh] overflow-hidden">
 				<motion.div
 					initial="hidden"
 					animate="visible"
@@ -69,16 +69,17 @@ export default function Home() {
 						src="/immagini/hero.jpeg"
 						alt={t('home.hero.title')}
 						fill
-						className="object-cover object-center"
+						sizes="100vw"
+						className="object-cover object-right"
 						priority
 					/>
 				</motion.div>
 				{/* Gradient overlay - bottom to top */}
-				<div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+				<div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-black/25 to-transparent md:from-black/70 md:via-black/30" />
 
-				<div className="relative z-10 container mx-auto px-4 h-full flex items-end pb-16 md:pb-20">
+				<div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center md:items-end md:justify-start pb-0 md:pb-20">
 					<motion.div
-						className="text-white max-w-3xl"
+						className="text-white max-w-3xl text-center md:text-left"
 						initial="hidden"
 						animate="visible"
 						variants={fadeInUp}
@@ -97,11 +98,11 @@ export default function Home() {
 						>
 							{t('home.hero.subtitle')} {t('home.hero.description')}
 						</motion.p>
-						<motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
+						<motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
 							<Link href="/biciclette">
 								<Button
 									size="lg"
-									className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 text-lg h-14 min-w-[200px] rounded-none transition-all"
+									className="bg-brand hover:bg-brand-dark text-white font-semibold px-8 text-lg h-14 min-w-[200px] w-full sm:w-auto rounded-none transition-all"
 								>
 									scopri i veicoli
 								</Button>
@@ -110,7 +111,7 @@ export default function Home() {
 								<Button
 									size="lg"
 									variant="outline"
-									className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black font-semibold px-8 text-lg h-14 min-w-[200px] rounded-none transition-all"
+									className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black font-semibold px-8 text-lg h-14 min-w-[200px] w-full sm:w-auto rounded-none transition-all"
 								>
 									{t('home.hero.contactUs')}
 								</Button>
@@ -124,7 +125,7 @@ export default function Home() {
 			<QuickActions />
 
 			{/* ASYA - Featured Product - Full Image */}
-			<section className="relative h-[80vh] min-h-[600px] lg:h-[90vh] overflow-hidden">
+			<section className="relative h-[62vh] min-h-[420px] md:h-[75vh] md:min-h-[520px] lg:h-[90vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"
@@ -136,14 +137,15 @@ export default function Home() {
 						src="/immagini/asya_autoelettrica.jpg"
 						alt="ASYA - Auto Elettrica"
 						fill
-						className="object-cover object-center"
+						sizes="100vw"
+						className="object-cover object-right"
 						priority
 					/>
 				</motion.div>
 				
 				{/* Gradient Overlay */}
-				<div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-				<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+				<div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-transparent md:from-black/80 md:via-black/50" />
+				<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60" />
 
 				{/* Content */}
 				<div className="relative container mx-auto px-4 h-full flex items-center">
@@ -210,7 +212,7 @@ export default function Home() {
 			</section>
 
 			{/* Trasporto Passeggeri - Full Image */}
-			<section className="relative h-[80vh] min-h-[600px] lg:h-[90vh] overflow-hidden">
+			<section className="relative h-[62vh] min-h-[420px] md:h-[75vh] md:min-h-[520px] lg:h-[90vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"
@@ -222,14 +224,15 @@ export default function Home() {
 						src="/immagini/veicoli_elettrici.jpg"
 						alt="Vitale Italy - Trasporto Passeggeri"
 						fill
-						className="object-cover object-center"
+						sizes="100vw"
+						className="object-cover object-right"
 						priority
 					/>
 				</motion.div>
 				
 				{/* Gradient Overlay */}
-				<div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-				<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+				<div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-transparent md:from-black/80 md:via-black/50" />
+				<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60" />
 
 				{/* Content */}
 				<div className="relative container mx-auto px-4 h-full flex items-center">
@@ -280,7 +283,7 @@ export default function Home() {
 			</section>
 
 			{/* Trasporto Merci - Full Image */}
-			<section className="relative h-[80vh] min-h-[600px] lg:h-[90vh] overflow-hidden">
+			<section className="relative h-[62vh] min-h-[420px] md:h-[75vh] md:min-h-[520px] lg:h-[90vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"
@@ -292,14 +295,15 @@ export default function Home() {
 						src="/immagini/veicoli_elettrici_trasporto.jpg"
 						alt="Vitale EGO - Trasporto Merci"
 						fill
-						className="object-cover object-center"
+						sizes="100vw"
+						className="object-cover object-right"
 						priority
 					/>
 				</motion.div>
 				
 				{/* Gradient Overlay */}
-				<div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-				<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+				<div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-transparent md:from-black/80 md:via-black/50" />
+				<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60" />
 
 				{/* Content */}
 				<div className="relative container mx-auto px-4 h-full flex items-center">
@@ -371,6 +375,7 @@ export default function Home() {
 										src="/immagini/rivenditore-privato-10.png"
 										alt="Diventa Rivenditore"
 										fill
+										sizes="(max-width: 768px) 100vw, 50vw"
 										className="object-cover transition-transform duration-500 group-hover:scale-105"
 									/>
 									{/* Overlay */}
@@ -397,6 +402,7 @@ export default function Home() {
 										src="/immagini/rivenditore-privato-11.png"
 										alt="Per Privati"
 										fill
+										sizes="(max-width: 768px) 100vw, 50vw"
 										className="object-cover transition-transform duration-500 group-hover:scale-105"
 									/>
 									{/* Overlay */}
@@ -452,6 +458,7 @@ export default function Home() {
 									src="/images/ecobonus-logo.png"
 									alt="Ecobonus"
 									fill
+									sizes="160px"
 									className="object-contain"
 								/>
 							</div>

@@ -42,7 +42,7 @@ export default function CategoryHero({
 					src={backgroundImage}
 					alt={title}
 					fill
-					className="object-cover object-center"
+					className="object-cover object-right"
 					priority
 				/>
 			</motion.div>
