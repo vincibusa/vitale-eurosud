@@ -19,7 +19,7 @@ interface CategoryHeroProps {
 	title: string
 	description: string
 	iconName: IconName
-	gradient: string
+	gradient?: string
 	totalProducts: number
 	backgroundImage?: string
 	titleClassName?: string
