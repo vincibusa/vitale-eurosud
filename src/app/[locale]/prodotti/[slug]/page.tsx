@@ -54,26 +54,27 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 	}))
 
 	return (
-		<ProductDetailLayout
-			name={vehicle.name}
-			model={vehicle.model}
-			brand={vehicle.brand}
-			year={vehicle.year}
-			productCode={vehicle.productCode}
-			category={vehicle.category}
-			categorySlug={vehicle.categorySlug}
-			categoryHref={vehicle.categoryHref}
-			images={vehicle.images}
-			specs={vehicle.specs}
-			description={vehicle.description}
-			specialBadges={vehicle.specialBadges}
-			descriptionImages={vehicle.descriptionImages}
-			optionalFeatures={vehicle.optionalFeatures}
-			relatedProducts={relatedVehicles}
-			primaryColor={vehicle.primaryColor}
-			badgeColor={vehicle.badgeColor}
-			model3d={vehicle.model3d}
-		/>
+		<div className="pt-20 md:pt-24">
+			<ProductDetailLayout
+				name={vehicle.name}
+				model={vehicle.model}
+				brand={vehicle.brand}
+				year={vehicle.year}
+				productCode={vehicle.productCode}
+				category={vehicle.category}
+				categorySlug={vehicle.categorySlug}
+				categoryHref={vehicle.categoryHref}
+				images={vehicle.images}
+				specs={vehicle.specs}
+				description={vehicle.description}
+				specialBadges={vehicle.specialBadges}
+				descriptionImages={vehicle.descriptionImages}
+				optionalFeatures={vehicle.optionalFeatures}
+				relatedProducts={relatedVehicles}
+				primaryColor={vehicle.primaryColor}
+				badgeColor={vehicle.badgeColor}
+				model3d={vehicle.model3d}
+			/>
+		</div>
 	)
 }
-

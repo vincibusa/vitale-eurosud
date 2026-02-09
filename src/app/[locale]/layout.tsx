@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import "../globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { CustomerChatWidget } from "@/components/customer-chat-widget";
@@ -53,22 +52,20 @@ export default async function LocaleLayout({
 	const messages = await getMessages({ locale });
 
 	return (
-		<html lang={locale} className="overflow-x-hidden">
-			<body
-				className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased overflow-x-hidden`}
-			>
-				<NextIntlClientProvider messages={messages}>
-					<ComparisonProvider>
-						<Header />
-						<main className="min-h-screen">
-							{children}
-						</main>
-						<Footer />
-						<CustomerChatWidget />
-					</ComparisonProvider>
-				</NextIntlClientProvider>
-			</body>
-		</html>
+		<div
+			lang={locale}
+			className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased overflow-x-hidden`}
+		>
+			<NextIntlClientProvider messages={messages}>
+				<ComparisonProvider>
+					<Header />
+					<main className="min-h-screen">
+						{children}
+					</main>
+					<Footer />
+					<CustomerChatWidget />
+				</ComparisonProvider>
+			</NextIntlClientProvider>
+		</div>
 	);
 }
-

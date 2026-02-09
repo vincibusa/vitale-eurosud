@@ -2,8 +2,6 @@
 
 import Image from 'next/image'
 import { Separator } from '@/components/ui/separator'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import {
@@ -14,7 +12,6 @@ import {
 	Mail,
 	MapPin,
 	Clock,
-	Send
 } from 'lucide-react'
 
 function Footer() {
@@ -23,9 +20,9 @@ function Footer() {
 
 	return (
 		<footer className="bg-gray-900 text-white">
-			{/* Main footer content - 6 columns */}
+			{/* Main footer content - 5 columns */}
 			<div className="container mx-auto px-4 py-12 md:py-16">
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
 					{/* Column 1: Brand */}
 					<div className="sm:col-span-2 lg:col-span-1">
 						<Link href="/" className="inline-block mb-4">
@@ -135,54 +132,7 @@ function Footer() {
 						</ul>
 					</div>
 
-					{/* Column 4: Servizi */}
-					<div className="lg:col-span-1">
-						<h3 className="text-base font-semibold mb-4 text-white">{t('footer.services')}</h3>
-						<ul className="space-y-2">
-							<li>
-								<Link
-									href="/contatti"
-									className="text-sm text-gray-400 hover:text-brand-light transition-colors inline-block"
-								>
-									{t('footer.assistanceMaintenance')}
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/contatti"
-									className="text-sm text-gray-400 hover:text-brand-light transition-colors inline-block"
-								>
-									{t('footer.originalParts')}
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/contatti"
-									className="text-sm text-gray-400 hover:text-brand-light transition-colors inline-block"
-								>
-									{t('footer.warranties')}
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/contatti"
-									className="text-sm text-gray-400 hover:text-brand-light transition-colors inline-block"
-								>
-									{t('footer.ecobonusIncentives')}
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/mobilita-disabili"
-									className="text-sm text-gray-400 hover:text-brand-light transition-colors inline-block"
-								>
-									{t('footer.disabledMobility')}
-								</Link>
-							</li>
-						</ul>
-					</div>
-
-					{/* Column 5: Azienda */}
+					{/* Column 4: Azienda */}
 					<div className="lg:col-span-1">
 						<h3 className="text-base font-semibold mb-4 text-white">{t('footer.company')}</h3>
 						<ul className="space-y-2">
@@ -227,7 +177,7 @@ function Footer() {
 						</ul>
 					</div>
 
-					{/* Column 6: Social & Newsletter */}
+					{/* Column 5: Social */}
 					<div className="lg:col-span-1">
 						<h3 className="text-base font-semibold mb-4 text-white">{t('footer.followUs')}</h3>
 						<div className="flex gap-3 mb-6">
@@ -256,27 +206,6 @@ function Footer() {
 							>
 								<Youtube size={18} strokeWidth={1.5} />
 							</Link>
-						</div>
-
-						<div>
-							<h4 className="text-sm font-semibold mb-2 text-white">{t('footer.newsletter')}</h4>
-							<p className="text-xs text-gray-400 mb-3">
-								{t('footer.newsletterDesc')}
-							</p>
-							<form className="flex gap-2">
-								<Input
-									type="email"
-									placeholder={t('footer.emailPlaceholder')}
-									className="h-9 text-sm bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-brand"
-								/>
-								<Button
-									type="submit"
-									size="icon"
-									className="h-9 w-9 bg-brand hover:bg-brand-dark flex-shrink-0"
-								>
-									<Send size={16} strokeWidth={1.5} />
-								</Button>
-							</form>
 						</div>
 					</div>
 				</div>

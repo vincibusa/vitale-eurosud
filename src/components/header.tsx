@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -19,7 +19,6 @@ import {
 	Zap,
 	Truck,
 	Users,
-	Wrench,
 	Shield,
 	MessageSquare,
 	ChevronRight,
@@ -28,11 +27,26 @@ import {
 
 function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const [isScrolled, setIsScrolled] = useState(false)
 	const t = useTranslations()
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsScrolled(window.scrollY > 20)
+		}
+		
+		window.addEventListener('scroll', handleScroll)
+		handleScroll() // Check initial scroll position
+		
+		return () => window.removeEventListener('scroll', handleScroll)
+	}, [])
 	const locale = useLocale()
 	const pathname = usePathname()
 	const router = useRouter()
 	const currentLocale = locale as 'it' | 'en'
+	const isProductDetailPage = pathname.includes('/prodotti/')
+	const isCatalogPage = pathname.includes('/catalogo-veicoli')
+	const isSolidHeader = isScrolled || isProductDetailPage || isCatalogPage
 	
 	const handleLanguageToggle = (e: React.MouseEvent) => {
 		e.preventDefault()
@@ -85,25 +99,6 @@ function Header() {
 			]
 		},
 		{
-			label: t('header.services'),
-			submenu: [
-				{
-					category: t('header.assistance'),
-					items: [
-						{ name: t('header.maintenance'), href: '/contatti', description: t('header.maintenanceDesc') },
-						{ name: t('header.originalParts'), href: '/contatti', description: t('header.originalPartsDesc') }
-					]
-				},
-				{
-					category: t('header.support'),
-					items: [
-						{ name: t('header.warranties'), href: '/contatti', description: t('header.warrantiesDesc') },
-						{ name: t('header.ecobonus'), href: '/contatti', description: t('header.ecobonusDesc') }
-					]
-				}
-			]
-		},
-		{
 			label: t('header.about'),
 			href: '/contatti'
 		},
@@ -138,7 +133,6 @@ function Header() {
 			title: t('common.menu'),
 			icon: MessageSquare,
 			items: [
-				{ name: t('header.services'), href: '/contatti', icon: Wrench },
 				{ name: t('header.warranties'), href: '/contatti', icon: Shield },
 				{ name: t('header.about'), href: '/contatti', icon: Users },
 				{ name: t('header.contacts'), href: '/contatti', icon: MessageSquare }
@@ -147,28 +141,11 @@ function Header() {
 	]
 
 	return (
-		<header className="bg-white sticky top-0 z-50 border-b border-gray-200 shadow-sm">
-			{/* Top contact bar - Dark theme */}
-			<div className="bg-gray-900 text-white">
-				<div className="container mx-auto px-4 py-2">
-					<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs sm:text-sm">
-						<div className="flex flex-wrap items-center gap-3 md:gap-4">
-						<a href={`tel:${t('common.phone')}`} className="flex items-center gap-2 hover:text-brand transition-colors">
-							<Phone size={14} strokeWidth={1.5} className="flex-shrink-0" />
-							<span>{t('common.phone')}</span>
-						</a>
-						<a href={`mailto:${t('common.email')}`} className="flex items-center gap-2 hover:text-brand transition-colors">
-							<Mail size={14} strokeWidth={1.5} className="flex-shrink-0" />
-							<span className="truncate">{t('common.email')}</span>
-						</a>
-						</div>
-						<div className="hidden lg:block text-gray-400">
-							<span>{t('common.hours')}</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
+		<header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+			isSolidHeader
+				? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm' 
+				: 'bg-transparent border-b border-transparent'
+			}`}>
 			{/* Main navigation */}
 			<div className="container mx-auto px-4 py-4">
 				<div className="flex items-center justify-between">
@@ -191,13 +168,23 @@ function Header() {
 					</Link>
 
 					{/* Desktop Mega Menu */}
-					<MegaMenu items={menuItems} />
+					<MegaMenu items={menuItems} isScrolled={isSolidHeader} />
 
 					{/* Right icons */}
 					<div className="flex items-center gap-3">
 						{/* Language Switcher - Toggle Switch (Visible on all screen sizes) */}
 						<div className="flex items-center gap-2">
-							<span className={`text-sm font-medium transition-colors ${currentLocale === 'it' ? 'text-blue-600' : 'text-gray-400'}`}>
+							<span
+								className={`text-sm font-medium transition-colors ${
+									isSolidHeader
+										? currentLocale === 'it'
+											? 'text-blue-600'
+											: 'text-gray-400'
+										: currentLocale === 'it'
+											? 'text-white'
+											: 'text-white/70'
+								}`}
+							>
 								🇮🇹
 							</span>
 							<button
@@ -217,7 +204,17 @@ function Header() {
 									}`}
 								/>
 							</button>
-							<span className={`text-sm font-medium transition-colors ${currentLocale === 'en' ? 'text-blue-600' : 'text-gray-400'}`}>
+							<span
+								className={`text-sm font-medium transition-colors ${
+									isSolidHeader
+										? currentLocale === 'en'
+											? 'text-blue-600'
+											: 'text-gray-400'
+										: currentLocale === 'en'
+											? 'text-white'
+											: 'text-white/70'
+								}`}
+							>
 								🇬🇧
 							</span>
 						</div>
@@ -227,7 +224,7 @@ function Header() {
 								<Button
 									variant="ghost"
 									size="icon"
-									className="lg:hidden"
+									className={`lg:hidden ${isSolidHeader ? 'text-gray-900' : 'text-white hover:text-white'}`}
 									aria-label="Toggle menu"
 								>
 									<Menu size={22} />

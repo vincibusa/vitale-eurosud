@@ -27,6 +27,7 @@ export default async function VeicoliCommercialiPage() {
 				iconName="Truck"
 				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
+				backgroundImage="/immagini/veicoli_elettrici_trasporto.jpg"
 			/>
 			<VehicleCategoryLayout
 				title={t('vehicles.categories.veicoli-commerciali')}
@@ -40,4 +41,3 @@ export default async function VeicoliCommercialiPage() {
 		</>
 	)
 }
-

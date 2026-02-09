@@ -27,6 +27,7 @@ export default async function QuadPage() {
 				iconName="ShoppingBag"
 				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
+				backgroundImage="/images/quad-elettrico.jpg"
 			/>
 			<VehicleCategoryLayout
 				title={t('vehicles.categories.quad')}
@@ -40,4 +41,3 @@ export default async function QuadPage() {
 		</>
 	)
 }
-

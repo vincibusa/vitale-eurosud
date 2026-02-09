@@ -27,6 +27,7 @@ export default async function ScooterPage() {
 				iconName="Zap"
 				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
+				backgroundImage="/images/ecozone-max-scooter.jpg"
 			/>
 			<VehicleCategoryLayout
 				title={t('vehicles.categories.scooter')}

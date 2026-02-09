@@ -9,7 +9,8 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
-import { Send, Bot, User, Loader2, MessageCircle, X, Phone } from 'lucide-react'
+import { Send, Bot, User, Loader2, X, Phone } from 'lucide-react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { getApiBaseUrl } from '@/lib/api-config'
 
@@ -330,7 +331,13 @@ export function CustomerChatWidget() {
 						className="h-16 w-16 rounded-full shadow-2xl bg-gradient-to-r from-brand to-brand-dark hover:from-brand-dark hover:to-brand-dark border-4 border-white transition-all duration-300 hover:scale-110"
 						size="icon"
 					>
-						<MessageCircle className="h-7 w-7 text-white" strokeWidth={1.5} />
+						<Image
+							src="/immagini/Icone/VITALE_SITO WEB-05.png"
+							alt="Chat"
+							width={32}
+							height={32}
+							className="h-8 w-8 object-contain"
+						/>
 					</Button>
 					<motion.div
 						className="absolute -top-1 -right-1 h-4 w-4 bg-green-500 rounded-full border-2 border-white"

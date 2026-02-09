@@ -27,6 +27,7 @@ export default async function MobilitaDisabiliPage() {
 				iconName="Users"
 				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
+				backgroundImage="/immagini/veicoli_elettrici.jpg"
 			/>
 			<VehicleCategoryLayout
 				title={t('vehicles.categories.mobilita-disabili')}
@@ -40,4 +41,3 @@ export default async function MobilitaDisabiliPage() {
 		</>
 	)
 }
-

@@ -1,11 +1,15 @@
 import { ReactNode } from 'react'
+import './globals.css'
 
 // Root layout - required by Next.js
-// The actual locale-aware layout is in [locale]/layout.tsx
 export default function RootLayout({
 	children
 }: {
 	children: ReactNode
 }) {
-	return children
+	return (
+		<html lang="it" className="overflow-x-hidden">
+			<body className="overflow-x-hidden">{children}</body>
+		</html>
+	)
 }

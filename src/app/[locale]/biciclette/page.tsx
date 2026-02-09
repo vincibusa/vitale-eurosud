@@ -27,6 +27,7 @@ export default async function BiciclettePage() {
 				iconName="Bike"
 				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
+				backgroundImage="/immagini/hero.jpeg"
 			/>
 			<VehicleCategoryLayout
 				title={t('vehicles.categories.biciclette')}

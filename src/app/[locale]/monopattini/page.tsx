@@ -27,6 +27,7 @@ export default async function MonopattiniPage() {
 				iconName="Bolt"
 				gradient="bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"
 				totalProducts={products.length}
+				backgroundImage="/images/me750-monopattino.jpg"
 			/>
 			<VehicleCategoryLayout
 				title={t('vehicles.categories.monopattini')}

@@ -21,9 +21,10 @@ export interface MegaMenuItem {
 
 interface MegaMenuProps {
 	items: MegaMenuItem[]
+	isScrolled?: boolean
 }
 
-export default function MegaMenu({ items }: MegaMenuProps) {
+export default function MegaMenu({ items, isScrolled = false }: MegaMenuProps) {
 	const [activeMenu, setActiveMenu] = useState<string | null>(null)
 
 	return (
@@ -42,7 +43,9 @@ export default function MegaMenu({ items }: MegaMenuProps) {
 									'flex items-center gap-1 text-sm font-medium transition-colors duration-200 py-2',
 									activeMenu === item.label
 										? 'text-brand'
-										: 'text-gray-700 hover:text-brand'
+										: isScrolled
+											? 'text-gray-700 hover:text-brand'
+											: 'text-white hover:text-brand-light'
 								)}
 							>
 								{item.label}
@@ -104,7 +107,12 @@ export default function MegaMenu({ items }: MegaMenuProps) {
 					) : (
 						<Link
 							href={item.href || '#'}
-							className="text-sm font-medium text-gray-700 hover:text-brand transition-colors duration-200 py-2"
+							className={cn(
+								'text-sm font-medium transition-colors duration-200 py-2',
+								isScrolled
+									? 'text-gray-700 hover:text-brand'
+									: 'text-white hover:text-brand-light'
+							)}
 						>
 							{item.label}
 						</Link>
