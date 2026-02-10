@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { CustomerChatWidget } from "@/components/customer-chat-widget";
+import ScrollToTopOnRouteChange from "@/components/scroll-to-top-on-route-change";
 import { ComparisonProvider } from "@/contexts/comparison-context";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -44,6 +45,7 @@ export default async function LocaleLayout({
 		>
 			<NextIntlClientProvider messages={messages}>
 				<ComparisonProvider>
+					<ScrollToTopOnRouteChange />
 					<Header />
 					<main className="min-h-screen">
 						{children}

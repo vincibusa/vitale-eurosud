@@ -109,9 +109,15 @@ export default function RivenditoriPage() {
 											</label>
 										</div>
 
-										<Button type="submit" size="lg" className="w-full bg-brand hover:bg-brand-dark text-white font-semibold">
-											Invia
-										</Button>
+										<div className="flex justify-center md:justify-start">
+											<Button
+												type="submit"
+												size="lg"
+												className="w-[220px] h-14 rounded-none bg-brand hover:bg-brand-dark text-white font-semibold"
+											>
+												Invia
+											</Button>
+										</div>
 									</form>
 								</CardContent>
 							</Card>

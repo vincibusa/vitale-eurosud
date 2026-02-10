@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
-	const { slug } = await params
+	const { slug, locale } = await params
 	const vehicle = await getVehicleById(slug)
 
 	// Se il veicolo non esiste, mostra 404
@@ -41,7 +41,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 		notFound()
 	}
 
-	// Ottieni veicoli correlati
+	// Ottieni veicoli correlati con availability
 	const relatedVehicles = (await getRelatedVehicles(slug, 3)).map(v => ({
 		id: v.id,
 		name: v.name,
@@ -50,8 +50,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 		battery: v.specs.batteria,
 		speed: v.specs.velocitaMassima,
 		image: v.images[0],
-		href: `/prodotti/${v.id}`
+		href: `/${locale}/prodotti/${v.id}`,
+		availability: (v.availability || 'in-stock') as 'in-stock' | 'limited' | 'out-of-stock' | 'pre-order'
 	}))
+
+	// Assicurati che le specs abbiano i campi dimensionali
+	const enrichedSpecs = {
+		...vehicle.specs,
+		lunghezza: vehicle.specs.lunghezza || '2200 mm',
+		larghezza: vehicle.specs.larghezza || '800 mm',
+		altezza: vehicle.specs.altezza || '1150 mm',
+	}
 
 	return (
 		<div className="pt-20 md:pt-24">
@@ -65,7 +74,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 				categorySlug={vehicle.categorySlug}
 				categoryHref={vehicle.categoryHref}
 				images={vehicle.images}
-				specs={vehicle.specs}
+				specs={enrichedSpecs}
 				description={vehicle.description}
 				specialBadges={vehicle.specialBadges}
 				descriptionImages={vehicle.descriptionImages}
@@ -74,6 +83,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 				primaryColor={vehicle.primaryColor}
 				badgeColor={vehicle.badgeColor}
 				model3d={vehicle.model3d}
+				availability={(vehicle.availability || 'in-stock') as 'in-stock' | 'limited' | 'out-of-stock' | 'pre-order'}
 			/>
 		</div>
 	)

@@ -99,7 +99,7 @@ export async function getRelatedVehicles(vehicleId: string, limit: number = 3): 
 }
 
 // Helper function to convert Vehicle to VehicleProduct for category pages
-export function vehicleToProduct(vehicle: Vehicle) {
+export function vehicleToProduct(vehicle: Vehicle, locale: string = 'it') {
 	return {
 		id: vehicle.id,
 		name: vehicle.name,
@@ -110,7 +110,7 @@ export function vehicleToProduct(vehicle: Vehicle) {
 		autonomy: vehicle.specs.autonomia,
 		chargingTime: vehicle.specs.tempoRicarica,
 		image: vehicle.images[0] || '/images/placeholder.jpg',
-		href: `/prodotti/${vehicle.id}`,
+		href: `/${locale}/prodotti/${vehicle.id}`,
 		isNew: vehicle.isNew || false,
 		subcategory: vehicle.subcategory,
 		optionalFeatures: vehicle.optionalFeatures || [],

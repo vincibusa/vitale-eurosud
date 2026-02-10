@@ -1,42 +1,103 @@
-import VehicleCategoryLayout, { VehicleProduct } from '@/components/vehicles/vehicle-category-layout'
+import { getVehiclesByCategory } from '@/lib/vehicles'
 import CategoryHero from '@/components/category-hero'
-import { getVehiclesByCategory, vehicleToProduct, getVehicleSubcategory } from '@/lib/vehicles'
-import { CATEGORY_SUBCATEGORIES } from '@/config/subcategories'
+import BMWVehicleGrid from '@/components/vehicles/bmw-vehicle-grid'
+import type { BMWVehicle } from '@/components/vehicles/bmw-vehicle-card'
 import { getTranslations } from 'next-intl/server'
 
-export const revalidate = 60 // Revalidate every 60 seconds
+export const revalidate = 60
 
-export default async function BiciclettePage() {
+// Parse autonomy value for filtering
+function parseAutonomy(autonomyStr: string): number {
+	const match = autonomyStr.match(/(\d+)/)
+	return match ? parseInt(match[1]) : 0
+}
+
+export default async function BiciclettePage({
+	params
+}: {
+	params: Promise<{ locale: string }>
+}) {
+	const { locale } = await params
 	const t = await getTranslations()
-	const vehicles = await getVehiclesByCategory('biciclette')
+	const vehiclesData = await getVehiclesByCategory('biciclette')
 
-	// Enrich vehicles with subcategory
-	const enrichedVehicles = vehicles.map((v) => ({
-		...v,
-		subcategory: getVehicleSubcategory(v)
+	// Transform vehicles to BMW format
+	const bmwVehicles: BMWVehicle[] = vehiclesData.map(vehicle => ({
+		id: vehicle.id,
+		name: vehicle.name,
+		model: vehicle.model,
+		category: vehicle.subcategory || vehicle.category,
+		image: vehicle.images[0] || '/images/placeholder.jpg',
+		href: `/${locale}/prodotti/${vehicle.id}`,
+		isNew: vehicle.isNew,
+		specs: {
+			autonomy: vehicle.specs.autonomia,
+			power: vehicle.specs.potenza,
+			speed: vehicle.specs.velocitaMassima,
+			chargingTime: vehicle.specs.tempoRicarica
+		}
 	}))
 
-	const products: VehicleProduct[] = enrichedVehicles.map(vehicleToProduct)
-	const subcategories = CATEGORY_SUBCATEGORIES['biciclette']
+	// Calculate subcategory counts
+	const subcategoryCounts = vehiclesData.reduce((acc, v) => {
+		const sub = v.subcategory || 'Altro'
+		acc[sub] = (acc[sub] || 0) + 1
+		return acc
+	}, {} as Record<string, number>)
+
+	const autonomyRanges = {
+		under50: 0,
+		'50to100': 0,
+		over100: 0
+	}
+
+	vehiclesData.forEach(v => {
+		const autonomy = parseAutonomy(v.specs.autonomia)
+		if (autonomy < 50) autonomyRanges.under50++
+		else if (autonomy <= 100) autonomyRanges['50to100']++
+		else autonomyRanges.over100++
+	})
+
+	// Define filter sections
+	const filterSections = [
+		{
+			id: 'subcategory',
+			label: 'Sottocategorie',
+			type: 'checkbox' as const,
+			options: Object.entries(subcategoryCounts).map(([label, count]) => ({
+				label,
+				value: label,
+				count
+			}))
+		},
+		{
+			id: 'autonomy',
+			label: 'Autonomia',
+			type: 'radio' as const,
+			options: [
+				{ label: 'Meno di 50 KM', value: 'under50', count: autonomyRanges.under50 },
+				{ label: '50 - 100 KM', value: '50to100', count: autonomyRanges['50to100'] },
+				{ label: 'Più di 100 KM', value: 'over100', count: autonomyRanges.over100 }
+			]
+		}
+	]
+
+	// Hero section component
+	const heroSection = (
+		<CategoryHero
+			title={t('vehicles.categories.biciclette')}
+			description={t('vehicles.categoryDescriptions.biciclette')}
+			iconName="Bike"
+			totalProducts={bmwVehicles.length}
+			backgroundImage="/images/bicicletta-elettrica.jpg"
+		/>
+	)
 
 	return (
-		<>
-			<CategoryHero
-				title={t('vehicles.categories.biciclette')}
-				description={t('vehicles.categoryDescriptions.biciclette')}
-				iconName="Bike"
-				totalProducts={products.length}
-				backgroundImage="/immagini/hero.jpeg"
-			/>
-			<VehicleCategoryLayout
-				title={t('vehicles.categories.biciclette')}
-				description={t('vehicles.categoryDescriptions.biciclette')}
-				products={products}
-				subcategories={subcategories}
-				categorySlug="biciclette"
-				badgeColor="bg-brand/10 text-brand hover:bg-brand/20"
-				primaryColor="brand"
-			/>
-		</>
+		<BMWVehicleGrid
+			vehicles={bmwVehicles}
+			filterSections={filterSections}
+			heroSection={heroSection}
+		/>
 	)
 }

@@ -6,7 +6,12 @@ import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
-export default async function QuadPage() {
+export default async function QuadPage({
+	params
+}: {
+	params: Promise<{ locale: string }>
+}) {
+	const { locale } = await params
 	const t = await getTranslations()
 	const vehicles = await getVehiclesByCategory('quad')
 
@@ -16,7 +21,7 @@ export default async function QuadPage() {
 		subcategory: getVehicleSubcategory(v)
 	}))
 
-	const products: VehicleProduct[] = enrichedVehicles.map(vehicleToProduct)
+	const products: VehicleProduct[] = enrichedVehicles.map((v) => vehicleToProduct(v, locale))
 	const subcategories = CATEGORY_SUBCATEGORIES['quad']
 
 	return (

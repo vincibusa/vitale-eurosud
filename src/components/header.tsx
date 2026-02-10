@@ -44,7 +44,8 @@ function Header() {
 	const isCatalogPage = pathname.includes('/catalogo-veicoli')
 	const isComparePage = pathname.includes('/confronta')
 	const isDealerPage = pathname.includes('/rivenditori')
-	const isSolidHeader = isScrolled || isProductDetailPage || isCatalogPage || isComparePage || isDealerPage
+	const isContactsPage = pathname.includes('/contatti')
+	const isSolidHeader = isScrolled || isProductDetailPage || isCatalogPage || isComparePage || isDealerPage || isContactsPage
 	
 	const handleLanguageToggle = (e: React.MouseEvent) => {
 		e.preventDefault()
@@ -76,6 +77,7 @@ function Header() {
 				{
 					category: 'Tutti i veicoli',
 					items: [
+						{ name: 'Tutti i veicoli', href: '/catalogo-veicoli', description: 'Panoramica completa della gamma Vitale' },
 						{ name: 'Biciclette', href: '/biciclette', description: 'Mobilità urbana e tempo libero' },
 						{ name: 'Monopattini', href: '/monopattini', description: 'Compatti e pratici per la città' },
 						{ name: 'Scooter', href: '/scooter', description: 'Comfort e autonomia per ogni giorno' },
@@ -113,6 +115,7 @@ function Header() {
 			title: 'Veicoli privati',
 			icon: Car,
 			items: [
+				{ name: 'Tutti i veicoli', href: '/catalogo-veicoli', icon: Car },
 				{ name: 'Biciclette', href: '/biciclette', icon: Car },
 				{ name: 'Monopattini', href: '/monopattini', icon: Car },
 				{ name: 'Scooter', href: '/scooter', icon: Car },

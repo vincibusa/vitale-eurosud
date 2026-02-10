@@ -42,7 +42,7 @@ export default async function ComparisonPage({ searchParams }: ComparisonPagePro
 		redirect('/')
 	}
 
-	const products: VehicleProduct[] = validVehicles.map(vehicleToProduct)
+	const products: VehicleProduct[] = validVehicles.map((vehicle) => vehicleToProduct(vehicle))
 
 	// Define comparison specs to show
 	const specKeys = [

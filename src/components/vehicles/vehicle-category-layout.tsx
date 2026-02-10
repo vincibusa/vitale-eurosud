@@ -1,30 +1,22 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from '@/i18n/routing'
-import { Search, X } from 'lucide-react'
-import CategoryTabs from './category-tabs'
+import { Search, X, Filter, RotateCcw } from 'lucide-react'
 import BMWStyleProductCard, { type VehicleProduct } from './bmw-style-product-card'
 import ComparisonBar from './comparison-bar'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 
-// Re-export VehicleProduct for backward compatibility
 export type { VehicleProduct }
 import { useComparison } from '@/contexts/comparison-context'
 import type { SubcategoryConfig } from '@/config/subcategories'
 
-// Animation variants from design system
 const fadeInUp = {
 	hidden: { opacity: 0, y: 30 },
 	visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-}
-
-const staggerContainer = {
-	hidden: { opacity: 0 },
-	visible: {
-		opacity: 1,
-		transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-	}
 }
 
 interface VehicleCategoryLayoutProps {
@@ -48,32 +40,31 @@ export default function VehicleCategoryLayout({
 }: VehicleCategoryLayoutProps) {
 	const router = useRouter()
 	const [searchTerm, setSearchTerm] = useState('')
-	const [activeTab, setActiveTab] = useState<string>('all')
+	const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([])
+	const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false)
 	const { items, addItem, removeItem, clearAll, isInComparison, maxItems } = useComparison()
 
-	// Calculate vehicle counts per tab
-	const vehicleCounts = useMemo(() => {
-		const counts: Record<string, number> = {}
-		subcategories.forEach((tab) => {
-			if (tab.value === 'all') {
-				counts[tab.value] = products.length
-			} else {
-				counts[tab.value] = products.filter((p) => p.subcategory === tab.value).length
-			}
-		})
-		return counts
-	}, [products, subcategories])
+	// Get subcategory options (excluding 'all')
+	const subcategoryOptions = useMemo(() => {
+		return subcategories
+			.filter(s => s.value !== 'all')
+			.map(s => ({
+				value: s.value,
+				label: s.label,
+				count: products.filter(p => p.subcategory === s.value).length
+			}))
+	}, [subcategories, products])
 
-	// Filter products by tab and search
+	// Filter products
 	const filteredProducts = useMemo(() => {
 		let filtered = products
 
-		// 1. Filter by active tab (subcategory)
-		if (activeTab !== 'all') {
-			filtered = filtered.filter((p) => p.subcategory === activeTab)
+		// Filter by selected subcategories
+		if (selectedSubcategories.length > 0) {
+			filtered = filtered.filter((p) => selectedSubcategories.includes(p.subcategory || ''))
 		}
 
-		// 2. Filter by search term
+		// Filter by search term
 		if (searchTerm) {
 			filtered = filtered.filter(
 				(p) =>
@@ -83,7 +74,7 @@ export default function VehicleCategoryLayout({
 		}
 
 		return filtered
-	}, [products, activeTab, searchTerm])
+	}, [products, selectedSubcategories, searchTerm])
 
 	// Get selected vehicles for comparison bar
 	const selectedVehicles = useMemo(() => {
@@ -96,10 +87,7 @@ export default function VehicleCategoryLayout({
 			if (isInComparison(id)) {
 				removeItem(id)
 			} else {
-				if (items.length >= maxItems) {
-					// Optionally show a toast/notification here
-					return
-				}
+				if (items.length >= maxItems) return
 				addItem(id)
 			}
 		},
@@ -113,100 +101,239 @@ export default function VehicleCategoryLayout({
 		}
 	}, [selectedVehicles, router])
 
-	return (
-		<div className="w-full pb-24">
-			{/* Main Content */}
-			<section className="py-8 md:py-12 lg:py-16">
-				<div className="container mx-auto px-4">
-					<motion.p
-						className="mb-5 md:mb-6 max-w-4xl text-sm md:text-base text-gray-600 leading-relaxed"
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true, margin: '-100px' }}
-						variants={fadeInUp}
-					>
-						Veicolo elettrico sostenibile, progettato per ridurre le emissioni e l&apos;impatto ambientale.
-						Silenzioso, efficiente e alimentato da energia pulita, offre una mobilità moderna che unisce prestazioni,
-						comfort e rispetto per il pianeta.
-					</motion.p>
+	const toggleSubcategory = (value: string) => {
+		setSelectedSubcategories(prev =>
+			prev.includes(value)
+				? prev.filter(v => v !== value)
+				: [...prev, value]
+		)
+	}
 
-					{/* Category Tabs */}
-					<motion.div
-						className="mb-6"
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true, margin: '-100px' }}
-						variants={fadeInUp}
-					>
-						<CategoryTabs
-							tabs={subcategories}
-							activeTab={activeTab}
-							onTabChange={setActiveTab}
-							vehicleCounts={vehicleCounts}
-							primaryColor={primaryColor}
-						/>
-					</motion.div>
+	const resetFilters = () => {
+		setSelectedSubcategories([])
+		setSearchTerm('')
+	}
 
-					{/* Search Bar */}
-					<motion.div
-						className="mb-6 md:mb-8"
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true, margin: '-100px' }}
-						variants={fadeInUp}
+	const hasActiveFilters = selectedSubcategories.length > 0 || searchTerm
+
+	// Sidebar content
+	const SidebarContent = () => (
+		<div className="flex flex-col h-full">
+			{/* Header */}
+			<div className="hidden lg:flex items-center justify-between p-6 border-b border-gray-200">
+				<div className="flex items-center gap-2">
+					<Filter className="w-5 h-5 text-[#1C69D4]" />
+					<h2 className="text-lg font-semibold text-[#1A1A1A]">Filtri</h2>
+				</div>
+				{hasActiveFilters && (
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={resetFilters}
+						className="text-[#6E6E73] hover:text-[#1C69D4] text-sm"
 					>
-						<div className="relative">
-							<Search
-								size={18}
-								className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-							/>
-							<input
-								type="text"
-								placeholder="Cerca modello..."
-								value={searchTerm}
-								onChange={(e) => setSearchTerm(e.target.value)}
-								className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-none focus:ring-2 focus:ring-brand focus:border-brand text-sm"
-							/>
-							{searchTerm && (
-								<button
-									type="button"
-									onClick={() => setSearchTerm('')}
-									className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-									aria-label="Cancella ricerca"
+						<RotateCcw className="w-4 h-4 mr-1" />
+						Resetta
+					</Button>
+				)}
+			</div>
+
+			{/* Mobile Header */}
+			<div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 bg-white">
+				<div className="flex items-center gap-2">
+					<Filter className="w-5 h-5 text-[#1C69D4]" />
+					<h2 className="text-lg font-semibold text-[#1A1A1A]">Filtri</h2>
+					{selectedSubcategories.length > 0 && (
+						<span className="bg-[#1C69D4] text-white text-xs px-2 py-0.5 rounded-full">
+							{selectedSubcategories.length}
+						</span>
+					)}
+				</div>
+				<button onClick={() => setIsMobileFilterOpen(false)} className="p-2 hover:bg-gray-100 rounded-full">
+					<X className="w-5 h-5 text-gray-600" />
+				</button>
+			</div>
+
+			{/* Results Count */}
+			<div className="px-6 py-4 bg-[#F5F5F7] border-b border-gray-200">
+				<p className="text-sm text-[#6E6E73]">
+					<span className="font-semibold text-[#1A1A1A]">{filteredProducts.length}</span> di{' '}
+					<span className="font-semibold text-[#1A1A1A]">{products.length}</span> veicoli
+				</p>
+			</div>
+
+			{/* Filter Sections */}
+			<div className="flex-1 overflow-y-auto p-6">
+				{/* Subcategories */}
+				{subcategoryOptions.length > 0 && (
+					<div className="border-b border-gray-100 pb-6">
+						<h3 className="font-semibold text-[#1A1A1A] mb-4">Sottocategorie</h3>
+						<div className="space-y-3">
+							{subcategoryOptions.map((option) => (
+								<div
+									key={option.value}
+									className="flex items-center justify-between group cursor-pointer"
+									onClick={() => toggleSubcategory(option.value)}
 								>
-									<X size={18} />
-								</button>
-							)}
+									<div className="flex items-center gap-3">
+										<Checkbox
+											checked={selectedSubcategories.includes(option.value)}
+											onCheckedChange={() => toggleSubcategory(option.value)}
+											className="rounded-none border-gray-300 data-[state=checked]:bg-[#1C69D4] data-[state=checked]:border-[#1C69D4]"
+										/>
+										<Label className="text-sm text-[#1A1A1A] cursor-pointer group-hover:text-[#1C69D4] transition-colors">
+											{option.label}
+										</Label>
+									</div>
+									<span className="text-xs text-[#6E6E73]">({option.count})</span>
+								</div>
+							))}
 						</div>
-					</motion.div>
+					</div>
+				)}
+			</div>
 
-					{/* Results Header */}
-					<motion.div
-						className="mb-4 md:mb-6"
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true, margin: '-100px' }}
-						variants={fadeInUp}
-					>
-						<h2 className="text-lg md:text-xl font-bold text-gray-900">
-							{filteredProducts.length}{' '}
-							{filteredProducts.length === 1 ? 'Risultato' : 'Risultati'}
-						</h2>
-						<p className="text-xs md:text-sm text-gray-600 mt-1">
-							{filteredProducts.length === products.length
-								? `Tutti i ${title.toLowerCase()} disponibili`
-								: `Filtrati da ${products.length} prodotti totali`}
-						</p>
-					</motion.div>
+			{/* Mobile Apply Button */}
+			<div className="lg:hidden p-4 border-t border-gray-200 bg-white">
+				<Button
+					onClick={() => setIsMobileFilterOpen(false)}
+					className="w-full bg-[#1C69D4] hover:bg-[#0653B6] text-white rounded-none py-6"
+				>
+					Mostra {filteredProducts.length} veicoli
+				</Button>
+			</div>
+		</div>
+	)
 
-					{/* Products Grid - BMW Style (2 columns on desktop) */}
+	return (
+		<section id="vehicle-catalog" className="bg-[#F5F5F7] min-h-screen">
+			{/* Desktop Sidebar - Fixed */}
+			<aside className="hidden lg:block fixed top-[80px] left-0 w-[280px] h-[calc(100vh-80px)] bg-white border-r border-gray-200 shadow-sm z-30 overflow-hidden">
+				<SidebarContent />
+			</aside>
+
+			{/* Mobile Drawer */}
+			<AnimatePresence>
+				{isMobileFilterOpen && (
+					<>
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+							onClick={() => setIsMobileFilterOpen(false)}
+						/>
+						<motion.div
+							initial={{ x: '-100%' }}
+							animate={{ x: 0 }}
+							exit={{ x: '-100%' }}
+							transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+							className="fixed left-0 top-0 bottom-0 w-[320px] max-w-[85vw] bg-white z-50 lg:hidden shadow-2xl"
+						>
+							<SidebarContent />
+						</motion.div>
+					</>
+				)}
+			</AnimatePresence>
+
+			{/* Main Content */}
+			<main className="min-w-0 lg:ml-[280px]">
+				{/* Toolbar */}
+				<div className="sticky top-20 z-20 bg-white border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4">
+					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+						{/* Search & Mobile Filter */}
+						<div className="flex items-center gap-3 flex-1">
+							<Button
+								variant="outline"
+								size="sm"
+								onClick={() => setIsMobileFilterOpen(true)}
+								className="lg:hidden rounded-none border-gray-300"
+							>
+								<Filter className="w-4 h-4 mr-2" />
+								Filtri
+								{selectedSubcategories.length > 0 && (
+									<span className="ml-2 bg-[#1C69D4] text-white text-xs px-1.5 py-0.5 rounded-full">
+										{selectedSubcategories.length}
+									</span>
+								)}
+							</Button>
+
+							<div className="relative flex-1 max-w-md">
+								<Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+								<input
+									type="text"
+									placeholder="Cerca modello..."
+									value={searchTerm}
+									onChange={(e) => setSearchTerm(e.target.value)}
+									className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-none focus:ring-2 focus:ring-[#1C69D4] focus:border-[#1C69D4] text-sm"
+								/>
+								{searchTerm && (
+									<button
+										type="button"
+										onClick={() => setSearchTerm('')}
+										className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+									>
+										<X className="w-4 h-4" />
+									</button>
+								)}
+							</div>
+						</div>
+
+						{/* Results count */}
+						<span className="text-sm text-[#6E6E73] hidden sm:inline">
+							{filteredProducts.length} risultati
+						</span>
+					</div>
+
+					{/* Active Filters */}
+					{hasActiveFilters && (
+						<motion.div
+							initial={{ opacity: 0, height: 0 }}
+							animate={{ opacity: 1, height: 'auto' }}
+							className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-gray-100"
+						>
+							<span className="text-xs text-[#6E6E73]">Filtri attivi:</span>
+							{selectedSubcategories.map((sub) => {
+								const option = subcategoryOptions.find(o => o.value === sub)
+								return (
+									<span key={sub} className="inline-flex items-center gap-1 px-2 py-1 bg-[#1C69D4]/10 text-[#1C69D4] text-xs font-medium">
+										{option?.label}
+										<button onClick={() => toggleSubcategory(sub)} className="ml-1 hover:text-[#0653B6]">
+											<X className="w-3 h-3" />
+										</button>
+									</span>
+								)
+							})}
+							{searchTerm && (
+								<span className="inline-flex items-center gap-1 px-2 py-1 bg-[#1C69D4]/10 text-[#1C69D4] text-xs font-medium">
+									Ricerca: &quot;{searchTerm}&quot;
+									<button onClick={() => setSearchTerm('')} className="ml-1 hover:text-[#0653B6]">
+										<X className="w-3 h-3" />
+									</button>
+								</span>
+							)}
+							<Button variant="ghost" size="sm" onClick={resetFilters} className="text-xs text-[#6E6E73] hover:text-[#1C69D4]">
+								Cancella tutto
+							</Button>
+						</motion.div>
+					)}
+				</div>
+
+				{/* Vehicle Grid */}
+				<div className="px-4 sm:px-6 lg:px-8 pt-30 pb-8">
 					{filteredProducts.length > 0 ? (
 						<motion.div
-							className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8"
+							className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8 items-stretch"
 							initial="hidden"
 							whileInView="visible"
 							viewport={{ once: true, margin: '-100px' }}
-							variants={staggerContainer}
+							variants={{
+								hidden: { opacity: 0 },
+								visible: {
+									opacity: 1,
+									transition: { staggerChildren: 0.1 }
+								}
+							}}
 						>
 							{filteredProducts.map((product) => (
 								<BMWStyleProductCard
@@ -221,60 +348,26 @@ export default function VehicleCategoryLayout({
 						</motion.div>
 					) : (
 						<motion.div
-							className="text-center py-12 md:py-16"
-							initial="hidden"
-							whileInView="visible"
-							viewport={{ once: true, margin: '-100px' }}
-							variants={fadeInUp}
+							className="text-center py-20"
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
 						>
-							<div className="mx-auto mb-4 w-16 h-16 bg-gray-100 rounded-none flex items-center justify-center">
-								<Search size={32} className="text-gray-400" />
+							<div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-6">
+								<Search className="w-10 h-10 text-gray-400" />
 							</div>
-							<h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2">
-								Nessun risultato trovato
-							</h3>
-							<p className="text-sm md:text-base text-gray-600 mb-4">
-								Prova a modificare la tab o la ricerca
-							</p>
-							<button
-								onClick={() => {
-									setSearchTerm('')
-									setActiveTab('all')
-								}}
-								className="px-4 py-2 border border-gray-300 rounded-none hover:bg-gray-50 transition-colors"
+							<h3 className="text-xl font-semibold text-[#1A1A1A] mb-2">Nessun veicolo trovato</h3>
+							<p className="text-[#6E6E73] mb-6">Prova a modificare i filtri o la ricerca</p>
+							<Button
+								onClick={resetFilters}
+								variant="outline"
+								className="rounded-none border-[#1C69D4] text-[#1C69D4] hover:bg-[#1C69D4] hover:text-white"
 							>
-								Resetta Filtri
-							</button>
+								Resetta filtri
+							</Button>
 						</motion.div>
 					)}
 				</div>
-			</section>
-
-			{/* CTA Section */}
-			<motion.section
-				className="py-8 md:py-12 lg:py-16 bg-gray-50"
-				initial="hidden"
-				whileInView="visible"
-				viewport={{ once: true, margin: '-100px' }}
-				variants={fadeInUp}
-			>
-				<div className="container mx-auto px-4 text-center">
-					<h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
-						Non hai trovato quello che cerchi?
-					</h2>
-					<p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6 max-w-2xl mx-auto px-4">
-						Contattaci per ricevere informazioni personalizzate sui nostri veicoli elettrici
-					</p>
-					<div className="flex flex-col sm:flex-row gap-3 justify-center">
-						<a
-							href="/contatti"
-							className="px-6 py-3 bg-brand hover:bg-brand-dark text-white rounded-none font-medium transition-colors w-full sm:w-auto sm:min-w-[200px] text-center"
-						>
-							Contattaci
-						</a>
-					</div>
-				</div>
-			</motion.section>
+			</main>
 
 			{/* Comparison Bar */}
 			<ComparisonBar
@@ -284,6 +377,6 @@ export default function VehicleCategoryLayout({
 				onClear={clearAll}
 				maxItems={maxItems}
 			/>
-		</div>
+		</section>
 	)
 }

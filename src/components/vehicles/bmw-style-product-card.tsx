@@ -71,16 +71,16 @@ export default function BMWStyleProductCard({
 			initial="hidden"
 			whileInView="visible"
 			viewport={{ once: true, margin: '-50px' }}
-			className="group bg-white rounded-none overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 h-full flex flex-col"
+			className="group  rounded-none overflow-hidden  h-full flex flex-col"
 		>
 			{/* Image Section */}
 			<Link href={product.href} className="block relative">
-				<div className="relative h-64 sm:h-72 md:h-80 bg-gray-100 overflow-hidden">
+				<div className="relative h-64 sm:h-72 md:h-80  overflow-hidden">
 					<Image
 						src={product.image}
 						alt={product.name}
 						fill
-						className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+						className="object-contain p-4"
 					/>
 
 					{/* Badges */}

@@ -6,7 +6,12 @@ import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
-export default async function ScooterPage() {
+export default async function ScooterPage({
+	params
+}: {
+	params: Promise<{ locale: string }>
+}) {
+	const { locale } = await params
 	const t = await getTranslations()
 	const vehicles = await getVehiclesByCategory('scooter')
 
@@ -16,7 +21,7 @@ export default async function ScooterPage() {
 		subcategory: getVehicleSubcategory(v)
 	}))
 
-	const products: VehicleProduct[] = enrichedVehicles.map(vehicleToProduct)
+	const products: VehicleProduct[] = enrichedVehicles.map((v) => vehicleToProduct(v, locale))
 	const subcategories = CATEGORY_SUBCATEGORIES['scooter']
 
 	return (

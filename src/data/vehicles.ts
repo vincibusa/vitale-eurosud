@@ -33,6 +33,7 @@ export interface Vehicle {
 	primaryColor: string
 	badgeColor: string
 	isNew?: boolean
+	availability?: 'in-stock' | 'limited' | 'out-of-stock' | 'pre-order'
 }
 
 export const vehicles: Record<string, Vehicle> = {
@@ -1761,4 +1762,3 @@ export function getVehiclesByCategory(categorySlug: string): Vehicle[] {
 export function getAllVehicleSlugs(): string[] {
 	return Object.keys(vehicles)
 }
-

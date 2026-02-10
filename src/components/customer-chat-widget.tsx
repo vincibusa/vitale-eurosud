@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
-import { Send, Bot, User, Loader2, X, Phone } from 'lucide-react'
+import { Send, Bot, User, Loader2, X, Phone, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { getApiBaseUrl } from '@/lib/api-config'
@@ -26,6 +26,7 @@ interface CustomerInfo {
 	lastName: string
 	email: string
 	phone: string
+	initialMessage: string
 }
 
 export function CustomerChatWidget() {
@@ -39,7 +40,8 @@ export function CustomerChatWidget() {
 		firstName: '',
 		lastName: '',
 		email: '',
-		phone: ''
+		phone: '',
+		initialMessage: ''
 	})
 	const [isRegistered, setIsRegistered] = useState(false)
 	const [isRegistering, setIsRegistering] = useState(false)
@@ -309,7 +311,8 @@ export function CustomerChatWidget() {
 				firstName: '',
 				lastName: '',
 				email: '',
-				phone: ''
+				phone: '',
+				initialMessage: ''
 			})
 			setIsRegistered(false)
 			setHasRequestedOperator(false)
@@ -328,15 +331,15 @@ export function CustomerChatWidget() {
 				>
 					<Button
 						onClick={() => setIsOpen(true)}
-						className="h-16 w-16 rounded-full shadow-2xl bg-gradient-to-r from-brand to-brand-dark hover:from-brand-dark hover:to-brand-dark border-4 border-white transition-all duration-300 hover:scale-110"
+						className="h-[72px] w-[72px] sm:h-20 sm:w-20 rounded-full shadow-2xl bg-white border-4 border-white transition-all duration-300 hover:scale-110"
 						size="icon"
 					>
 						<Image
 							src="/immagini/Icone/VITALE_SITO WEB-05.png"
 							alt="Chat"
-							width={32}
-							height={32}
-							className="h-8 w-8 object-contain"
+							width={56}
+							height={56}
+							className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
 						/>
 					</Button>
 					<motion.div
@@ -399,9 +402,9 @@ export function CustomerChatWidget() {
 							<div className="flex-1 p-4 sm:p-6 flex flex-col justify-center overflow-y-auto">
 								<div className="space-y-4 sm:space-y-6">
 									<div className="text-center space-y-2">
-										<h3 className="text-base sm:text-lg font-semibold">Inizia una chat</h3>
+										<h3 className="text-base sm:text-lg font-bold">Come possiamo aiutarti?</h3>
 										<p className="text-xs sm:text-sm text-muted-foreground">
-											Inserisci i tuoi dati per iniziare a chattare con il nostro assistente
+											Parla ora con l&apos;assistente Vitale
 										</p>
 									</div>
 									
@@ -434,6 +437,12 @@ export function CustomerChatWidget() {
 											onChange={(e) => setCustomerInfo(prev => ({ ...prev, phone: e.target.value }))}
 											className="h-9 sm:h-10 text-sm"
 										/>
+										<Textarea
+											placeholder="Scrivi qui il tuo messaggio"
+											value={customerInfo.initialMessage}
+											onChange={(e) => setCustomerInfo(prev => ({ ...prev, initialMessage: e.target.value }))}
+											className="min-h-[72px] resize-none text-sm"
+										/>
 									</div>
 
 									<Button
@@ -447,7 +456,10 @@ export function CustomerChatWidget() {
 												Registrazione...
 											</>
 										) : (
-											'Inizia Chat'
+											<>
+												Invia
+												<ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
+											</>
 										)}
 									</Button>
 								</div>

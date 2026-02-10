@@ -32,6 +32,7 @@ export interface Vehicle {
 	primaryColor: string
 	badgeColor: string
 	isNew?: boolean
+	availability?: 'in-stock' | 'limited' | 'out-of-stock' | 'pre-order'
 	subcategory?: string
 	model3d?: string
 }

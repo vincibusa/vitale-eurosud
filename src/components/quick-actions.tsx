@@ -60,8 +60,8 @@ export default function QuickActions() {
 	return (
 		<section className=" bg-white">
 			<div className="container mx-auto px-4">
-				<div className="text-center mb-2 md:mb-4 mt-5">
-					<h2 className="text-base md:text-lg font-light text-gray-900 mb-1">
+				<div className="text-center mb-2 md:mb-4 mt-8">
+					<h2 className="max-w-4xl mx-auto text-base md:text-lg font-light text-gray-900 mb-1 leading-relaxed text-center">
 						Leader nella fornitura di veicoli elettrici di qualità superiore.
 						<br />
 						Scopri la nostra gamma completa per una mobilità sostenibile e all&apos;avanguardia.
@@ -92,8 +92,8 @@ export default function QuickActions() {
 											{action.title}
 										</h3>
 
-										<div className="mt-5 flex items-center gap-2 border border-black bg-white text-black px-6 py-4">
-											<span className="text-sm font-bold">{action.ctaLabel}</span>
+										<div className="mt-5 flex items-center gap-2 border border-black bg-white text-black px-6 py-4 transition-all duration-200 group-hover:border-[3px]">
+											<span className="text-sm font-medium">{action.ctaLabel}</span>
 										</div>
 									</CardContent>
 								</Card>

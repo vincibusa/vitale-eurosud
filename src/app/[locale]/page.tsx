@@ -127,7 +127,7 @@ export default function Home() {
 			<QuickActions />
 
 			{/* ASYA - Featured Product - Full Image */}
-			<section className="relative h-[62vh] min-h-[420px] md:h-[75vh] md:min-h-[520px] lg:h-[90vh] overflow-hidden">
+			<section className="relative h-[52vh] min-h-[360px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"
@@ -212,7 +212,7 @@ export default function Home() {
 			<div className="h-8 md:h-10 bg-white" />
 
 			{/* Trasporto Passeggeri - Full Image */}
-			<section className="relative h-[62vh] min-h-[420px] md:h-[75vh] md:min-h-[520px] lg:h-[90vh] overflow-hidden">
+			<section className="relative h-[52vh] min-h-[360px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"
@@ -260,6 +260,72 @@ export default function Home() {
 						</div>
 
 						<div className="flex flex-wrap justify-center md:justify-start gap-4">
+							<Link href="/veicoli-commerciali">
+								<Button
+									size="lg"
+									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-[220px] h-14"
+								>
+									Scopri di più
+								</Button>
+							</Link>
+							<Link href="/rivenditori">
+								<Button
+									size="lg"
+									variant="outline"
+									className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black font-semibold px-6 w-[220px] h-14"
+								>
+									Guarda le offerte
+								</Button>
+							</Link>
+						</div>
+					</motion.div>
+				</div>
+			</section>
+			<div className="h-8 md:h-10 bg-white" />
+
+			{/* Mobilità Disabili - Full Image */}
+			<section className="relative h-[52vh] min-h-[360px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
+				{/* Background Image */}
+				<motion.div
+					className="absolute inset-0"
+					initial="hidden"
+					animate="visible"
+					variants={fadeIn}
+				>
+					<Image
+						src="/immagini/veicolo_disabili 2.png"
+						alt="Mobilità disabili"
+						fill
+						sizes="100vw"
+						className="object-cover object-right"
+						priority
+					/>
+				</motion.div>
+
+				{/* Gradient Overlay */}
+				<div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-transparent md:from-black/80 md:via-black/50" />
+				<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60" />
+
+				{/* Content */}
+				<div className="relative container mx-auto px-4 h-full flex items-center justify-center md:justify-start">
+					<motion.div
+						className="max-w-2xl text-white text-center md:text-left"
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, margin: "-100px" }}
+						variants={fadeInUp}
+					>
+						<h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+							Mobilità
+							<br />
+							<span className="text-brand-light">disabili</span>
+						</h2>
+
+						<p className="text-xl md:text-2xl text-white/90 mb-6 font-light">
+							Muoviti in libertà
+						</p>
+
+						<div className="flex flex-wrap justify-center md:justify-start gap-4">
 							<Link href="/mobilita-disabili">
 								<Button
 									size="lg"
@@ -284,7 +350,7 @@ export default function Home() {
 			<div className="h-8 md:h-10 bg-white" />
 
 			{/* Trasporto Merci - Full Image */}
-			<section className="relative h-[62vh] min-h-[420px] md:h-[75vh] md:min-h-[520px] lg:h-[90vh] overflow-hidden">
+			<section className="relative h-[52vh] min-h-[360px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"

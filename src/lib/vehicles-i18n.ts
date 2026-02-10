@@ -22,6 +22,7 @@ interface VehicleFromDB {
 	primary_color: string
 	badge_color: string
 	is_new?: boolean
+	availability?: 'in-stock' | 'limited' | 'out-of-stock' | 'pre-order'
 	subcategory?: string
 	model_3d?: string
 	// Campi di traduzione JSONB
@@ -82,6 +83,7 @@ export function localizeVehicle(vehicle: VehicleFromDB, locale: 'it' | 'en'): Ve
 		primaryColor: vehicle.primary_color,
 		badgeColor: vehicle.badge_color,
 		isNew: vehicle.is_new,
+		availability: vehicle.availability || 'in-stock',
 		subcategory: vehicle.subcategory,
 		model3d: vehicle.model_3d
 	}
