@@ -238,18 +238,18 @@ export default function ContattiPage() {
 									</CardHeader>
 									<CardContent className="space-y-5">
 										{exclusiveBenefits.map((benefit, index) => (
-											<div key={index} className="flex items-start gap-4">
+											<div key={index} className="flex items-center gap-4">
 												<div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center overflow-hidden">
 													<Image
 														src={benefit.iconSrc}
 														alt={benefit.title}
 														width={80}
 														height={80}
-														className="w-12 h-12 md:w-14 md:h-14 object-contain"
+														className="w-14 h-14 md:w-16 md:h-16 object-contain"
 													/>
 												</div>
 												<div>
-													<h3 className="text-base md:text-lg font-light text-gray-900">{benefit.title}</h3>
+													<h3 className="text-base md:text-lg font-bold text-gray-900">{benefit.title}</h3>
 													<p className="text-sm text-gray-600 mt-1">{benefit.description}</p>
 												</div>
 											</div>

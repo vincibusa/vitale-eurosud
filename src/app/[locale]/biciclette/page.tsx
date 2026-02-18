@@ -89,7 +89,7 @@ export default async function BiciclettePage({
 			description={t('vehicles.categoryDescriptions.biciclette')}
 			iconName="Bike"
 			totalProducts={bmwVehicles.length}
-			backgroundImage="/images/bicicletta-elettrica.jpg"
+			backgroundImage="/immagini/1 sfondo bicicletta.jpg"
 		/>
 	)
 

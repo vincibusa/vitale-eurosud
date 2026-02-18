@@ -962,7 +962,7 @@ export default function ProductDetailLayout({
 									className="px-8"
 									asChild
 								>
-									<Link href="/cerca">{t('product.viewAll')}</Link>
+									<Link href="/catalogo-veicoli">{t('product.viewAll')}</Link>
 								</Button>
 							</div>
 						</motion.div>

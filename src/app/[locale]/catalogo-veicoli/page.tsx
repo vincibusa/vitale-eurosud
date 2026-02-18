@@ -1,5 +1,4 @@
 import { getVehicles } from '@/lib/vehicles'
-import BMWHeroSection from '@/components/vehicles/bmw-hero-section'
 import BMWVehicleGrid from '@/components/vehicles/bmw-vehicle-grid'
 import type { BMWVehicle } from '@/components/vehicles/bmw-vehicle-card'
 
@@ -94,7 +93,23 @@ export default async function CatalogoVeicoliPage({
 	]
 
 	return (
-		<>
+		<div className="w-full pt-20 md:pt-24">
+			<section className="bg-white py-16 md:py-24 border-b border-gray-200">
+				<div className="container mx-auto px-4">
+					<div className="max-w-4xl text-gray-900">
+						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+							Scopri tutti i modelli Vitale
+						</h1>
+						<p className="text-base md:text-lg text-gray-700 leading-relaxed max-w-4xl">
+							Dai modelli classici alle ultime novità, con funzioni innovative pensate per le tue esigenze.
+							<span className="block">
+								Leader nella fornitura di veicoli elettrici di alta qualità. Scopri la nostra gamma completa e vivi una mobilità sostenibile e all&apos;avanguardia.
+							</span>
+						</p>
+					</div>
+				</div>
+			</section>
+
 			{/* Vehicle Grid with Sidebar */}
 			<BMWVehicleGrid
 				vehicles={bmwVehicles}
@@ -118,6 +133,6 @@ export default async function CatalogoVeicoliPage({
 					</a>
 				</div>
 			</section>
-		</>
+		</div>
 	)
 }

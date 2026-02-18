@@ -127,7 +127,7 @@ export default function Home() {
 			<QuickActions />
 
 			{/* ASYA - Featured Product - Full Image */}
-			<section className="relative h-[52vh] min-h-[360px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
+			<section className="relative h-[74vh] min-h-[520px] sm:h-[78vh] sm:min-h-[580px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"
@@ -150,7 +150,7 @@ export default function Home() {
 				<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60" />
 
 				{/* Content */}
-				<div className="relative container mx-auto px-4 h-full flex items-center justify-center md:justify-start">
+				<div className="relative container mx-auto px-4 h-full flex items-center justify-center md:justify-start py-6 md:py-0">
 					<motion.div
 						className="max-w-2xl text-white text-center md:text-left"
 						initial="hidden"
@@ -158,11 +158,11 @@ export default function Home() {
 						viewport={{ once: true, margin: "-100px" }}
 						variants={fadeInUp}
 					>
-						<h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+						<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-5 md:mb-6 leading-tight">
 							Asya<br />
 							<span className="text-brand-light">Auto elettrica</span>
 						</h2>
-						<p className="text-xl md:text-2xl text-white/90 mb-6 font-light">
+						<p className="text-lg md:text-2xl text-white/90 mb-5 md:mb-6 font-light">
 							Scopri la nuova auto elettrica a due posti
 						</p>
 
@@ -187,11 +187,11 @@ export default function Home() {
 							Omologazione L7e-CP
 						</p>
 
-						<div className="flex flex-wrap justify-center md:justify-start gap-4">
+						<div className="flex w-full flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4">
 							<Link href="/minicar">
 								<Button
 									size="lg"
-									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-[220px] h-14"
+									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-full sm:w-[220px] h-12 sm:h-14"
 								>
 									Scopri di più
 								</Button>
@@ -200,7 +200,7 @@ export default function Home() {
 								<Button
 									size="lg"
 									variant="outline"
-									className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black font-semibold px-6 w-[220px] h-14"
+									className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black font-semibold px-6 w-full sm:w-[220px] h-12 sm:h-14"
 								>
 									Guarda le offerte
 								</Button>
@@ -211,8 +211,69 @@ export default function Home() {
 			</section>
 			<div className="h-8 md:h-10 bg-white" />
 
+			{/* Parcheggio Verticale - Split Layout */}
+			<section className="w-full bg-white px-4 md:px-6">
+				<div className="grid grid-cols-1 md:grid-cols-2">
+					<motion.div
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, margin: "-100px" }}
+						variants={fadeIn}
+						className="relative min-h-[320px] md:min-h-[520px]"
+					>
+						<Image
+							src="/parcheggio-verticale.png"
+							alt="Sistema di parcheggio verticale"
+							fill
+							sizes="(max-width: 768px) 100vw, 50vw"
+							className="object-cover"
+						/>
+						<div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+					</motion.div>
+
+					<motion.div
+						className="flex flex-col justify-center px-6 py-12 md:px-12 lg:px-20"
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, margin: "-100px" }}
+						variants={fadeInUp}
+					>
+						<p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand">
+							Soluzioni smart
+						</p>
+						<h2 className="mb-5 text-3xl font-bold leading-tight text-neutral-900 md:text-4xl lg:text-5xl">
+							Parcheggio verticale
+						</h2>
+						<p className="mb-8 text-lg text-neutral-700">
+							Ottimizza gli spazi con sistemi di parcheggio verticale pensati per contesti urbani, hotel, strutture private e aziende.
+						</p>
+
+						<div className="flex flex-col items-center gap-3 sm:flex-row sm:items-center md:items-start">
+							<Link href="/contatti">
+								<Button
+									size="lg"
+									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-[220px] h-14"
+								>
+									Richiedi consulenza
+								</Button>
+							</Link>
+							<Link href="/parcheggio-verticale">
+								<Button
+									size="lg"
+									variant="outline"
+									className="border-2 border-neutral-900 bg-transparent text-neutral-900 hover:bg-neutral-900 hover:text-white font-semibold px-6 w-[220px] h-14"
+								>
+									Scopri il prodotto
+								</Button>
+							</Link>
+						</div>
+					</motion.div>
+				</div>
+			</section>
+			<div className="h-8 md:h-10 bg-white" />
+
 			{/* Trasporto Passeggeri - Full Image */}
-			<section className="relative h-[52vh] min-h-[360px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
+			<section className="relative h-[74vh] min-h-[520px] sm:h-[78vh] sm:min-h-[580px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"
@@ -235,7 +296,7 @@ export default function Home() {
 				<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60" />
 
 				{/* Content */}
-				<div className="relative container mx-auto px-4 h-full flex items-center justify-center md:justify-start">
+				<div className="relative container mx-auto px-4 h-full flex items-center justify-center md:justify-start py-6 md:py-0">
 					<motion.div
 						className="max-w-2xl text-white text-center md:text-left"
 						initial="hidden"
@@ -243,11 +304,11 @@ export default function Home() {
 						viewport={{ once: true, margin: "-100px" }}
 						variants={fadeInUp}
 					>
-						<h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+						<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-5 md:mb-6 leading-tight">
 							Trasporto<br />
 							<span className="text-brand-light">passeggeri</span>
 						</h2>
-						<p className="text-xl md:text-2xl text-white/90 mb-6 font-light">
+						<p className="text-lg md:text-2xl text-white/90 mb-5 md:mb-6 font-light">
 							Veicoli elettrici per una prestazione eccellente
 						</p>
 
@@ -259,11 +320,11 @@ export default function Home() {
 							</div>
 						</div>
 
-						<div className="flex flex-wrap justify-center md:justify-start gap-4">
+						<div className="flex w-full flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4">
 							<Link href="/veicoli-commerciali">
 								<Button
 									size="lg"
-									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-[220px] h-14"
+									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-full sm:w-[220px] h-12 sm:h-14"
 								>
 									Scopri di più
 								</Button>
@@ -272,7 +333,7 @@ export default function Home() {
 								<Button
 									size="lg"
 									variant="outline"
-									className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black font-semibold px-6 w-[220px] h-14"
+									className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black font-semibold px-6 w-full sm:w-[220px] h-12 sm:h-14"
 								>
 									Guarda le offerte
 								</Button>
@@ -284,7 +345,7 @@ export default function Home() {
 			<div className="h-8 md:h-10 bg-white" />
 
 			{/* Mobilità Disabili - Full Image */}
-			<section className="relative h-[52vh] min-h-[360px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
+			<section className="relative h-[74vh] min-h-[520px] sm:h-[78vh] sm:min-h-[580px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"
@@ -307,7 +368,7 @@ export default function Home() {
 				<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60" />
 
 				{/* Content */}
-				<div className="relative container mx-auto px-4 h-full flex items-center justify-center md:justify-start">
+				<div className="relative container mx-auto px-4 h-full flex items-center justify-center md:justify-start py-6 md:py-0">
 					<motion.div
 						className="max-w-2xl text-white text-center md:text-left"
 						initial="hidden"
@@ -315,21 +376,37 @@ export default function Home() {
 						viewport={{ once: true, margin: "-100px" }}
 						variants={fadeInUp}
 					>
-						<h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+						<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-5 md:mb-6 leading-tight">
 							Mobilità
 							<br />
 							<span className="text-brand-light">disabili</span>
 						</h2>
 
-						<p className="text-xl md:text-2xl text-white/90 mb-6 font-light">
+						<p className="text-lg md:text-2xl text-white/90 mb-5 md:mb-6 font-light">
 							Muoviti in libertà
 						</p>
 
-						<div className="flex flex-wrap justify-center md:justify-start gap-4">
+						<div className="flex flex-wrap items-center justify-center md:justify-start gap-6 mb-8 text-white/80">
+							<div className="flex items-center gap-2">
+								<Battery className="text-green-400 flex-shrink-0" size={24} />
+								<span className="text-base md:text-md">Aut. 150 Km</span>
+							</div>
+							<span className="text-white/40">|</span>
+							<div className="flex items-center gap-2">
+								<Zap className="text-brand-light flex-shrink-0" size={24} />
+								<span className="text-base md:text-md">7 kW</span>
+							</div>
+							<span className="text-white/40">|</span>
+							<div className="flex items-center gap-2">
+								<span className="text-base md:text-md">Max 85 Km/h</span>
+							</div>
+						</div>
+
+						<div className="flex w-full flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4">
 							<Link href="/mobilita-disabili">
 								<Button
 									size="lg"
-									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-[220px] h-14"
+									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-full sm:w-[220px] h-12 sm:h-14"
 								>
 									Scopri di più
 								</Button>
@@ -338,7 +415,7 @@ export default function Home() {
 								<Button
 									size="lg"
 									variant="outline"
-									className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black font-semibold px-6 w-[220px] h-14"
+									className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black font-semibold px-6 w-full sm:w-[220px] h-12 sm:h-14"
 								>
 									Guarda le offerte
 								</Button>
@@ -350,7 +427,7 @@ export default function Home() {
 			<div className="h-8 md:h-10 bg-white" />
 
 			{/* Trasporto Merci - Full Image */}
-			<section className="relative h-[52vh] min-h-[360px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
+			<section className="relative h-[74vh] min-h-[520px] sm:h-[78vh] sm:min-h-[580px] md:h-[62vh] md:min-h-[440px] lg:h-[70vh] overflow-hidden">
 				{/* Background Image */}
 				<motion.div
 					className="absolute inset-0"
@@ -373,7 +450,7 @@ export default function Home() {
 				<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:from-black/60" />
 
 				{/* Content */}
-				<div className="relative container mx-auto px-4 h-full flex items-center justify-center md:justify-start">
+				<div className="relative container mx-auto px-4 h-full flex items-center justify-center md:justify-start py-6 md:py-0">
 					<motion.div
 						className="max-w-2xl text-white text-center md:text-left"
 						initial="hidden"
@@ -381,12 +458,12 @@ export default function Home() {
 						viewport={{ once: true, margin: "-100px" }}
 						variants={fadeInUp}
 					>
-						<h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+						<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-5 md:mb-6 leading-tight">
 							Trasporto<br />
 							<span className="text-brand-light">merci</span>
 						</h2>
 
-						<p className="text-xl md:text-2xl text-white/90 mb-6 font-light">
+						<p className="text-lg md:text-2xl text-white/90 mb-5 md:mb-6 font-light">
 							L&apos;epicentro dell&apos;innovazione in mobilità sostenibile
 						</p>
 
@@ -398,11 +475,11 @@ export default function Home() {
 							</div>
 						</div>
 
-						<div className="flex flex-wrap justify-center md:justify-start gap-4">
+						<div className="flex w-full flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4">
 							<Link href="/veicoli-commerciali">
 								<Button
 									size="lg"
-									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-[220px] h-14"
+									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-full sm:w-[220px] h-12 sm:h-14"
 								>
 									Scopri di più
 								</Button>
@@ -411,7 +488,7 @@ export default function Home() {
 								<Button
 									size="lg"
 									variant="outline"
-									className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black font-semibold px-6 w-[220px] h-14"
+									className="border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black font-semibold px-6 w-full sm:w-[220px] h-12 sm:h-14"
 								>
 									Guarda le offerte
 								</Button>

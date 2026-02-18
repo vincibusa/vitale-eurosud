@@ -45,7 +45,8 @@ function Header() {
 	const isComparePage = pathname.includes('/confronta')
 	const isDealerPage = pathname.includes('/rivenditori')
 	const isContactsPage = pathname.includes('/contatti')
-	const isSolidHeader = isScrolled || isProductDetailPage || isCatalogPage || isComparePage || isDealerPage || isContactsPage
+	const isVerticalParkingPage = pathname.includes('/parcheggio-verticale')
+	const isSolidHeader = isScrolled || isProductDetailPage || isCatalogPage || isComparePage || isDealerPage || isContactsPage || isVerticalParkingPage
 	
 	const handleLanguageToggle = (e: React.MouseEvent) => {
 		e.preventDefault()
@@ -65,6 +66,7 @@ function Header() {
 				{
 					category: 'Soluzioni professionali',
 					items: [
+						{ name: 'Tutti i veicoli', href: '/catalogo-veicoli', description: 'Panoramica completa della gamma Vitale' },
 						{ name: 'Trasporto merci', href: '/veicoli-commerciali', description: 'Modelli professionali per carico e lavoro' },
 						{ name: 'Trasporto passeggeri', href: '/veicoli-commerciali', description: 'Soluzioni dedicate al trasporto persone' }
 					]
@@ -107,6 +109,7 @@ function Header() {
 			title: 'Veicoli commerciali',
 			icon: Truck,
 			items: [
+				{ name: 'Tutti i veicoli', href: '/catalogo-veicoli', icon: Car },
 				{ name: 'Trasporto merci', href: '/veicoli-commerciali', icon: Truck },
 				{ name: 'Trasporto passeggeri', href: '/veicoli-commerciali', icon: Users }
 			]

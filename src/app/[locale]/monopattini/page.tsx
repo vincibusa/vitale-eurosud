@@ -89,7 +89,7 @@ export default async function MonopattiniPage({
 			description={t('vehicles.categoryDescriptions.monopattini')}
 			iconName="Zap"
 			totalProducts={bmwVehicles.length}
-			backgroundImage="/images/ecozone-monopattino.jpg"
+			backgroundImage="/immagini/1 sfondo monopattino.jpg"
 		/>
 	)
 

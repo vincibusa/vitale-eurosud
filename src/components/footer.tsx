@@ -141,26 +141,18 @@ function Footer() {
 						<ul className="space-y-2">
 							<li>
 								<Link
-									href="/contatti"
+									href="/rivenditori"
 									className="text-sm text-gray-400 hover:text-brand-light transition-colors inline-block"
 								>
-									{t('footer.aboutUs')}
+									Rivenditore
 								</Link>
 							</li>
 							<li>
 								<Link
-									href="/contatti"
+									href="/privati"
 									className="text-sm text-gray-400 hover:text-brand-light transition-colors inline-block"
 								>
-									{t('footer.becomePartner')}
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/contatti"
-									className="text-sm text-gray-400 hover:text-brand-light transition-colors inline-block"
-								>
-									{t('footer.workWithUs')}
+									Privato
 								</Link>
 							</li>
 							<li>
