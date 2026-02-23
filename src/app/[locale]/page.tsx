@@ -10,7 +10,9 @@ import {
 	Battery,
 	Zap,
 	Users,
-	Truck
+	Truck,
+	Building2,
+	Home as HomeIcon
 } from 'lucide-react'
 
 // Animation variants
@@ -241,29 +243,54 @@ export default function Home() {
 						<p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand">
 							Soluzioni smart
 						</p>
-						<h2 className="mb-5 text-3xl font-bold leading-tight text-neutral-900 md:text-4xl lg:text-5xl">
+						<h2 className="mb-2 text-3xl font-bold leading-tight text-neutral-900 md:text-4xl lg:text-5xl">
 							Parcheggio verticale
 						</h2>
+						<p className="mb-6 text-xl md:text-2xl font-semibold text-neutral-800">
+							Trasforma il tuo spazio in un&apos;opportunità
+						</p>
 						<p className="mb-8 text-lg text-neutral-700">
 							Ottimizza gli spazi con sistemi di parcheggio verticale pensati per contesti urbani, hotel, strutture private e aziende.
 						</p>
 
+						{/* Icone strutture */}
+						<div className="flex flex-col sm:flex-row gap-6 mb-8">
+							<div className="flex items-center gap-3">
+								<div className="w-12 h-12 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
+									<Building2 className="w-6 h-6 text-brand" />
+								</div>
+								<div>
+									<p className="font-semibold text-neutral-900">Strutture commerciali</p>
+									<p className="text-sm text-neutral-500">Hotel, centri commerciali, uffici</p>
+								</div>
+							</div>
+							<div className="flex items-center gap-3">
+								<div className="w-12 h-12 rounded-full bg-brand/10 flex items-center justify-center flex-shrink-0">
+									<HomeIcon className="w-6 h-6 text-brand" />
+								</div>
+								<div>
+									<p className="font-semibold text-neutral-900">Strutture private</p>
+									<p className="text-sm text-neutral-500">Residenziali, box privati</p>
+								</div>
+							</div>
+						</div>
+
 						<div className="flex flex-col items-center gap-3 sm:flex-row sm:items-center md:items-start">
-							<Link href="/contatti">
-								<Button
-									size="lg"
-									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-[220px] h-14"
-								>
-									Richiedi consulenza
-								</Button>
-							</Link>
 							<Link href="/parcheggio-verticale">
 								<Button
 									size="lg"
 									variant="outline"
 									className="border-2 border-neutral-900 bg-transparent text-neutral-900 hover:bg-neutral-900 hover:text-white font-semibold px-6 w-[220px] h-14"
 								>
-									Scopri il prodotto
+									Scopri di più
+								</Button>
+							</Link>
+							<Link href="/contatti">
+								<Button
+									size="lg"
+									className="bg-brand hover:bg-brand-dark text-white font-semibold px-6 w-[220px] h-14"
+								>
+									Richiedi consulenza
 								</Button>
 							</Link>
 						</div>

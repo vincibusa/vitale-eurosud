@@ -59,7 +59,21 @@ export default function BMWVehicleGrid({ vehicles, filterSections, heroSection }
 
 		if (selectedFilters.autonomy?.length > 0) {
 			result = result.filter(v => {
-				const autonomy = parseInt(v.specs.autonomy.replace(/\D/g, '')) || 0
+				// Handle range values like "35-40 KM" or "80-100 KM"
+				const autonomyStr = v.specs.autonomy.replace(/\D/g, ' ')
+				const parts = autonomyStr.trim().split(/\s+/)
+				let autonomy: number
+
+				if (parts.length >= 2) {
+					// It's a range - take the average
+					const num1 = parseInt(parts[0]) || 0
+					const num2 = parseInt(parts[1]) || 0
+					autonomy = Math.round((num1 + num2) / 2)
+				} else {
+					// Single value
+					autonomy = parseInt(parts[0]) || 0
+				}
+
 				return selectedFilters.autonomy.some(range => {
 					if (range === 'under50') return autonomy < 50
 					if (range === '50to100') return autonomy >= 50 && autonomy <= 100
